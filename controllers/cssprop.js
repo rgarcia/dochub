@@ -45,7 +45,7 @@ define([
         }
       });
 
-      query.limit(1);
+      query.limit(10);
 
       query.exec(function(err, cssprops) {
         if ( err || cssprops.length == 0 ) {
