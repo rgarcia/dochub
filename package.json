@@ -1,7 +1,10 @@
 {
-  "name": "node-example",
+  "name": "instacss-backend",
   "version": "0.0.1",
   "dependencies": {
-    "express": "2.2.0"
+    "requirejs": ">=1.0.0",
+    "express": "2.2.0",
+    "mongoose": ">=2.3.9",
+    "underscore": ">=1.2.1"
   }
 }

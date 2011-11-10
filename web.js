@@ -1,12 +1,14 @@
-var express = require('express');
+var requirejs = require('requirejs');
 
-var app = express.createServer(express.logger());
-
-app.get('/', function(request, response) {
-  response.send('Hello World!');
+requirejs.config({
+  // Pass the top-level main.js/index.js require
+  // function to requirejs so that node modules
+  // are loaded relative to the top-level JS file.
+  nodeRequire: require
 });
 
-var port = process.env.PORT || 3000;
-app.listen(port, function() {
-  console.log("Listening on " + port);
+requirejs([
+  'app'
+], function(app) {
+  app.initialize();
 });
