@@ -22,7 +22,6 @@ define([
     },
 
     render: function() {
-      console.log('rendering search header: ', this.options.query);
       $(this.el).html(this.template({}));
       return this;
     },
@@ -33,12 +32,13 @@ define([
         return;
       }
       console.log('searching for ' + query);
-      this.collection.fetch({
-        url: '/find_cssprop',
-        data: {
-          'name' : query
-        },
+      var searchfn = function(model) {
+        return model.get('name').match(query);
+      };
+      this.collection.each(function(model) {
+        model.set({visible: searchfn(model)});
       });
+      this.collection.trigger('reset'); // hack, should make subviews for individual models
       // todo permalinks
       //BackBone.history.navigate('search/' + this.options.query, false);
     },

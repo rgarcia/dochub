@@ -33,10 +33,14 @@ define([
       var $defandusage = $('h2').filter(function(index) { return $(this).text().trim() === "Definition and Usage"; });
       if ( $defandusage.length === 1 ) {
         cssprop['description'] = '';
-        // TODO: multiline js string?
+        // TODO: this is ugly and i hate it
         var $p = $defandusage.next();
-        for (; $p.is('p'); $p = $p.next() )
-          cssprop['description'] += '<p>' + $p.html() + '</p>';
+        for (; $p.is('p') || $p.is('ul'); $p = $p.next() ) {
+          if ( $p.is('p') )
+            cssprop['description'] += '<p>' + $p.html() + '</p>';
+          else if ( $p.is('ul') )
+            cssprop['description'] += '<ul>' + $p.html() + '</ul>';
+        }
         //console.log(cssprop['description']);
 
         // if table comes after description, look for "Default value:",
