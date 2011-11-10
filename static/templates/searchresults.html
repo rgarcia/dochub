@@ -1,5 +1,6 @@
 <!-- <section id="search-results" style="padding-top:0px"> -->
 <% cssprops.each(function(cssprop) { %>
+<% if ( !cssprop.get('visible') ) return; %>
 <div>
   <div class="page-header span10 offset6">
     <h2><%= cssprop.get('name') %>  <small>default: <%= cssprop.get('defaultValue') %>, inherited: <%= cssprop.get('inherited') %></small></h2>

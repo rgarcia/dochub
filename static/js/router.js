@@ -27,16 +27,18 @@ define([
     },
 
     initialize: function() {
+      // for client-side search...
+      this.wholeFrigginDB = new CSSPropCollection();
+      this.wholeFrigginDB.fetch({url: '/cssprop'});
     },
 
     main: function() {
       this.topNavView = new TopNavView();
-      var searchResults = new CSSPropCollection();
       this.searchHeaderView = new SearchHeaderView({
-        collection : searchResults
+        collection : this.wholeFrigginDB
       });
       this.searchResultsView = new SearchResultsView({
-        collection: searchResults
+        collection: this.wholeFrigginDB
       });
 
       // Save for convenience

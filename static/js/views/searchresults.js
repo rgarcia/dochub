@@ -17,7 +17,6 @@ define([
     },
 
     render: function() {
-      console.log('rendering search results: ',this.collection.models);
       $(this.el).html(this.template({ _:_, cssprops: this.collection }));
       return this;
     },

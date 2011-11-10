@@ -17,7 +17,14 @@ define([
         'method':'get',
         'description':'find css property. expects a GET parameter "query"',
         'auth':false
-      }
+      },
+      'read_all' : {
+        'url'         : '/cssprop',
+        'method'      : 'get',
+        'description' : 'returns everything',
+        'auth'        : false
+      },
+
 
     },
 
@@ -54,6 +61,18 @@ define([
           res.send(JSON.stringify(cssprops));
         }
       });
-    }
+    },
+
+    read_all: function(req, res) {
+      CSSProp.find({}, function(error, cssprop) {
+        if (!error && cssprop) {
+          res.header('Content-Type', 'application/json');
+          res.send(JSON.stringify(cssprop), 200);
+        } else {
+          res.send('error', 404);
+        }
+      });
+    },
+
   };
 });

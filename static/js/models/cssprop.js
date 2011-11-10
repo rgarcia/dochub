@@ -10,6 +10,7 @@ define([
 
     urlRoot: '/cssprop',
     defaults: {
+      'visible'           : false,
       'name'              : '',
       'description'       : '',
       'possibleValues'    : '',
