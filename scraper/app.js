@@ -3,8 +3,9 @@ define([
   'scraper',
   'underscore',
   '../config',
-  '../models/cssproperty'
-], function (mongoose, scraper, _, config, CSSPropertyModel) {
+  '../models/cssproperty',
+  './w3schools'
+], function (mongoose, scraper, _, config, CSSPropertyModel, w3schools) {
 
   // connect to db
   var db = mongoose.connect(
@@ -14,13 +15,20 @@ define([
       if (err) {
         console.log(err);
         throw err;
+      } else {
+        console.log('connected to db');
+
+        console.log('clearing out collections');
+        CSSPropertyModel.collection.remove({});
+
+        console.log('scraping w3schools');
+        w3schools.rootLevelScraper();
       }
     });
-
-  // clear out the db collections
-  CSSPropertyModel.collection.remove({});
+});
 
   // get a list of all css properties
+/*
   var urlroot = 'http://www.htmldog.com/reference/cssproperties/';
   var propertyUrls = [];
   scraper('http://www.htmldog.com/reference/cssproperties/', function(err, $) {
@@ -62,4 +70,5 @@ define([
       });
     });
   });
-});
+
+});*/
