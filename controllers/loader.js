@@ -1,6 +1,6 @@
 define([
-  './cssproperty',
-], function(CSSPropertyActions) {
+  './cssprop',
+], function(CSSPropActions) {
 
   var mappingString = "";
 
@@ -45,8 +45,8 @@ define([
 
   return {
     bootControllers : function(app) {
-      console.log("booting cssproperty controller");
-      bootController(app, CSSPropertyActions);
+      console.log("booting cssprop controller");
+      bootController(app, CSSPropActions);
 
       app.get("/show_available_interfaces", function(req, res){
         res.send(mappingString);

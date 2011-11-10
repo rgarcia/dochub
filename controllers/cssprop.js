@@ -1,19 +1,19 @@
 define([
   'underscore',
-  '../models/cssproperty'
-], function(_, CSSPropertyModel) {
+  '../models/cssprop'
+], function(_, CSSProp) {
 
   return {
 
     mapping: {
       'read' : {
-        'url'         : '/cssproperty/:name',
+        'url'         : '/cssprop/:name',
         'method'      : 'get',
         'description' : 'returns docuemnt for css property name',
         'auth'        : false
       },
-      'find_cssproperty' : {
-        'url':'/find_cssproperty',
+      'find_cssprop' : {
+        'url':'/find_cssprop',
         'method':'get',
         'description':'find css property. expects a GET parameter "query"',
         'auth':false
@@ -22,7 +22,7 @@ define([
     },
 
     read: function(req, res) {
-      CSSPropertyModel.findOne({ name: req.params.name }, function(error, cssprop) {
+      CSSProp.findOne({ name: req.params.name }, function(error, cssprop) {
         if (!error && cssprop) {
           res.header('Content-Type', 'application/json');
           res.send(JSON.stringify(cssprop), 200);
@@ -32,10 +32,10 @@ define([
       });
     },
 
-    find_cssproperty: function(req, res) {
+    find_cssprop: function(req, res) {
       res.header('Content-Type', 'application/json');
 
-      var query = CSSPropertyModel.find({});
+      var query = CSSProp.find({});
 
       // TODO: frontend only queries w/ "name"...should offer advanced search
       _.each(['name', 'description', 'possibleValues'], function(param) {
