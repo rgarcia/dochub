@@ -1,0 +1,10 @@
+{
+  "name": "instacss-scraper",
+  "version": "0.0.1",
+  "dependencies": {
+    "requirejs": ">=1.0.0",
+    "mongoose": ">=2.3.9",
+    "underscore": ">=1.2.1",
+    "scraper": ">=0.0.9"
+  }
+}
