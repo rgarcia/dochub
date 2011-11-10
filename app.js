@@ -18,13 +18,14 @@ define([
       app.listen(config.app_port);
 
       app.configure(function() {
-        var db = mongoose.connect(
-          'mongodb://' + config.db_user_prod + ':' + config.db_pass_prod +
-            '@' + config.db_host_prod + ':' + config.db_port_prod + '/' + config.db_name_prod,
-          function(err) {
-            if (err)
-              throw err;
-          });
+        var dbstring = 'mongodb://' + config.db_user_prod + ':' + config.db_pass_prod +
+          '@' + config.db_host_prod + ':' + config.db_port_prod + '/' + config.db_name_prod;
+        var db = mongoose.connect(dbstring, function(err) {
+          if (err)
+            throw err;
+          else
+            console.log('connected to ' + dbstring);
+        });
         app.use(express.logger({ format: ':method :url :status' }));
         console.log('initializing static: ' + path.dirname(filename) + '/static');
         var filename = module.uri;
