@@ -1,7 +1,7 @@
 define([
   'scraper',
   'underscore',
-  '../models/cssproperty'
+  '../models/cssprop'
 ], function(scraper, _, CSSProp) {
 
   // scrapes w3schools css reference page

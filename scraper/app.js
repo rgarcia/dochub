@@ -3,9 +3,9 @@ define([
   'scraper',
   'underscore',
   '../config',
-  '../models/cssproperty',
+  '../models/cssprop',
   './w3schools'
-], function (mongoose, scraper, _, config, CSSPropertyModel, w3schools) {
+], function (mongoose, scraper, _, config, CSSProp, w3schools) {
 
   // connect to db
   var db = mongoose.connect(
@@ -19,7 +19,7 @@ define([
         console.log('connected to db');
 
         console.log('clearing out collections');
-        CSSPropertyModel.collection.remove({});
+        CSSProp.collection.remove({});
 
         console.log('scraping w3schools');
         w3schools.rootLevelScraper();
