@@ -27,7 +27,7 @@ define([
     },
 
     onSearch: function() {
-      var query = $.trim(this.$('#search-box').val());
+      var query = $.trim(this.$('#search-box').val()).toLowerCase();
       if (query === '') {
         return;
       }
