@@ -12,24 +12,26 @@ define([
   'views/searchresults',
 
   // Models
-  'models/cssprop',
+  'models/mozdevcssprop',
 
   // Collections
-  'collections/cssprops'
+  'collections/mozdevcssprops'
 ], function(doc, $, _, Backbone,
             TopNavView, SearchHeaderView, SearchResultsView,
-            CSSProp,
-            CSSPropCollection) {
+            MozDevCSSProp,
+            MozDevCSSPropCollection) {
 
-  var Abakan = Backbone.Router.extend({
+  var InstaCSS = Backbone.Router.extend({
     routes: {
       ''          : 'main',
     },
 
     initialize: function() {
       // for client-side search...
-      this.wholeFrigginDB = new CSSPropCollection();
-      this.wholeFrigginDB.fetch({url: '/cssprop'});
+      this.wholeFrigginDB = new MozDevCSSPropCollection();
+
+      // todo: display a loading spinner or something while this is happening
+      this.wholeFrigginDB.fetch({url: '/mozdevcssprop'});
     },
 
     main: function() {
@@ -53,7 +55,7 @@ define([
   });
 
   var initialize = function() {
-    var mainApp = new Abakan();
+    var mainApp = new InstaCSS();
     Backbone.history.start(); // can't do pushstate until we handle all routes on backend ({pushState: true});
   };
 

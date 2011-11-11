@@ -1,31 +1,30 @@
 define([
   'underscore',
-  '../models/cssprop'
-], function(_, CSSProp) {
+  '../models/mozdevcssprop'
+], function(_, MozDevCSSProp) {
 
   return {
 
     mapping: {
 
       'read' : {
-        'url'         : '/cssprop/:name',
+        'url'         : '/mozdevcssprop/:name',
         'method'      : 'get',
         'description' : 'returns docuemnt for css property name',
         'auth'        : false
       },
 
       'read_all' : {
-        'url'         : '/cssprop',
+        'url'         : '/mozdevcssprop',
         'method'      : 'get',
         'description' : 'returns everything',
         'auth'        : false
       },
 
-
     },
 
     read: function(req, res) {
-      CSSProp.findOne({ name: req.params.name }, function(error, cssprop) {
+      MozDevCSSProp.findOne({ name: req.params.name }, function(error, cssprop) {
         if (!error && cssprop) {
           res.header('Content-Type', 'application/json');
           res.send(JSON.stringify(cssprop), 200);
@@ -36,7 +35,7 @@ define([
     },
 
     read_all: function(req, res) {
-      CSSProp.find({}, function(error, cssprop) {
+      MozDevCSSProp.find({}, function(error, cssprop) {
         if (!error && cssprop) {
           res.header('Content-Type', 'application/json');
           res.send(JSON.stringify(cssprop), 200);

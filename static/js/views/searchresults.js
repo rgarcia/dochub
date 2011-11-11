@@ -2,8 +2,8 @@ define([
   'jQuery',
   'Underscore',
   'Backbone',
-  'text!templates/searchresults.html',
-], function($, _, BackBone, searchResultsTemplate) {
+  'views/mozdevcssprop'
+], function($, _, BackBone, MozDevCSSPropView) {
 
   // the results view is just tied to a collection and re-renders itself
   var SearchResultsView = BackBone.View.extend({
@@ -12,12 +12,16 @@ define([
 
     initialize: function() {
       _.bindAll(this, 'render');
-      this.template = _.template(searchResultsTemplate);
       this.collection.bind('reset', this.render);
     },
 
     render: function() {
-      $(this.el).html(this.template({ _:_, cssprops: this.collection }));
+      // render a subview for each model in the collection
+      var self = this;
+      this.collection.each(function(cssprop) {
+        var view = new MozDevCSSPropView({model: cssprop});
+        $(self.el).append(view.render().el);
+      });
       return this;
     },
   });

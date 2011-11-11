@@ -1,5 +1,5 @@
 define([
-  './cssprop',
+  './mozdevcssprop',
 ], function(CSSPropActions) {
 
   var mappingString = "";
