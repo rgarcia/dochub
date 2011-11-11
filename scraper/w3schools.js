@@ -86,7 +86,8 @@ define([
       }
 
       // save to db!
-      cssprop.save();
+      if ( config.environment === 'production' )
+        cssprop.save();
     },
 
     rootLevelScraper: function() {
