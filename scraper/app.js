@@ -3,11 +3,10 @@ define([
   'scraper',
   'underscore',
   '../config',
-  '../models/cssprop',
   '../models/mozdevcssprop',
-  './w3schools',
-  './mozdevcss'
-], function (mongoose, scraper, _, config, CSSProp, MozDevCSSProp, w3schools, mozdevcss) {
+  './mozdevcss',
+  './cssinfos'
+], function (mongoose, scraper, _, config, MozDevCSSProp, mozdevcss, cssinfos) {
 
   var db = mongoose.connect(
     'mongodb://' + config.db_user_prod + ':' + config.db_pass_prod +
@@ -20,17 +19,17 @@ define([
         console.log('connected to db');
 
         // have to set NODE_ENV to 'production' to actually hit the db
-        if ( config.environment === 'production' ) {
-          console.log('clearing out collections');
-          //CSSProp.collection.remove({});
-          MozDevCSSProp.collection.remove({});
-        }
+        // todo: just update db docs, don't reset like this
+        //if ( config.environment === 'production' ) {
+          //console.log('clearing out collections');
+          //MozDevCSSProp.collection.remove({});
+        //}
 
-        //console.log('scraping w3schools');
-        //w3schools.rootLevelScraper();
+        // console.log('scraping mozdev');
+        // mozdevcss.rootLevelScraper();
 
-        console.log('scraping mozdev');
-        mozdevcss.rootLevelScraper();
+        console.log('scraping cssinfos for webkit data');
+        cssinfos.rootLevelScraper();
       }
     });
 });

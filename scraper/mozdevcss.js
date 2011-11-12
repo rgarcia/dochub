@@ -19,12 +19,16 @@ define([
       mozdevdoc['title'] = $('#title').text();
       console.log('-----------------')
       console.log('scraping ' + mozdevdoc['title']);
-      console.log('-----------------')
+
+      if ( !mozdevdoc['title'] ) {
+        console.log('ERROR: could not find title');
+        return;
+      }
 
       // function that looks for a section_* with a certain title,
       // sets a document field to the html contents or null if it can't find any
       var sectionScraper = function(title, dbfield) {
-        console.log('looking for ' + title);
+        //console.log('looking for ' + title);
         var $section = $('[id^=section_]').filter(function() {
           return $(this).children(0).attr('id').toLowerCase() === title.toLowerCase();
         });
@@ -50,7 +54,7 @@ define([
       // save to db!
       if ( config.environment === 'production' )
         mozdevdoc.save();
-      console.log(mozdevdoc);
+      //console.log(mozdevdoc);
     },
 
     rootLevelScraper: function() {
