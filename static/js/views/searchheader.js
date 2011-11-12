@@ -16,12 +16,13 @@ define([
     },
 
     initialize: function() {
-      _.bindAll(this, 'render');
+      _.bindAll(this, 'render','onSearch');
       this.template = _.template(searchHeaderTemplate);
     },
 
     render: function() {
-      $(this.el).html(this.template({}));
+      var initialQuery = this.options.query ? this.options.query : "";
+      $(this.el).html(this.template({ query: initialQuery }));
       return this;
     },
 
@@ -30,6 +31,7 @@ define([
       if (query === '') {
         return;
       }
+      BackBone.history.navigate(query, false);
       console.log('searching for ' + query);
       var searchfn = function(model) {
         // BEGIN GLORIOUS SEARCH ALGORITHM
@@ -40,8 +42,6 @@ define([
         model.set({visible: searchfn(model)});
       });
 
-      // todo permalinks
-      // BackBone.history.navigate('search/' + this.options.query, false);
     },
 
     onKeyup: function(evt) {
