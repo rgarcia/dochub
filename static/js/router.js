@@ -24,6 +24,7 @@ define([
   var InstaCSS = Backbone.Router.extend({
     routes: {
       ''          : 'main',
+      ':query'   : 'main',
     },
 
     initialize: function() {
@@ -34,14 +35,17 @@ define([
       this.wholeFrigginDB.fetch({url: '/mozdevcssprop'});
     },
 
-    main: function() {
+    main: function(query) {
       this.topNavView = new TopNavView();
       this.searchHeaderView = new SearchHeaderView({
-        collection : this.wholeFrigginDB
+        collection : this.wholeFrigginDB,
+        query      : query
       });
       this.searchResultsView = new SearchResultsView({
         collection: this.wholeFrigginDB
       });
+      // need to subscribe after searchresultsview...ew
+      this.wholeFrigginDB.bind('reset',this.searchHeaderView.onSearch);
 
       // Save for convenience
       this.container = $('#container');
@@ -52,6 +56,7 @@ define([
       $('#container').append(this.searchResultsView.render().el);
       $('#search-box').focus();
     },
+
   });
 
   var initialize = function() {
