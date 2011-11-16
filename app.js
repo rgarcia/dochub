@@ -22,7 +22,7 @@ define([
           if (err)
             throw err;
           else
-            console.log('connected to ' + dbstring);
+            console.log('connected to ' + config.mongo_uri);
         });
         app.use(express.logger({ format: ':method :url :status' }));
         var filename = module.uri;
