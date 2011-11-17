@@ -33,3 +33,15 @@ div .smallclear {
 div #toc {
   margin-top: 138px;
 }
+
+button.up-arrow {
+  width: 180px;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  font-weight: 900;
+  font-size: 150%;
+  padding-bottom: 5px;
+}
+
