@@ -57,6 +57,7 @@ define([
       // Save for convenience
       this.container = $('#container');
 
+      $('#topnav').empty();
       $('#topnav').append(this.topNavView.render().el);
       $('#container').empty();
       $('#container').append(this.searchHeaderView.render().el);

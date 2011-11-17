@@ -37,9 +37,15 @@ define([
     onClick: function() {
       console.log('clicked ' + this.model.get('title'));
 
-      $('html,body').animate({
-        scrollTop: $("#_"+this.model.get('title')).offset().top-40},
-                             'slow');
+      // if nothing in the search bar, put it there
+      if ( $('#search-box').val() === "" ) {
+        $('#search-box').val(this.model.get('title'));
+        $("#search-box").trigger('keyup');
+      } else {
+        $('html,body').animate({
+          scrollTop: $("#_"+this.model.get('title')).offset().top-40},
+                               'slow');
+      }
     }
 
   });
