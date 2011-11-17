@@ -20,7 +20,7 @@ define([
     render: function() {
       $(this.el).html(this.template({}));
 
-      var tocResultsUl = $('toc-results');
+      var tocResultsUl = $('#toc-results');
       var self = this;
       this.collection.each(function(cssprop) {
         var view = new TOCResult({ model: cssprop });
