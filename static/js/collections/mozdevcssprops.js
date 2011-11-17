@@ -4,9 +4,14 @@ define([
   'Backbone',
   'models/mozdevcssprop'
 ], function($, _, Backbone, MozDevCSSProp) {
-    var MozDevCSSProps = Backbone.Collection.extend({
-        model: MozDevCSSProp
-    });
+  var MozDevCSSProps = Backbone.Collection.extend({
+    model: MozDevCSSProp,
 
-    return MozDevCSSProps;
+    comparator: function(model) {
+      return model.get('title');
+    },
+
+  });
+
+  return MozDevCSSProps;
 });
