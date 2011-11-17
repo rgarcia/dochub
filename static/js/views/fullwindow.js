@@ -9,8 +9,10 @@ define([
   var FullWindowView = BackBone.View.extend({
 
     initialize: function() {
-      _.bindAll(this, 'onScroll');
+      _.bindAll(this, 'onScroll', 'onResize');
       $(window).scroll(this.onScroll);
+      $(window).resize(this.onResize);
+      this.onResize();
     },
 
     onScroll: function() {
@@ -18,6 +20,14 @@ define([
       var scrollTop = $(window).scrollTop();
       $('#toc').animate({'margin-top':Math.max(138,scrollTop)},
                         25);
+    },
+
+    onResize: function() {
+      // make sure the TOC div reaches the bottom of the screen
+      console.log('window height',$(window).height());
+      var tocHeight = $(window).height() - 255;
+      $('#toc-well').css('height',tocHeight);
+      $('#toc-well').css('overflow-y','scroll');
     },
   });
 
