@@ -6,6 +6,7 @@ define([
 ], function($, _, BackBone, topNavTemplate) {
 
   var TopNavView = BackBone.View.extend({
+    className: 'topbar-inner',
 
     initialize: function() {
       _.bindAll(this, 'render');

@@ -7,8 +7,9 @@ define([
 
   // the results view is just tied to a collection and re-renders itself
   var SearchResultsView = BackBone.View.extend({
-    tagName: 'div',
     id: 'search-results',
+    tagName: 'div',
+    className: 'content',
 
     initialize: function() {
       _.bindAll(this, 'render');

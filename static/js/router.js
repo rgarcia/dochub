@@ -9,6 +9,7 @@ define([
   // Views
   'views/topnav',
   'views/searchheader',
+  'views/tocbar',
   'views/searchresults',
 
   // Models
@@ -17,13 +18,13 @@ define([
   // Collections
   'collections/mozdevcssprops'
 ], function(doc, $, _, Backbone,
-            TopNavView, SearchHeaderView, SearchResultsView,
+            TopNavView, SearchHeaderView, TOCView, SearchResultsView,
             MozDevCSSProp,
             MozDevCSSPropCollection) {
 
   var InstaCSS = Backbone.Router.extend({
     routes: {
-      ''          : 'main',
+      ''         : 'main',
       ':query'   : 'main',
     },
 
@@ -37,6 +38,9 @@ define([
 
     main: function(query) {
       this.topNavView = new TopNavView();
+      this.tocView = new TOCView({
+        collection : this.wholeFrigginDB,
+      });
       this.searchHeaderView = new SearchHeaderView({
         collection : this.wholeFrigginDB,
         query      : query
@@ -45,6 +49,7 @@ define([
         collection: this.wholeFrigginDB
       });
       // need to subscribe after searchresultsview...ew
+      this.wholeFrigginDB.bind('reset',this.tocView.onSearch);
       this.wholeFrigginDB.bind('reset',this.searchHeaderView.onSearch);
 
       // Save for convenience
@@ -53,6 +58,7 @@ define([
       $('#topnav').append(this.topNavView.render().el);
       $('#container').empty();
       $('#container').append(this.searchHeaderView.render().el);
+      $('#container').append(this.tocView.render().el);
       $('#container').append(this.searchResultsView.render().el);
       $('#search-box').focus();
     },

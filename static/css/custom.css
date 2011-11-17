@@ -14,22 +14,12 @@
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
 
-div .edit-info {
-  margin-top: 12px;
-  margin-left: 20px;
-  border-bottom: 1px solid #DDD;
-}
-
 h2 .sub-title {
   margin-bottom: 12px;
 }
 
 div .item {
   margin-bottom: 30px;
-}
-
-#search-header {
- padding-top: 60px;
 }
 
 .pointer {
@@ -39,3 +29,8 @@ div .item {
 div .smallclear {
   margin-bottom: 9px;
 }
+
+div#toc {
+  margin-top: 138px;
+}
+

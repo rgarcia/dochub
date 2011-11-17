@@ -8,8 +8,8 @@ define([
   // the header does not re-render on collection events
   // it just handles applying the query to the collection of models
   var SearchHeaderView = BackBone.View.extend({
-    tagName: 'section',
     id: 'search-header',
+    className: 'content',
 
     events: {
       'keyup #search-box'    : 'onKeyup',
