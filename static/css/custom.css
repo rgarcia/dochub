@@ -30,10 +30,6 @@ div .smallclear {
   margin-bottom: 9px;
 }
 
-div #toc {
-  margin-top: 138px;
-}
-
 button.up-arrow {
   width: 180px;
   border-width: 1px;
@@ -43,5 +39,9 @@ button.up-arrow {
   font-weight: 900;
   font-size: 150%;
   padding-bottom: 5px;
+}
+
+div.search-header {
+  margin-bottom: 15px;
 }
 

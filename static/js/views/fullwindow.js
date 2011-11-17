@@ -18,7 +18,7 @@ define([
     onScroll: function() {
       // make sure the margin-top of the TOC is correct
       var scrollTop = $(window).scrollTop();
-      $('#toc').animate({'margin-top':Math.max(138,scrollTop)},
+      $('#toc').animate({'margin-top':Math.max(0,scrollTop)},
                         25);
     },
 

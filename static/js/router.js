@@ -8,7 +8,6 @@ define([
 
   // Views
   'views/topnav',
-  'views/searchheader',
   'views/tocbar',
   'views/searchresults',
   'views/fullwindow',
@@ -19,7 +18,7 @@ define([
   // Collections
   'collections/mozdevcssprops'
 ], function(doc, $, _, Backbone,
-            TopNavView, SearchHeaderView, TOCView, SearchResultsView, FullWindowView,
+            TopNavView, TOCView, SearchResultsView, FullWindowView,
             MozDevCSSProp,
             MozDevCSSPropCollection) {
 
@@ -41,9 +40,6 @@ define([
       this.topNavView = new TopNavView();
       this.tocView = new TOCView({
         collection : this.wholeFrigginDB,
-      });
-      this.searchHeaderView = new SearchHeaderView({
-        collection : this.wholeFrigginDB,
         query      : query
       });
       this.searchResultsView = new SearchResultsView({
@@ -52,7 +48,7 @@ define([
 
       // search needs to be triggered as soon as db is loaded (in case search box has an unhandled query)
       // also need to subscribe after searchresultsview...ew
-      this.wholeFrigginDB.bind('reset',this.searchHeaderView.onSearch);
+      this.wholeFrigginDB.bind('reset',this.tocView.searchHeaderView.onSearch);
 
       // Save for convenience
       this.container = $('#container');
@@ -60,7 +56,6 @@ define([
       $('#topnav').empty();
       $('#topnav').append(this.topNavView.render().el);
       $('#container').empty();
-      $('#container').append(this.searchHeaderView.render().el);
       $('#container').append(this.tocView.render().el);
       $('#container').append(this.searchResultsView.render().el);
       $('#search-box').focus();

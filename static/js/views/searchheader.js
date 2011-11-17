@@ -9,7 +9,7 @@ define([
   // it just handles applying the query to the collection of models
   var SearchHeaderView = BackBone.View.extend({
     id: 'search-header',
-    className: 'content',
+    className: 'search-header',
 
     events: {
       'keyup #search-box'    : 'onKeyup',
