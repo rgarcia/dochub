@@ -2,8 +2,9 @@ define([
   'jQuery',
   'Underscore',
   'Backbone',
+  'views/tocresult',
   'text!templates/toc.html',
-], function($, _, BackBone, tocTemplate) {
+], function($, _, BackBone, TOCResult, tocTemplate) {
 
   // the contents view view is just tied to a collection and re-renders itself
   var TOCBar = BackBone.View.extend({
@@ -17,10 +18,14 @@ define([
     },
 
     render: function() {
-      var obj = {
-        cssprops: this.collection
-      }
-      $(this.el).html(this.template(obj));
+      $(this.el).html(this.template({}));
+
+      var tocResultsUl = $('toc-results');
+      var self = this;
+      this.collection.each(function(cssprop) {
+        var view = new TOCResult({ model: cssprop });
+        tocResultsUl.append(view.render().el);
+      });
 
       return this;
     },
