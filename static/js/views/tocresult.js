@@ -6,6 +6,11 @@ define([
 ], function($, _, BackBone, tocResultTemplate) {
 
   var TOCResult = BackBone.View.extend({
+
+    events: {
+      'click a' : 'onClick'
+    },
+
     initialize: function() {
       _.bindAll(this,'render');
       this.template = _.template(tocResultTemplate);
@@ -28,8 +33,16 @@ define([
       $(this.el).hide();
       return this;
     },
+
+    onClick: function() {
+      console.log('clicked ' + this.model.get('title'));
+
+      $('html,body').animate({
+        scrollTop: $("#_"+this.model.get('title')).offset().top-40},
+                             'slow');
+    }
+
   });
 
   return TOCResult;
 });
-

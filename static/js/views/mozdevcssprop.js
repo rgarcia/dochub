@@ -15,11 +15,6 @@ define([
           $(self.el).show();
         else
           $(self.el).hide();
-//        $(self.el).toggle((model.get("visible")));
-        // if ( model.get('visible') && $(self.el).attr('display') === '' )
-        //   $(self.el).toggle((model.get("visible")));
-        // else if ( !model.get('visible') && $(self.el).attr('display') === 'none' )
-        //   $(self.el).toggle((model.get("visible")));
       });
     },
 

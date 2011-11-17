@@ -31,6 +31,7 @@ define([
       if (query === '') {
         return;
       }
+      // todo: replacestate...
       BackBone.history.navigate(query, false);
       console.log('searching for ' + query);
       var searchfn = function(model) {

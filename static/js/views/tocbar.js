@@ -11,6 +11,10 @@ define([
     id: 'toc',
     className: 'sidebar',
 
+    events: {
+      'click #goto-top' : 'gotoTop'
+    },
+
     initialize: function() {
       _.bindAll(this, 'render');
       this.collection.bind('reset', this.render);
@@ -29,8 +33,12 @@ define([
 
       return this;
     },
+
+    gotoTop: function() {
+      $('html,body').animate({scrollTop: 0},'slow');
+    }
+
   });
 
   return TOCBar;
 });
-
