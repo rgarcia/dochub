@@ -40,13 +40,9 @@ define([
 
       var searchResultsTopVal = $('#search-results').scrollTop();
       var topVal = $("#_" + this.model.get('title')).offset().top;
-      /*
-       * Don't animate, just move to
       $('#search-results').animate({
         scrollTop: searchResultsTopVal + topVal - 60
       }, 'slow');
-      */
-      $('#search-results').scrollTop(searchResultsTopVal + topVal - 60);
     }
 
   });
