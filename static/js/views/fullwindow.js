@@ -18,16 +18,18 @@ define([
     onScroll: function() {
       // make sure the margin-top of the TOC is correct
       var scrollTop = $(window).scrollTop();
-      $('#toc').animate({'margin-top':Math.max(0,scrollTop)},
-                        25);
+      $('#toc').animate({'margin-top':Math.max(0,scrollTop)}, 25);
     },
 
     onResize: function() {
       // make sure the TOC div reaches the bottom of the screen
       console.log('window height',$(window).height());
-      var tocHeight = $(window).height() - 255;
-      $('#toc-well').css('height',tocHeight);
+      var windowHeight = $(window).height();
+      $('#toc-well').css('height', windowHeight - 120);
       $('#toc-well').css('overflow-y','scroll');
+
+      $('#search-results').css('height', windowHeight - 80);
+      $('#search-results').css('overflow-y','scroll');
     },
   });
 

@@ -42,9 +42,10 @@ define([
         $('#search-box').val(this.model.get('title'));
         $("#search-box").trigger('keyup');
       } else {
-        $('html,body').animate({
-          scrollTop: $("#_"+this.model.get('title')).offset().top-40},
-                               'slow');
+        //$('html,body').animate({
+        $('#search-results').animate({
+          scrollTop: $("#_" + this.model.get('title')).offset().top-60
+        }, 'slow');
       }
     }
 

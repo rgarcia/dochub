@@ -13,7 +13,7 @@ define([
     className: 'sidebar',
 
     events: {
-      'click #goto-top' : 'gotoTop'
+      // 'click #goto-top' : 'gotoTop'
     },
 
     initialize: function() {
@@ -43,9 +43,11 @@ define([
       return this;
     },
 
+    /*
     gotoTop: function() {
       $('html,body').animate({scrollTop: 0},'slow');
     }
+    */
 
   });
 
