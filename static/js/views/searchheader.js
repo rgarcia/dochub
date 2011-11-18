@@ -27,12 +27,13 @@ define([
     },
 
     onSearch: function() {
+      // todo: replacestate...
+      BackBone.history.navigate(query, false);
+
       var query = $.trim(this.$('#search-box').val()).toLowerCase();
       if (query === '') {
         query = '.';
       }
-      // todo: replacestate...
-      BackBone.history.navigate(query, false);
       console.log('searching for ' + query);
       var searchfn = function(model) {
         // BEGIN GLORIOUS SEARCH ALGORITHM
@@ -43,6 +44,7 @@ define([
         model.set({visible: searchfn(model)});
       });
 
+      $('#search-box').focus();
     },
 
     onKeyup: function(evt) {
