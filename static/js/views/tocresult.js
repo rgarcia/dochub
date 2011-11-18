@@ -38,17 +38,15 @@ define([
     onClick: function() {
       console.log('clicked ' + this.model.get('title'));
 
-      // if nothing in the search bar, put it there
-      if ( $('#search-box').val() === "" ) {
-        $('#search-box').val(this.model.get('title'));
-        $("#search-box").trigger('keyup');
-      } else {
-        var searchResultsTopVal = $('#search-results').scrollTop();
-        var topVal = $("#_" + this.model.get('title')).offset().top;
-        $('#search-results').animate({
-          scrollTop: searchResultsTopVal + topVal - 60
-        }, 'slow');
-      }
+      var searchResultsTopVal = $('#search-results').scrollTop();
+      var topVal = $("#_" + this.model.get('title')).offset().top;
+      /*
+       * Don't animate, just move to
+      $('#search-results').animate({
+        scrollTop: searchResultsTopVal + topVal - 60
+      }, 'slow');
+      */
+      $('#search-results').scrollTop(searchResultsTopVal + topVal - 60);
     }
 
   });
