@@ -42,9 +42,10 @@ define([
         $('#search-box').val(this.model.get('title'));
         $("#search-box").trigger('keyup');
       } else {
-        //$('html,body').animate({
+        var searchResultsTopVal = $('#search-results').scrollTop();
+        var topVal = $("#_" + this.model.get('title')).offset().top;
         $('#search-results').animate({
-          scrollTop: $("#_" + this.model.get('title')).offset().top-60
+          scrollTop: searchResultsTopVal + topVal - 60
         }, 'slow');
       }
     }

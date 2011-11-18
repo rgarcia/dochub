@@ -29,7 +29,8 @@ define([
       $('#toc-well').css('overflow-y','scroll');
 
       $('#search-results').css('height', windowHeight - 80);
-      $('#search-results').css('overflow-y','scroll');
+      $('#search-results').css('overflow-y', 'scroll');
+      $('#search-results').css('overflow-x', 'hidden');
     },
   });
 
