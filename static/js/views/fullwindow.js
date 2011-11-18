@@ -9,16 +9,9 @@ define([
   var FullWindowView = BackBone.View.extend({
 
     initialize: function() {
-      _.bindAll(this, 'onScroll', 'onResize');
-      $(window).scroll(this.onScroll);
+      _.bindAll(this, 'onResize');
       $(window).resize(this.onResize);
       this.onResize();
-    },
-
-    onScroll: function() {
-      // make sure the margin-top of the TOC is correct
-      var scrollTop = $(window).scrollTop();
-      $('#toc').animate({'margin-top':Math.max(0,scrollTop)}, 25);
     },
 
     onResize: function() {
