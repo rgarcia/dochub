@@ -29,7 +29,7 @@ define([
     onSearch: function() {
       var query = $.trim(this.$('#search-box').val()).toLowerCase();
       if (query === '') {
-        return;
+        query = '.';
       }
       // todo: replacestate...
       BackBone.history.navigate(query, false);
