@@ -39,7 +39,7 @@ define([
       console.log('clicked ' + this.model.get('title'));
 
       var searchResultsTopVal = $('#search-results').scrollTop();
-      var topVal = $("#_" + this.model.get('title')).offset().top;
+      var topVal = $('#' + this.model.get('validHtmlId')).offset().top;
       $('#search-results').animate({
         scrollTop: searchResultsTopVal + topVal - 60
       }, 'slow');

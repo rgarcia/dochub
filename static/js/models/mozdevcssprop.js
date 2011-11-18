@@ -11,6 +11,7 @@ define([
     defaults: {
       'visible'              : false,
       'title'                : '',
+      'validHtmlId'          : '',  // title is not always a valid HTML id value
       'summary'              : null,
       'syntax'               : null,
       'values'               : null,
@@ -22,6 +23,7 @@ define([
     },
 
     initialize: function() {
+      this.set({'validHtmlId': this.get('title').replace(/[\W\s]/g, '_') });
     },
 
     url: function() {
