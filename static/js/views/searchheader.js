@@ -27,10 +27,11 @@ define([
     },
 
     onSearch: function() {
+      var query = $.trim(this.$('#search-box').val()).toLowerCase();
+
       // todo: replacestate...
       BackBone.history.navigate(query, false);
 
-      var query = $.trim(this.$('#search-box').val()).toLowerCase();
       if (query === '') {
         query = '.';
       }
