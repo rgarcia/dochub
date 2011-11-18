@@ -6,6 +6,7 @@ define([
 ], function($, _, BackBone, tocResultTemplate) {
 
   var TOCResult = BackBone.View.extend({
+    tagName: 'li',
 
     events: {
       'click a' : 'onClick'

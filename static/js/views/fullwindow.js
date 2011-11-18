@@ -19,7 +19,10 @@ define([
       console.log('window height',$(window).height());
       var windowHeight = $(window).height();
       $('#toc-well').css('height', windowHeight - 120);
-      $('#toc-well').css('overflow-y','scroll');
+      $('#toc-well').css('overflow-y', 'hidden');
+
+      $('#toc-results-div').css('height', windowHeight - 160);
+      $('#toc-results-div').css('overflow-y', 'scroll');
 
       $('#search-results').css('height', windowHeight - 80);
       $('#search-results').css('overflow-y', 'scroll');
