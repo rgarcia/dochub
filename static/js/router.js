@@ -48,7 +48,8 @@ define([
 
       // search needs to be triggered as soon as db is loaded (in case search box has an unhandled query)
       // also need to subscribe after searchresultsview...ew
-      this.wholeFrigginDB.bind('reset',this.tocView.searchHeaderView.onSearch);
+      this.wholeFrigginDB.bind('reset', this.tocView.searchHeaderView.onSearch);
+      this.wholeFrigginDB.bind('reset', this.searchResultsView.onLoad);
 
       // Save for convenience
       this.container = $('#container');
@@ -59,6 +60,7 @@ define([
       $('#container').append(this.tocView.render().el);
       $('#container').append(this.searchResultsView.render().el);
       $('#search-box').focus();
+      this.searchResultsView.renderSpinner();
 
       this.fullWindow = new FullWindowView();
       this.wholeFrigginDB.bind('reset',this.fullWindow.onResize); // make sure toc well height is set correctly
