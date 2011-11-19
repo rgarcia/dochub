@@ -35,6 +35,9 @@ define([
     onLoad: function() {
       this.dataLoaded = true;
       this.spinner.stop();
+
+      // Remove css height property
+      $('#container').css('height', '');
     },
 
     renderSpinner: function() {
