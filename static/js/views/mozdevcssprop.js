@@ -24,7 +24,7 @@ define([
         model : this.model,
       }
       $(this.el).html(this.template(obj));
-      $(this.el).show();
+      $(this.el).hide();
       return this;
     },
   });
