@@ -19,8 +19,6 @@ define([
       _.bindAll(this, 'render','onSearch');
       this.template = _.template(searchHeaderTemplate);
       this.render();
-
-      this.lastQuery = '';
     },
 
     render: function() {
@@ -33,13 +31,6 @@ define([
     onSearch: function() {
       console.log('onSearch');
       var query = $.trim(this.$('#search-box').val()).toLowerCase();
-      /*
-      if (query === this.lastQuery) {
-        // _.delay(this.onSearch, 500);
-        return;
-      }
-      this.lastQuery = query;
-      */
 
       // todo: replacestate...
       BackBone.history.navigate(query, false);

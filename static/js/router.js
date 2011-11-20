@@ -47,7 +47,9 @@ define([
       $('#topnav').empty();
       $('#topnav').append(this.topNavView.el);
 
-      this.tocBarView = new TOCBarView({});
+      this.tocBarView = new TOCBarView({
+        collection: this.wholeFrigginDB
+      });
       $('#container').empty();
       $('#container').append(this.tocBarView.el);
 

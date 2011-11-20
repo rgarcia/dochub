@@ -11,8 +11,8 @@ define([
   //  ::xyz
   //  :xyz
   //  @xyz
-  //  TODO: <xyz>
-  var cssPropsPattern = new RegExp("^([-:@]*)(.+)$");
+  //  <xyz>
+  var cssPropsPattern = new RegExp("^(\\W*)(.+)$");
 
   var MozDevCSSProps = Backbone.Collection.extend({
     model: MozDevCSSProp,
