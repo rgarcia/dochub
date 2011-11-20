@@ -4,16 +4,10 @@ define(['mongoose'], function(mongoose) {
   var ObjectId  = Schema.ObjectId;
 
   var MozDevCSSProp = new Schema({
-    id           : ObjectId,
-    title        : { type: String, required: true },
-    summary              : String,
-    syntax               : String,
-    values               : String,
-    relatedProperties    : String,
-    examples             : String,
-    notes                : String,
-    specifications       : String,
-    browserCompatability : String,
+    id             : ObjectId,
+    title          : { type: String, required: true },
+    sectionNames   : [String],  // ordering important
+    sectionHTMLs   : [String]
   });
 
   return mongoose.model('MozDevCSSProp',MozDevCSSProp);

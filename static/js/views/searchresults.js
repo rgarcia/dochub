@@ -17,7 +17,7 @@ define([
       this.collection.bind('reset', this.render);
       this.dataLoaded = false;
 
-      // Render the loading spinner 
+      // Render the loading spinner
       var opts = {
         lines  : 12,      // The number of lines to draw
         length : 30,      // The length of each line
@@ -47,6 +47,7 @@ define([
     },
 
     render: function() {
+      console.log('rendering search results');
       // render a subview for each model in the collection
       var self = this;
       this.collection.each(function(cssprop) {

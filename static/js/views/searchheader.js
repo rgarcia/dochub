@@ -38,7 +38,7 @@ define([
       console.log('searching for ' + query);
       var searchfn = function(model) {
         // BEGIN GLORIOUS SEARCH ALGORITHM
-        return model.get('title').match(query);
+        return model.get('title').match(query) !== null;
         // END GLORIOUS SEARCH ALGORITHM
       };
       this.collection.each(function(model) {

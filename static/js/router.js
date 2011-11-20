@@ -34,6 +34,7 @@ define([
 
       // todo: display a loading spinner or something while this is happening
       this.wholeFrigginDB.fetch({url: '/mozdevcssprop'});
+      this.wholeFrigginDB.bind('reset',function() { console.log('reset!'); });
     },
 
     main: function(query) {
@@ -58,7 +59,7 @@ define([
       $('#topnav').append(this.topNavView.render().el);
       $('#container').empty();
       $('#container').append(this.tocView.render().el);
-      $('#container').append(this.searchResultsView.render().el);
+      $('#container').append(this.searchResultsView.el);
       $('#search-box').focus();
       this.searchResultsView.renderSpinner();
 

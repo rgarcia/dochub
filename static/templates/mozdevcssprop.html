@@ -1,7 +1,6 @@
 <div id="<%= model.get('validHtmlId') %>" class="page-header span10 offset6">
   <h2><%= model.get('title') %></h2>
-    <%= model.get('summary') %>
-    <%= model.get('syntax') %>
-    <%= model.get('values') %>
-    <%= model.get('examples') %>
+  <% for ( var i = 0; i < model.get('sectionNames').length; i++ ) { %>
+     <%= model.get('sectionHTMLs')[i] %>
+     <% } %>
 </div>

@@ -9,21 +9,19 @@ define([
 
     urlRoot: '/mozdevcssprop',
     defaults: {
-      'visible'              : false,
       'title'                : '',
-      'validHtmlId'          : '',  // title is not always a valid HTML id value
-      'summary'              : null,
-      'syntax'               : null,
-      'values'               : null,
-      'relatedProperties'    : null,
-      'examples'             : null,
-      'notes'                : null,
-      'specifications'       : null,
-      'browserCompatability' : null,
+      'sectionNames'         : [],
+      'sectionHTMLs'         : [],
+
+      // display properties
+      'visible'              : false,
+      'validHtmlId'          : ''  // title is not always a valid HTML id value
     },
 
     initialize: function() {
-      this.set({'validHtmlId': this.get('title').replace(/[\W\s]/g, '_') });
+      // need to put an underscore before it otherwise pushing to the URL bar
+      // might trigger an anchor scroll
+      this.set({'validHtmlId': '_' + this.get('title').replace(/[\W\s]/g, '_') });
     },
 
     url: function() {
