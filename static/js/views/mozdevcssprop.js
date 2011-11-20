@@ -9,12 +9,23 @@ define([
       _.bindAll(this,'render');
       this.template = _.template(this.options.template);
       var self = this;
-      this.model.bind("change:visible", function(model) {
-        if (model.get("visible")) // todo does this get passed in the callback?
-          $(self.el).show();
-        else
-          $(self.el).hide();
-      });
+      if (this.options.type === 'toc') {
+        this.model.bind("change:tocVisible", function(model) {
+          if (model.get("tocVisible")) // todo does this get passed in the callback?
+            $(self.el).show();
+          else
+            $(self.el).hide();
+        });
+      } else if (this.options.type === 'main') {
+        this.model.bind("change:mainVisible", function(model) {
+          if (model.get("mainVisible")) // todo does this get passed in the callback?
+            $(self.el).show();
+          else
+            $(self.el).hide();
+        });
+      } else {
+        throw 'Type option value: ' + this.options.type + ' must be "toc" or "main".';
+      }
       this.render();
     },
 

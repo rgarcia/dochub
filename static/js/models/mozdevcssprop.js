@@ -14,7 +14,8 @@ define([
       'sectionHTMLs'         : [],
 
       // display properties
-      'visible'              : false,
+      'tocVisible'           : false,
+      'mainVisible'          : false,
       'validHtmlId'          : ''  // title is not always a valid HTML id value
     },
 

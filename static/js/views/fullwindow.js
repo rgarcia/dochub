@@ -18,15 +18,17 @@ define([
       // make sure the TOC div reaches the bottom of the screen
       console.log('window height',$(window).height());
       var windowHeight = $(window).height();
-      $('#toc-well').css('height', windowHeight - 120);
+      $('#toc-well').height(windowHeight - 120);
       $('#toc-well').css('overflow-y', 'hidden');
 
-      $('#toc-results-div').css('height', windowHeight - 160);
+      $('#toc-results-div').height(windowHeight - 160);
       $('#toc-results-div').css('overflow-y', 'scroll');
 
-      $('#search-results').css('height', windowHeight - 80);
+      $('#search-results').height(windowHeight - 80);
       $('#search-results').css('overflow-y', 'scroll');
       $('#search-results').css('overflow-x', 'hidden');
+
+      $('#container').height(Math.max($('#toc').height(), $('#search-results').height()));
     },
   });
 

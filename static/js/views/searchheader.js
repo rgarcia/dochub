@@ -19,6 +19,8 @@ define([
       _.bindAll(this, 'render','onSearch');
       this.template = _.template(searchHeaderTemplate);
       this.render();
+
+      this.lastQuery = '';
     },
 
     render: function() {
@@ -29,12 +31,21 @@ define([
     },
 
     onSearch: function() {
+      console.log('onSearch');
       var query = $.trim(this.$('#search-box').val()).toLowerCase();
+      /*
+      if (query === this.lastQuery) {
+        // _.delay(this.onSearch, 500);
+        return;
+      }
+      this.lastQuery = query;
+      */
 
       // todo: replacestate...
       BackBone.history.navigate(query, false);
 
-      if (query === '') {
+      var queryExists = !(query === '');
+      if (!queryExists) {
         query = '.';
       }
       console.log('searching for ' + query);
@@ -44,9 +55,11 @@ define([
         // END GLORIOUS SEARCH ALGORITHM
       };
       this.collection.each(function(model) {
-        model.set({visible: searchfn(model)});
+        var visible = searchfn(model);
+        model.set({tocVisible: visible, mainVisible: visible && queryExists});
       });
 
+      // _.delay(this.onSearch, 500);
     },
 
   });
