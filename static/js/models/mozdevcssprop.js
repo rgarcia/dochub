@@ -19,9 +19,6 @@ define([
     },
 
     initialize: function() {
-      // need to put an underscore before it otherwise pushing to the URL bar
-      // might trigger an anchor scroll
-      this.set({'validHtmlId': '_' + this.get('title').replace(/[\W\s]/g, '_') });
     },
 
     url: function() {

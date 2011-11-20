@@ -2,42 +2,39 @@ define([
   'jQuery',
   'Underscore',
   'Backbone',
-  'views/searchheader',
-  'views/tocresult',
   'text!templates/toc.html',
-], function($, _, BackBone, SearchHeader, TOCResult, tocTemplate) {
+], function($, _, BackBone, tocTemplate) {
 
-  // the contents view view is just tied to a collection and re-renders itself
   var TOCBar = BackBone.View.extend({
     id: 'toc',
     className: 'sidebar',
 
+    events: {
+      'click a' : 'onClick'
+    },
+
+
     initialize: function() {
       _.bindAll(this, 'render');
-      this.collection.bind('reset', this.render);
       this.template = _.template(tocTemplate);
-
-      this.searchHeaderView = new SearchHeader({
-        collection: this.collection,
-        query: this.options.query
-      });
+      this.render();
     },
 
     render: function() {
+      console.log('rendering tocbar');
       $(this.el).html(this.template({}));
-
-      // Search bar
-      $('#search-bar').append(this.searchHeaderView.render().el);
-
-      var tocResultsUl = $('#toc-results');
-      var self = this;
-      this.collection.each(function(cssprop) {
-        var view = new TOCResult({ model: cssprop });
-        tocResultsUl.append(view.render().el);
-      });
-
       return this;
     },
+
+    onClick: function(e) {
+      console.log('clicked', e);
+      var modelid = $(e.currentTarget).attr('data-model-id');
+      var searchResultsTopVal = $('#search-results').scrollTop();
+      var topVal = $('#search-results [data-model-id="' + modelid + '"]').offset().top;
+      $('#search-results').animate({
+        scrollTop: searchResultsTopVal + topVal - 60
+      }, 'slow');
+    }
 
   });
 

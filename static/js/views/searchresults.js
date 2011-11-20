@@ -13,46 +13,38 @@ define([
     className: 'content',
 
     initialize: function() {
-      _.bindAll(this, 'render', 'onLoad');
+      _.bindAll(this, 'render'); //, 'onLoad');
       this.collection.bind('reset', this.render);
-      this.dataLoaded = false;
 
       // Render the loading spinner
-      var opts = {
-        lines  : 12,      // The number of lines to draw
-        length : 30,      // The length of each line
-        width  : 10,      // The line thickness
-        radius : 31,      // The radius of the inner circle
-        color  : '#000',  // #rgb or #rrggbb
-        speed  : 0.7,     // Rounds per second
-        trail  : 60,      // Afterglow percentage
-        shadow : false    // Whether to render a shadow
-      };
-      this.spinner = new Spinner(opts);
-    },
-
-    // Callback to handle when the db loads, so we can remove the spinner
-    onLoad: function() {
-      this.dataLoaded = true;
-      this.spinner.stop();
-
-      // Remove css height property
-      $('#container').css('height', '');
-    },
-
-    renderSpinner: function() {
-      if (!this.dataLoaded) {
-        this.spinner.spin($('#container')[0]);
+      if (this.options.spinner) {
+        var opts = {
+          lines  : 12,      // The number of lines to draw
+          length : 30,      // The length of each line
+          width  : 10,      // The line thickness
+          radius : 31,      // The radius of the inner circle
+          color  : '#000',  // #rgb or #rrggbb
+          speed  : 0.7,     // Rounds per second
+          trail  : 60,      // Afterglow percentage
+          shadow : false    // Whether to render a shadow
+        };
+        this.spinner = new Spinner(opts).spin();
+        $(this.spinner.el).css('margin-top',$(window).height()/4);
+        $(this.spinner.el).css('margin-left',$(window).width()/4);
+        $(this.el).append(this.spinner.el);
       }
     },
 
     render: function() {
-      console.log('rendering search results');
+      console.log('db loaded, rendering models');
+      if (this.options.spinner)
+        this.spinner.stop();
       // render a subview for each model in the collection
       var self = this;
-      this.collection.each(function(cssprop) {
-        var view = new MozDevCSSPropView({model: cssprop});
-        $(self.el).append(view.render().el);
+      this.collection.each(function(model) {
+        var view = new MozDevCSSPropView({model: model,
+                                          template: self.options.itemTemplate});
+        $(self.el).append(view.el);
       });
       return this;
     },

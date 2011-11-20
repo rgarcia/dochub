@@ -9,8 +9,13 @@ define([
   // Views
   'views/topnav',
   'views/tocbar',
+  'views/searchheader',
   'views/searchresults',
   'views/fullwindow',
+
+  // Templates
+  'text!templates/tocresult.html',
+  'text!templates/mozdevcssprop.html',
 
   // Models
   'models/mozdevcssprop',
@@ -18,7 +23,8 @@ define([
   // Collections
   'collections/mozdevcssprops'
 ], function(doc, $, _, Backbone,
-            TopNavView, TOCView, SearchResultsView, FullWindowView,
+            TopNavView, TOCBarView, SearchHeaderView, SearchResultsView, FullWindowView,
+            TocResultTemplate, FullResultTemplate,
             MozDevCSSProp,
             MozDevCSSPropCollection) {
 
@@ -32,41 +38,49 @@ define([
       // for client-side search...
       this.wholeFrigginDB = new MozDevCSSPropCollection();
 
-      // todo: display a loading spinner or something while this is happening
       this.wholeFrigginDB.fetch({url: '/mozdevcssprop'});
       this.wholeFrigginDB.bind('reset',function() { console.log('reset!'); });
     },
 
     main: function(query) {
       this.topNavView = new TopNavView();
-      this.tocView = new TOCView({
-        collection : this.wholeFrigginDB,
-        query      : query
-      });
-      this.searchResultsView = new SearchResultsView({
-        collection: this.wholeFrigginDB
-      });
-
-      // search needs to be triggered as soon as db is loaded (in case search box has an unhandled query)
-      // also need to subscribe after searchresultsview...ew
-      this.wholeFrigginDB.bind('reset', this.tocView.searchHeaderView.onSearch);
-      this.wholeFrigginDB.bind('reset', this.searchResultsView.onLoad);
-
-      // Save for convenience
-      this.container = $('#container');
-
       $('#topnav').empty();
-      $('#topnav').append(this.topNavView.render().el);
+      $('#topnav').append(this.topNavView.el);
+
+      this.tocBarView = new TOCBarView({});
       $('#container').empty();
-      $('#container').append(this.tocView.render().el);
-      $('#container').append(this.searchResultsView.el);
-      $('#search-box').focus();
-      this.searchResultsView.renderSpinner();
+      $('#container').append(this.tocBarView.el);
+
+      this.searchHeaderView = new SearchHeaderView({
+        el: this.tocBarView.$('#search-header'),
+        collection: this.wholeFrigginDB,
+        query: query
+      });
+
+      this.tocResultsView = new SearchResultsView({
+        el: this.tocBarView.$('#toc-results'),
+        collection: this.wholeFrigginDB,
+        itemTemplate: TocResultTemplate
+      });
+
+      this.mainResultsView = new SearchResultsView({
+        collection: this.wholeFrigginDB,
+        itemTemplate: FullResultTemplate,
+        spinner: true
+      });
+      $('#container').append(this.mainResultsView.el);
+
+      // search needs to be triggered as soon as db is loaded in case search box
+      // has an unhandled query. also need to wait to do this until after
+      // results have rendered (which happens on reset).
+      this.wholeFrigginDB.bind('reset', this.searchHeaderView.onSearch);
 
       this.fullWindow = new FullWindowView();
-      this.wholeFrigginDB.bind('reset',this.fullWindow.onResize); // make sure toc well height is set correctly
-    },
+      // make sure toc well height is set correctly (todo: move this into tocbarview)
+      this.wholeFrigginDB.bind('reset',this.fullWindow.onResize);
 
+      $('#search-box').focus();
+    },
   });
 
   var initialize = function() {

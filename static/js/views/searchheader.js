@@ -12,15 +12,17 @@ define([
     className: 'search-header',
 
     events: {
-      'keyup #search-box'    : 'onKeyup',
+      'keyup #search-box'    : 'onSearch',
     },
 
     initialize: function() {
       _.bindAll(this, 'render','onSearch');
       this.template = _.template(searchHeaderTemplate);
+      this.render();
     },
 
     render: function() {
+      console.log('rendering search header');
       var initialQuery = this.options.query ? this.options.query : "";
       $(this.el).html(this.template({ query: initialQuery }));
       return this;
@@ -45,11 +47,6 @@ define([
         model.set({visible: searchfn(model)});
       });
 
-      $('#search-box').focus();
-    },
-
-    onKeyup: function(evt) {
-      this.onSearch();
     },
 
   });

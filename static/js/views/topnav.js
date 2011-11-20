@@ -11,6 +11,7 @@ define([
     initialize: function() {
       _.bindAll(this, 'render');
       this.template = _.template(topNavTemplate);
+      this.render();
     },
 
     render: function() {

@@ -1,4 +1,4 @@
-<div id="<%= model.get('validHtmlId') %>" class="page-header span10 offset6">
+<div data-model-id="<%= model.id %>" class="page-header span10 offset6">
   <h2><%= model.get('title') %></h2>
   <% for ( var i = 0; i < model.get('sectionNames').length; i++ ) { %>
      <%= model.get('sectionHTMLs')[i] %>
