@@ -1,7 +1,8 @@
 define([
+  'jQuery',
   'Underscore',
   'Backbone'
-], function(_, Backbone) {
+], function($, _, Backbone) {
 
   var MozDevCSSProp = Backbone.Model.extend({
 
@@ -20,11 +21,13 @@ define([
     },
 
     initialize: function() {
+      this.set({ htmlEscapedTitle: $('<div/>').html(this.get('title')).text() });
     },
 
     url: function() {
       return this.urlRoot + '/' + this.get('name');
     },
+
 
   });
 

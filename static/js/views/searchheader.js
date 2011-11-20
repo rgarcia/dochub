@@ -44,15 +44,13 @@ define([
       query = new RegExp(query, 'i'); // Ignore case
       var searchfn = function(model) {
         // BEGIN GLORIOUS SEARCH ALGORITHM
-        return query.test(model.get('title'));
+        return query.test(model.get('htmlEscapedTitle'));
         // END GLORIOUS SEARCH ALGORITHM
       };
       this.collection.each(function(model) {
         var visible = searchfn(model);
         model.set({tocVisible: visible, mainVisible: visible && queryExists});
       });
-
-      // _.delay(this.onSearch, 500);
     },
 
   });
