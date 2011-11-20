@@ -40,9 +40,11 @@ define([
         query = '.';
       }
       console.log('searching for ' + query);
+
+      query = new RegExp(query, 'i'); // Ignore case
       var searchfn = function(model) {
         // BEGIN GLORIOUS SEARCH ALGORITHM
-        return model.get('title').match(query) !== null;
+        return query.test(model.get('title'));
         // END GLORIOUS SEARCH ALGORITHM
       };
       this.collection.each(function(model) {
