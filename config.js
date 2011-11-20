@@ -1,7 +1,5 @@
 define([], function() {
 
-  console.log(global.process.env);
-
   return {
     host_dev: 'localhost',
     host_prod: 'instacss.herokuapp.com',

@@ -9,6 +9,8 @@ define([
 
   var app = null;
 
+  console.log(global.process.env);
+
   return {
     initialize: function() {
       if ( app ) return;
