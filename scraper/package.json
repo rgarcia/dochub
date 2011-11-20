@@ -5,6 +5,9 @@
     "requirejs": ">=1.0.0",
     "mongoose": ">=2.3.9",
     "underscore": ">=1.2.1",
-    "scraper": ">=0.0.9"
+    "request": ">=2.2.5",
+    "cheerio": ">=0.2.2",
+    "step": ">=0.0.5",
+    "commander": ">=0.4.1"
   }
 }
