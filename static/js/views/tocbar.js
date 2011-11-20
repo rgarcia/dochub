@@ -39,13 +39,9 @@ define([
         });
       }
 
-      var name = $(e.currentTarget).text();
-      var model = this.collection.find(function(model) {
-        return model.get('title') === name;
-      });
-      model.set({ mainVisible: true });
-
       var modelid = $(e.currentTarget).attr('data-model-id');
+      this.collection.get(modelid).set({ mainVisible: true });
+
       var searchResultsTopVal = $('#search-results').scrollTop();
       var topVal = $('#search-results [data-model-id="' + modelid + '"]').offset().top;
       $('#search-results').animate({
