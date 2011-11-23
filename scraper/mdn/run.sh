@@ -1,4 +1,6 @@
-node index.js > index.txt 2>&1
+#!/bin/bash
+
+node index.js > index.txt &&
 while read line; do
-    node page.js $line 2>&1;
+    node page.js $line
 done < index.txt
