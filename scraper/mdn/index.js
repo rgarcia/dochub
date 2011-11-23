@@ -25,7 +25,6 @@ requirejs([
         throw(error);
       }
       var $ = cheerio.load(body); // use cheerio to generate a new jquery obj
-      linksToScrape = {};
       $('code a').each(function(index) {
         console.log('"' + $(this).text().trim() + '" "' + $(this).attr('href') + '"');
       });
