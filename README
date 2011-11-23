@@ -1,7 +1,0 @@
-How to use the r.js optimizer:
-
-> node node_modules/requirejs/bin/r.js -o static/js/app.build.js
-
-Make sure the node server is serving the correct static folder
-(whether you want /static or /static-build).
-
