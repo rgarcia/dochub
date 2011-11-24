@@ -45,7 +45,7 @@ define([
         var view = new MozDevCSSPropView({
           model: model,
           template: self.options.itemTemplate,
-          type: self.options.type
+          visibleField: self.options.visibleField
         });
         $(self.el).append(view.el);
       });

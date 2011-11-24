@@ -63,13 +63,13 @@ define([
         el: this.tocBarView.$('#toc-results'),
         collection: this.wholeFrigginDB,
         itemTemplate: TocResultTemplate,
-        type: 'toc'
+        visibleField: 'tocVisible'
       });
 
       this.mainResultsView = new SearchResultsView({
         collection: this.wholeFrigginDB,
         itemTemplate: FullResultTemplate,
-        type: 'main',
+        visibleField: 'mainVisible',
         spinner: true
       });
       $('#container').append(this.mainResultsView.el);

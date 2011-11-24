@@ -11,13 +11,13 @@ define([
     urlRoot: '/mozdevcssprop',
     defaults: {
       'title'                : '',
+      'htmlEscapedTitle'     : '', // Set in initialize
       'sectionNames'         : [],
       'sectionHTMLs'         : [],
 
       // display properties
       'tocVisible'           : false,
       'mainVisible'          : false,
-      'validHtmlId'          : ''  // title is not always a valid HTML id value
     },
 
     initialize: function() {
@@ -27,7 +27,6 @@ define([
     url: function() {
       return this.urlRoot + '/' + this.get('name');
     },
-
 
   });
 
