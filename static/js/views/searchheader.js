@@ -3,11 +3,11 @@ define([
   'Underscore',
   'Backbone',
   'text!templates/searchheader.html',
-], function($, _, BackBone, searchHeaderTemplate) {
+], function($, _, Backbone, searchHeaderTemplate) {
 
   // the header does not re-render on collection events
   // it just handles applying the query to the collection of models
-  var SearchHeaderView = BackBone.View.extend({
+  var SearchHeaderView = Backbone.View.extend({
     id: 'search-header',
     className: 'search-header',
 
@@ -28,7 +28,7 @@ define([
     render: function() {
       console.log('rendering search header');
       var initialQuery = this.options.query ? this.options.query : "";
-      $(this.el).html(this.template({ query: initialQuery }));
+      this.$(this.el).html(this.template({ query: initialQuery }));
       return this;
     },
 
@@ -36,17 +36,18 @@ define([
       var targetText = evt.target.text.toLowerCase();
       if (this.languageType !== targetText) {
         // Change the active tab
-        $('#toc-tabs > .active').removeClass('active');
-        $('#' + evt.target.id).parent().addClass('active'); // Add 'active' to the li, not the a
+        this.$('#toc-tabs > .active').removeClass('active');
+        this.$('#' + evt.target.id).parent().addClass('active'); // Add 'active' to the li, not the a
 
+        var searchBox = this.$('#search-box');
         if ('css' === targetText) {
-          $('#search-box').attr('placeholder', 'Type a CSS property name');
+          searchBox.attr('placeholder', 'Type a CSS property name');
         } else if ('html' === targetText) {
-          $('#search-box').attr('placeholder', 'Type an HTML element name');
+          searchBox.attr('placeholder', 'Type an HTML element name');
         }
 
         this.languageType = targetText;
-        $('#search-box').focus();
+        searchBox.focus();
         this.onSearch();  // refresh TOC bar
       }
     },
@@ -56,25 +57,38 @@ define([
       var query = $.trim(this.$('#search-box').val()).toLowerCase();
 
       // TODO: replacestate...
-      BackBone.history.navigate(query, false);
+      Backbone.history.navigate(query, false);
 
-      var queryExists = !(query === '');
+      var queryExists = (query !== '');
       if (!queryExists) {
-        query = '.';
-      }
-      console.log('searching for ' + query);
+        // query = '.';
+        //
+        // No query, so can do some optimizations.
+        //  1. Don't use the search function
+        //  2. Set tocVisibile for all elements based on self.languageType
+        //  3. For all mainVisible, set mainVisible false
+        var self = this;
+        this.collection.each(function(model) {
+          model.set({
+            tocVisible  : model.get('type') === self.languageType,
+            mainVisible : false
+          });
+        });
+      } else {
+        console.log('searching for ' + query);
 
-      query = new RegExp(query, 'i'); // Ignore case
-      var searchfn = function(model) {
-        // BEGIN GLORIOUS SEARCH ALGORITHM
-        return query.test(model.get('htmlEscapedTitle'));
-        // END GLORIOUS SEARCH ALGORITHM
-      };
-      var self = this;
-      this.collection.each(function(model) {
-        var visible = searchfn(model) && model.get('type') === self.languageType;
-        model.set({tocVisible: visible, mainVisible: visible && queryExists});
-      });
+        query = new RegExp(query, 'i'); // Ignore case
+        var searchfn = function(model) {
+          // BEGIN GLORIOUS SEARCH ALGORITHM
+          return query.test(model.get('htmlEscapedTitle'));
+          // END GLORIOUS SEARCH ALGORITHM
+        };
+        var self = this;
+        this.collection.each(function(model) {
+          var visible = (model.get('type') === self.languageType) && searchfn(model);
+          model.set({ tocVisible: visible, mainVisible: visible });
+        });
+      }
     },
 
   });

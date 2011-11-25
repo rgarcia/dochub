@@ -34,7 +34,7 @@ define([
 
       // If no query, make everything in the search results invisible before
       // showing the one that was clicked.
-      var query = $.trim($('#search-box').val()).toLowerCase();
+      var query = $.trim(this.$('#search-box').val()).toLowerCase();
       if (query === '') {
         this.collection.each(function(model) {
           if (model.get('mainVisible')) {
@@ -43,12 +43,13 @@ define([
         });
       }
 
-      var modelid = $(e.currentTarget).attr('data-model-id');
+      var modelid = this.$(e.currentTarget).attr('data-model-id');
       this.collection.get(modelid).set({ mainVisible: true });
 
-      var searchResultsTopVal = $('#search-results').scrollTop();
+      var searchResults = $('#search-results');
+      var searchResultsTopVal = searchResults.scrollTop();
       var topVal = $('#search-results [data-model-id="' + modelid + '"]').offset().top;
-      $('#search-results').animate({
+      searchResults.animate({
         scrollTop: searchResultsTopVal + topVal - 60
       }, 'slow');
     }

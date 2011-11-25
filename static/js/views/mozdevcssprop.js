@@ -12,9 +12,9 @@ define([
 
       this.model.bind("change:" + this.options.visibleField, function(model) {
         if (model.get(self.options.visibleField)) {
-          $(self.el).show();
+          self.$(self.el).show();
         } else {
-          $(self.el).hide();
+          self.$(self.el).hide();
         }
       });
 
@@ -26,11 +26,12 @@ define([
         _ : _,
         model : this.model,
       }
-      $(this.el).html(this.template(obj));
-      $(this.el).hide(); // by default need to have everything hidden, only search unhides
+      this.$(this.el).html(this.template(obj));
+      this.$(this.el).hide(); // by default need to have everything hidden, only search unhides
       return this;
     },
   });
 
   return MozDevCSSPropView;
 });
+

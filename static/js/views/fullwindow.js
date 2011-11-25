@@ -26,11 +26,12 @@ define([
       // in the toc bar, make the magic number -(196 + 24) = -220.
       $('#toc-results-div').height(windowHeight - 184);
 
-      $('#search-results').height(windowHeight - 80);
-      $('#search-results').css('overflow-y', 'auto');
-      $('#search-results').css('overflow-x', 'hidden');
+      var searchResults = $('#search-results');
+      searchResults.height(windowHeight - 80);
+      searchResults.css('overflow-y', 'auto');
+      searchResults.css('overflow-x', 'hidden');
 
-      $('#container').height(Math.max($('#toc').height(), $('#search-results').height()));
+      $('#container').height(Math.max($('#toc').height(), searchResults.height()));
     },
   });
 
