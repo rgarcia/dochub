@@ -16,7 +16,7 @@ requirejs([
   'mongoose',
   '../../models/mozdevcssprop',
   'underscore'
-], function(config, step, request, cheerio, program, mongoose, MDNProp, _) {
+], function(config, step, request, cheerio, program, mongoose, MozDevCssProp, _) {
 
   program
     .parse(global.process.argv);
@@ -36,7 +36,7 @@ requirejs([
   // connect to teh mongo db
   console.log(config.mongo_uri);
 
-  var mdnprop = new MDNProp();
+  var mdnobj = new MozDevCssProp();
 
   step(
     function connectToDB() {
@@ -49,7 +49,7 @@ requirejs([
       else
         console.log('connected to ' + config.mongo_uri);
 
-      MDNProp.findOne({title:propName},this);
+      MozDevCssProp.findOne({title:propName},this);
     },
 
     function processFind(err, doc) {
@@ -83,10 +83,10 @@ requirejs([
       }
 
       var $ = cheerio.load(body);
-      mdnprop['type'] = 'css';
-      mdnprop['title'] = propName;
-      mdnprop['sectionNames'] = [];
-      mdnprop['sectionHTMLs'] = [];
+      mdnobj['type'] = 'html';
+      mdnobj['title'] = propName;
+      mdnobj['sectionNames'] = [];
+      mdnobj['sectionHTMLs'] = [];
 
       var ids = _.map($('[id^=section_]'), function(div) { return div.attribs.id } );
 
@@ -101,11 +101,11 @@ requirejs([
             break;
           }
         }
-        mdnprop['sectionNames'].push(sectionName);
-        mdnprop['sectionHTMLs'].push($section.html());
+        mdnobj['sectionNames'].push(sectionName);
+        mdnobj['sectionHTMLs'].push($section.html());
       }
 
-      mdnprop.save(this);
+      mdnobj.save(this);
     },
 
     function postDBSave(err) {
@@ -114,7 +114,7 @@ requirejs([
         throw err;
       }
 
-      console.log(mdnprop);
+      console.log(mdnobj);
       console.log('successfully saved to db');
       mongoose.disconnect();
     }

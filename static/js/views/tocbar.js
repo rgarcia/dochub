@@ -28,6 +28,12 @@ define([
     onClick: function(e) {
       console.log('clicked', e);
 
+      var targetText = e.target.text;
+      if ("HTML" === targetText || "CSS" === targetText) {
+        // Clicked on one of the tabs.
+        return;
+      }
+
       // If no query, make everything in the search results invisible before
       // showing the one that was clicked.
       var query = $.trim($('#search-box').val()).toLowerCase();

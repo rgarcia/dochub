@@ -5,6 +5,7 @@ define(['mongoose'], function(mongoose) {
 
   var MozDevCSSProp = new Schema({
     id             : ObjectId,
+    type           : { type: String, required: true }, // One of 'html' or 'css'
     title          : { type: String, required: true },
     sectionNames   : [String],  // ordering important
     sectionHTMLs   : [String]

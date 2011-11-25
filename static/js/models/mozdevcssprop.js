@@ -10,6 +10,7 @@ define([
 
     urlRoot: '/mozdevcssprop',
     defaults: {
+      'type'                 : '',
       'title'                : '',
       'htmlEscapedTitle'     : '', // Set in initialize
       'sectionNames'         : [],

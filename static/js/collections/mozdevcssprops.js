@@ -23,7 +23,8 @@ define([
     var prefix = results[1];
     var name   = results[2].toLowerCase();
 
-    return prefix ? ('1' + title) : ('0' + name);
+    var extractedSorting = prefix ? ('1' + title) : ('0' + name);
+    return model.get('type') + extractedSorting;  // Sort 'css' before 'html'
   },
 
   });
