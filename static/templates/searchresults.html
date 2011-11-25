@@ -2,7 +2,7 @@
 <% cssprops.each(function(cssprop) { %>
 <% if ( !cssprop.get('visible') ) return; %>
 <div>
-  <div class="page-header span10 offset6">
+  <div class="page-header span10 offset6 pageText">
     <h2><%= cssprop.get('name') %>  <small>default: <%= cssprop.get('defaultValue') %>, inherited: <%= cssprop.get('inherited') %></small></h2>
     <%= cssprop.get('description') %>
 

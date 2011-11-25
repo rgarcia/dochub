@@ -44,3 +44,31 @@ button.up-arrow {
 #search-header {
   margin-bottom: 15px;
 }
+
+/* From MDN site (needed to make HTML element attributes section look the same) */
+
+.pageText code, .pageText tt {
+  font: 100% "Courier New", "Andale Mono", monospace;
+  font-weight: inherit;
+  background-color: transparent;
+}
+
+.pageText code a {
+  color: #333;
+}
+
+.pageText dd {
+  margin: 0 0 .5em 22px;
+  margin-bottom: .5em;
+  padding-left: 15px;
+}
+
+div.note {
+  margin-bottom: 1.286em;
+  border: solid #DDDAAA;
+  padding: .75em 15px;
+  background: #FAF9E2;
+  color: #5D5636;
+  border-width: 1px 0;
+}
+
