@@ -24,7 +24,7 @@ define([
       // Adjust the -196 magic # to account for the heights of new objects
       // put in the tocbar. For example, if a new thing occupies +24px height
       // in the toc bar, make the magic number -(196 + 24) = -220.
-      $('#toc-results-div').height(windowHeight - 196);
+      $('#toc-results-div').height(windowHeight - 184);
       $('#toc-results-div').css('overflow-y', 'scroll');
 
       $('#search-results').height(windowHeight - 80);
