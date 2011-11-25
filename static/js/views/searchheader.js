@@ -46,6 +46,7 @@ define([
         }
 
         this.languageType = targetText;
+        $('#search-box').focus();
         this.onSearch();  // refresh TOC bar
       }
     },
