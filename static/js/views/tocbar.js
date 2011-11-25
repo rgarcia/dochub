@@ -26,8 +26,6 @@ define([
     },
 
     onClick: function(e) {
-      console.log('clicked', e);
-
       var targetText = e.target.text;
       if ("HTML" === targetText || "CSS" === targetText) {
         // Clicked on one of the tabs.

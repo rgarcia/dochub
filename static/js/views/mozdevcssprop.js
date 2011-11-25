@@ -11,10 +11,11 @@ define([
       var self = this;
 
       this.model.bind("change:" + this.options.visibleField, function(model) {
-        if (model.get(self.options.visibleField))
+        if (model.get(self.options.visibleField)) {
           $(self.el).show();
-        else
+        } else {
           $(self.el).hide();
+        }
       });
 
       this.render();
