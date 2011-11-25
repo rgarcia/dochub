@@ -25,10 +25,9 @@ define([
       // put in the tocbar. For example, if a new thing occupies +24px height
       // in the toc bar, make the magic number -(196 + 24) = -220.
       $('#toc-results-div').height(windowHeight - 184);
-      $('#toc-results-div').css('overflow-y', 'scroll');
 
       $('#search-results').height(windowHeight - 80);
-      $('#search-results').css('overflow-y', 'scroll');
+      $('#search-results').css('overflow-y', 'auto');
       $('#search-results').css('overflow-x', 'hidden');
 
       $('#container').height(Math.max($('#toc').height(), $('#search-results').height()));
