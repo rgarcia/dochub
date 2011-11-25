@@ -39,6 +39,12 @@ define([
         $('#toc-tabs > .active').removeClass('active');
         $('#' + evt.target.id).parent().addClass('active'); // Add 'active' to the li, not the a
 
+        if ('css' === targetText) {
+          $('#search-box').attr('placeholder', 'Type a CSS property name');
+        } else if ('html' === targetText) {
+          $('#search-box').attr('placeholder', 'Type an HTML element name');
+        }
+
         this.languageType = targetText;
         this.onSearch();  // refresh TOC bar
       }
