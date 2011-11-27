@@ -8,10 +8,6 @@ define([
 
   // the results view is just tied to a collection and re-renders itself
   var SearchResultsView = BackBone.View.extend({
-    id: 'search-results',
-    tagName: 'div',
-    className: 'content',
-
     initialize: function() {
       _.bindAll(this, 'render'); //, 'onLoad');
       this.collection.bind('reset', this.render);
@@ -29,8 +25,8 @@ define([
           shadow : false    // Whether to render a shadow
         };
         this.spinner = new Spinner(opts).spin();
-        $(this.spinner.el).css('margin-top',$(window).height()/4);
-        $(this.spinner.el).css('margin-left',$(window).width()/4);
+        $(this.spinner.el).css('margin-top',  $(window).height()/4);
+        $(this.spinner.el).css('margin-left', $(window).width()/4);
         $(this.el).append(this.spinner.el);
       }
     },

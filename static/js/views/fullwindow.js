@@ -19,7 +19,6 @@ define([
       console.log('window height',$(window).height());
       var windowHeight = $(window).height();
       $('#toc-well').height(windowHeight - 120);
-      $('#toc-well').css('overflow-y', 'hidden');
 
       // Adjust the -196 magic # to account for the heights of new objects
       // put in the tocbar. For example, if a new thing occupies +24px height
@@ -28,8 +27,6 @@ define([
 
       var searchResults = $('#search-results');
       searchResults.height(windowHeight - 80);
-      searchResults.css('overflow-y', 'auto');
-      searchResults.css('overflow-x', 'hidden');
 
       $('#container').height(Math.max($('#toc').height(), searchResults.height()));
     },

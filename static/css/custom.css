@@ -72,3 +72,12 @@ div.note {
   border-width: 1px 0;
 }
 
+div#toc-well {
+  overflow-y: hidden;
+}
+
+div#search-results {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+

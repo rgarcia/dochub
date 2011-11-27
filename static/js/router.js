@@ -48,10 +48,9 @@ define([
       $('#topnav').append(this.topNavView.el);
 
       this.tocBarView = new TOCBarView({
+        el: $('#toc'),
         collection: this.wholeFrigginDB
       });
-      $('#container').empty();
-      $('#container').append(this.tocBarView.el);
 
       this.searchHeaderView = new SearchHeaderView({
         el: this.tocBarView.$('#search-header'),
@@ -67,12 +66,12 @@ define([
       });
 
       this.mainResultsView = new SearchResultsView({
+        el: $('#search-results'),
         collection: this.wholeFrigginDB,
         itemTemplate: FullResultTemplate,
         visibleField: 'mainVisible',
         spinner: true
       });
-      $('#container').append(this.mainResultsView.el);
 
       // search needs to be triggered as soon as db is loaded in case search box
       // has an unhandled query. also need to wait to do this until after

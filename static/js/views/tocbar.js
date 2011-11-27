@@ -6,9 +6,6 @@ define([
 ], function($, _, BackBone, tocTemplate) {
 
   var TOCBar = BackBone.View.extend({
-    id: 'toc',
-    className: 'sidebar',
-
     events: {
       'click a' : 'onClick'
     },
