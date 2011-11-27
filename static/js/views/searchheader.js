@@ -12,9 +12,9 @@ define([
     className: 'search-header',
 
     events: {
-      'click #CSS-toc'       : 'onChangeLanguage',
-      'click #HTML-toc'      : 'onChangeLanguage',
-      'keyup #search-box'    : 'onSearch',
+      'click #CSS-toc'     : 'onChangeLanguage',
+      'click #HTML-toc'    : 'onChangeLanguage',
+      'keyup #search-box'  : 'onSearch',
     },
 
     initialize: function() {
@@ -28,7 +28,7 @@ define([
     render: function() {
       console.log('rendering search header');
       var initialQuery = this.options.query ? this.options.query : "";
-      this.$(this.el).html(this.template({ query: initialQuery }));
+      $(this.el).html(this.template({ query: initialQuery }));
       return this;
     },
 

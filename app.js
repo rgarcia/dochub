@@ -28,8 +28,9 @@ define([
         });
         app.use(express.logger({ format: ':method :url :status' }));
         var filename = module.uri;
-        console.log('initializing static: ' + path.dirname(filename) + '/static');
-        app.use(express.static(path.dirname(filename) + '/static'));
+        var staticDir = path.dirname(filename) + '/static';
+        console.log('initializing static: ' + staticDir);
+        app.use(express.static(staticDir));
         app.use(express.bodyParser());
         app.use(express.methodOverride());
         controllerLoader.bootControllers(app);

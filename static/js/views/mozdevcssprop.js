@@ -12,9 +12,9 @@ define([
 
       this.model.bind("change:" + this.options.visibleField, function(model) {
         if (model.get(self.options.visibleField)) {
-          self.$(self.el).css({'display': 'block'});
+          $(self.el).css({'display': 'block'});
         } else {
-          self.$(self.el).css({'display': 'none'});
+          $(self.el).css({'display': 'none'});
         }
       });
 
