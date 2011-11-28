@@ -13,7 +13,6 @@ define([
     initialize: function() {
       _.bindAll(this, 'render');
       this.template = _.template(tocTemplate);
-      this.render();
     },
 
     render: function() {

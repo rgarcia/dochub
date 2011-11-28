@@ -33,8 +33,10 @@ define([
 
     render: function() {
       console.log('db loaded, rendering models');
-      if (this.options.spinner)
+      if (this.options.spinner) {
         this.spinner.stop();
+      }
+
       // render a subview for each model in the collection
       var self = this;
       this.collection.each(function(model) {
@@ -51,3 +53,4 @@ define([
 
   return SearchResultsView;
 });
+

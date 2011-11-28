@@ -51,12 +51,14 @@ define([
         el: $('#toc'),
         collection: this.wholeFrigginDB
       });
+      this.tocBarView.render();
 
       this.searchHeaderView = new SearchHeaderView({
         el: this.tocBarView.$('#search-header'),
         collection: this.wholeFrigginDB,
         query: query
       });
+      this.searchHeaderView.render();
 
       this.tocResultsView = new SearchResultsView({
         el: this.tocBarView.$('#toc-results'),
@@ -79,7 +81,7 @@ define([
       this.wholeFrigginDB.bind('reset', this.searchHeaderView.onSearch);
 
       this.fullWindow = new FullWindowView();
-      // make sure toc well height is set correctly (todo: move this into tocbarview)
+      // make sure toc well height is set correctly (TODO: move this into tocbarview)
       this.wholeFrigginDB.bind('reset',this.fullWindow.onResize);
 
       $('#search-box').focus();
@@ -93,3 +95,4 @@ define([
 
   return { initialize: initialize };
 });
+

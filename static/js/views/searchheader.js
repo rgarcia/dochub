@@ -22,7 +22,6 @@ define([
       this.template = _.template(searchHeaderTemplate);
 
       this.languageType = 'css';  // TODO: unhack to pick based on which is "active"
-      this.render();  // TODO: why are we calling render in initialize?
     },
 
     render: function() {
@@ -61,8 +60,6 @@ define([
 
       var queryExists = (query !== '');
       if (!queryExists) {
-        // query = '.';
-        //
         // No query, so can do some optimizations.
         //  1. Don't use the search function
         //  2. Set tocVisibile for all elements based on self.languageType
