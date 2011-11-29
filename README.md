@@ -4,17 +4,17 @@ Make sure you have a MongoDB server running on your system. For example, on Ubun
 
     apt-get install mongodb
 
-Install the dependencies:
-
-    npm install
-
 Download the content:
 
-    cd scraper/mdn
-    ./run.sh
+    cd scraper
+    npm install # downloads dependencies for scrapers
+    (cd css-mdn;      ./run.sh)
+    (cd css-cssinfos; ./run.sh)
+    (cd html-mdn;     ./run.sh)
 
 Run the server:
 
+    npm install # downloads dependencies for web server
     node web.js
 
 Open http://localhost:5000/ in your browser.
