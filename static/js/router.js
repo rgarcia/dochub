@@ -32,11 +32,13 @@ define([
       this.languageViews = {
         'css' : new LanguageView({
           languageName: 'CSS',
-          collection: this.wholeFrigginDB
+          collection: this.wholeFrigginDB,
+          placeholder: 'Type a CSS property name'
         }),
         'html' : new LanguageView({
           languageName: 'HTML',
-          collection: this.wholeFrigginDB
+          collection: this.wholeFrigginDB,
+          placeholder: 'Type an HTML element name'
         })
       };
 

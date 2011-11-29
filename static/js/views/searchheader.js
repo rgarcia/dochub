@@ -19,7 +19,10 @@ define([
       console.log('rendering search header');
 
       var initialQuery = this.options.query ? this.options.query : "";
-      this.$('#search-box').attr({'value': initialQuery });
+      this.$('#search-box').attr({
+        'value': initialQuery,
+        'placeholder': this.options.placeholder
+      });
 
       return this;
     },
@@ -36,9 +39,8 @@ define([
         // No query, so can do some optimizations.
         //  1. Don't use the search function
         //  2. Set tocVisibile: true, mainVisible: false
-        var self = this;
         this.collection.each(function(model) {
-          model.set({ tocVisible  : true, mainVisible : false });
+          model.set({ tocVisible: true, mainVisible: false });
         });
       } else {
         console.log('searching for ' + query);

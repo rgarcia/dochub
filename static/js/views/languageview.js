@@ -31,7 +31,8 @@ define([
 
         this.searchHeaderView = new SearchHeaderView({
           el: '#search-header',
-          collection: this.collection
+          collection: this.collection,
+          placeholder: this.options.placeholder
         });
         this.searchHeaderView.render();
 
@@ -60,14 +61,15 @@ define([
     setActive: function(active) {
       console.log('setActive: ' + this.languageName + ' = ' + active);
 
-      var self = this;
       if (active) {
         this.render();
         if (this.collection.length > 0) {
           this.searchHeaderView.onSearch();
         } else {
-          this.mainResultsView.startSpinner();
           console.log('Fetching ' + this.languageName);
+
+          this.mainResultsView.startSpinner();
+          var self = this;
           this.collection.fetch({
             success: function(coll, resp) {
               console.log('Success fetching ' + self.languageName);
