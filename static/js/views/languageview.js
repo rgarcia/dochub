@@ -34,7 +34,6 @@ define([
           collection: this.collection,
           placeholder: this.options.placeholder
         });
-        this.searchHeaderView.render();
 
         this.tocResultsView = new SearchResultsView({
           el: '#toc-results',
@@ -55,6 +54,7 @@ define([
 
     render: function() {
       this.createAndRenderViews();  // _.once'd
+      this.searchHeaderView.render(); // Need to do this to change the placeholder 
       return this;
     },
 
