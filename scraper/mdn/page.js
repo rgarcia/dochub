@@ -83,7 +83,6 @@ requirejs([
       }
 
       var $ = cheerio.load(body);
-      mdnprop['type'] = 'css';
       mdnprop['title'] = propName;
       mdnprop['sectionNames'] = [];
       mdnprop['sectionHTMLs'] = [];

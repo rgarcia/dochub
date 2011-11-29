@@ -64,6 +64,7 @@ define([
       if (active) {
         this.render();
         if (this.collection.length > 0) {
+          this.searchHeaderView.delegateEvents(); // (Re)bind events
           this.searchHeaderView.onSearch();
         } else {
           console.log('Fetching ' + this.languageName);
@@ -79,7 +80,13 @@ define([
           });
         }
       } else {
-        // Nothing for now
+        // Unbind events
+        this.searchHeaderView.removeBindings();
+
+        // Hide everything
+        this.collection.each(function(model) {
+          model.set({ tocVisible: false, mainVisible: false });
+        });
       }
     },
 

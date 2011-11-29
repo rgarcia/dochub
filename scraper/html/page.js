@@ -14,9 +14,9 @@ requirejs([
   'cheerio',
   'commander',
   'mongoose',
-  '../../models/mozdevcssprop',
+  '../../models/mdnhtmlelement',
   'underscore'
-], function(config, step, request, cheerio, program, mongoose, MozDevCssProp, _) {
+], function(config, step, request, cheerio, program, mongoose, MDNHtmlElement, _) {
 
   program
     .parse(global.process.argv);
@@ -36,7 +36,7 @@ requirejs([
   // connect to teh mongo db
   console.log(config.mongo_uri);
 
-  var mdnobj = new MozDevCssProp();
+  var mdnobj = new MDNHtmlElement();
 
   step(
     function connectToDB() {
@@ -49,7 +49,7 @@ requirejs([
       else
         console.log('connected to ' + config.mongo_uri);
 
-      MozDevCssProp.findOne({title:propName},this);
+      MDNHtmlElement.findOne({title:propName},this);
     },
 
     function processFind(err, doc) {
@@ -83,7 +83,6 @@ requirejs([
       }
 
       var $ = cheerio.load(body);
-      mdnobj['type'] = 'html';
       mdnobj['title'] = propName;
       mdnobj['sectionNames'] = [];
       mdnobj['sectionHTMLs'] = [];

@@ -12,7 +12,11 @@ define([
     },
 
     initialize: function() {
-      _.bindAll(this, 'render', 'onSearch');
+      _.bindAll(this, 'render', 'removeBindings', 'onSearch');
+    },
+
+    removeBindings: function() {
+      $(this.el).undelegate();
     },
 
     render: function() {

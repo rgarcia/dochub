@@ -4,11 +4,11 @@ define([
   'Backbone'
 ], function($, _, Backbone) {
 
-  var MozDevCSSProp = Backbone.Model.extend({
+  var MDNHtmlElement = Backbone.Model.extend({
 
     idAttribute: '_id',
 
-    urlRoot: '/mozdevcssprop',
+    urlRoot: '/mdnhtmlelement',
     defaults: {
       'title'                : '',
       'htmlEscapedTitle'     : '', // Set in initialize
@@ -30,6 +30,6 @@ define([
 
   });
 
-  return MozDevCSSProp;
+  return MDNHtmlElement;
 });
 

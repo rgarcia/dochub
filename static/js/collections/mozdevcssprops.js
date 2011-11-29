@@ -24,8 +24,7 @@ define([
     var prefix = results[1];
     var name   = results[2].toLowerCase();
 
-    var extractedSorting = prefix ? ('1' + title) : ('0' + name);
-    return model.get('type') + extractedSorting;  // Sort 'css' before 'html'
+    return prefix ? ('1' + title) : ('0' + name);
   },
 
   });

@@ -19,7 +19,7 @@ define([
       this.$('#nav-list > .active').removeClass('active');
       this.$('#' + evt.target.id).parent().addClass('active');  // Add 'active' to <li>, not <a>
 
-      var newLanguage = evt.target.text.toLowerCase();
+      var newLanguage = evt.target.text;
       this.trigger('changeLanguage', newLanguage);
     },
 

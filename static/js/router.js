@@ -12,10 +12,11 @@ define([
   'views/fullwindow',
 
   // Collections
-  'collections/mozdevcssprops'
+  'collections/mozdevcssprops',
+  'collections/mdnhtmlelements'
 ], function(doc, $, _, Backbone,
             TopNavView, LanguageView, FullWindowView,
-            MozDevCSSPropCollection) {
+            MozDevCSSPropCollection, MDNHtmlElementsCollection) {
 
   var InstaCSS = Backbone.Router.extend({
     routes: {
@@ -26,18 +27,15 @@ define([
     initialize: function() {
       _.bindAll(this, 'changeLanguage', 'setLanguage');
 
-      // for client-side search...
-      this.wholeFrigginDB = new MozDevCSSPropCollection();
-
       this.languageViews = {
-        'css' : new LanguageView({
+        'CSS' : new LanguageView({
           languageName: 'CSS',
-          collection: this.wholeFrigginDB,
+          collection: new MozDevCSSPropCollection(),
           placeholder: 'Type a CSS property name'
         }),
-        'html' : new LanguageView({
+        'HTML' : new LanguageView({
           languageName: 'HTML',
-          collection: this.wholeFrigginDB,
+          collection: new MDNHtmlElementsCollection(),
           placeholder: 'Type an HTML element name'
         })
       };
@@ -47,7 +45,7 @@ define([
       //  insta.com/html
       //  insta.com/js
       //  ...
-      this.currentLanguage = 'css';
+      this.currentLanguage = 'CSS';
     },
 
     changeLanguage: function(newLanguage) {

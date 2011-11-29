@@ -1,6 +1,7 @@
 define([
   './mozdevcssprop',
-], function(CSSPropActions) {
+  './mdnhtmlelement',
+], function(CSSPropActions, HTMLElementActions) {
 
   var mappingString = "";
 
@@ -47,6 +48,9 @@ define([
     bootControllers : function(app) {
       console.log("booting cssprop controller");
       bootController(app, CSSPropActions);
+
+      console.log("booting cssprop controller");
+      bootController(app, HTMLElementActions);
 
       app.get("/show_available_interfaces", function(req, res){
         res.send(mappingString);

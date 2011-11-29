@@ -17,8 +17,6 @@ define([
 
     render: function() {
       // NOP
-      // console.log('rendering tocbar');
-      // $(this.el).html(this.template({}));
       return this;
     },
 
