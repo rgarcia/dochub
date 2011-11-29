@@ -11,13 +11,17 @@ define([
     },
 
     initialize: function() {
-      _.bindAll(this, 'render');
+      _.bindAll(this, 'render', 'removeBindings');
       this.template = _.template(tocTemplate);
     },
 
     render: function() {
       // NOP
       return this;
+    },
+
+    removeBindings: function() {
+      $(this.el).undelegate();
     },
 
     onClick: function(e) {

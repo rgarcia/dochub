@@ -53,7 +53,7 @@ define([
     },
 
     render: function() {
-      this.createAndRenderViews();  // _.once'd
+      this.createAndRenderViews();    // _.once'd
       this.searchHeaderView.render(); // Need to do this to change the placeholder 
       return this;
     },
@@ -64,7 +64,10 @@ define([
       if (active) {
         this.render();
         if (this.collection.length > 0) {
-          this.searchHeaderView.delegateEvents(); // (Re)bind events
+          // (Re)bind events
+          this.searchHeaderView.delegateEvents();
+          this.tocBarView.delegateEvents();
+
           this.searchHeaderView.onSearch();
         } else {
           console.log('Fetching ' + this.languageName);
@@ -82,6 +85,7 @@ define([
       } else {
         // Unbind events
         this.searchHeaderView.removeBindings();
+        this.tocBarView.removeBindings();
 
         // Hide everything
         this.collection.each(function(model) {
