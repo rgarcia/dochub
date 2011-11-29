@@ -2,53 +2,26 @@ define([
   'jQuery',
   'Underscore',
   'Backbone',
-  'text!templates/searchheader.html',
-], function($, _, Backbone, searchHeaderTemplate) {
+], function($, _, Backbone) {
 
   // the header does not re-render on collection events
   // it just handles applying the query to the collection of models
   var SearchHeaderView = Backbone.View.extend({
-    id: 'search-header',
-    className: 'search-header',
-
     events: {
-      'click #CSS-toc'     : 'onChangeLanguage',
-      'click #HTML-toc'    : 'onChangeLanguage',
-      'keyup #search-box'  : 'onSearch',
+      'keyup #search-box': 'onSearch',
     },
 
     initialize: function() {
-      _.bindAll(this, 'render', 'onChangeLanguage', 'onSearch');
-      this.template = _.template(searchHeaderTemplate);
-
-      this.languageType = 'css';  // TODO: unhack to pick based on which is "active"
+      _.bindAll(this, 'render', 'onSearch');
     },
 
     render: function() {
       console.log('rendering search header');
+
       var initialQuery = this.options.query ? this.options.query : "";
-      $(this.el).html(this.template({ query: initialQuery }));
+      this.$('#search-box').attr({'value': initialQuery });
+
       return this;
-    },
-
-    onChangeLanguage: function(evt) {
-      var targetText = evt.target.text.toLowerCase();
-      if (this.languageType !== targetText) {
-        // Change the active tab
-        this.$('#toc-tabs > .active').removeClass('active');
-        this.$('#' + evt.target.id).parent().addClass('active'); // Add 'active' to the li, not the a
-
-        var searchBox = this.$('#search-box');
-        if ('css' === targetText) {
-          searchBox.attr('placeholder', 'Type a CSS property name');
-        } else if ('html' === targetText) {
-          searchBox.attr('placeholder', 'Type an HTML element name');
-        }
-
-        this.languageType = targetText;
-        searchBox.focus();
-        this.onSearch();  // refresh TOC bar
-      }
     },
 
     onSearch: function(evt) {
@@ -62,14 +35,10 @@ define([
       if (!queryExists) {
         // No query, so can do some optimizations.
         //  1. Don't use the search function
-        //  2. Set tocVisibile for all elements based on self.languageType
-        //  3. For all mainVisible, set mainVisible false
+        //  2. Set tocVisibile: true, mainVisible: false
         var self = this;
         this.collection.each(function(model) {
-          model.set({
-            tocVisible  : model.get('type') === self.languageType,
-            mainVisible : false
-          });
+          model.set({ tocVisible  : true, mainVisible : false });
         });
       } else {
         console.log('searching for ' + query);
@@ -82,7 +51,7 @@ define([
         };
         var self = this;
         this.collection.each(function(model) {
-          var visible = (model.get('type') === self.languageType) && searchfn(model);
+          var visible = searchfn(model);
           model.set({ tocVisible: visible, mainVisible: visible });
         });
       }
@@ -92,3 +61,4 @@ define([
 
   return SearchHeaderView;
 });
+

@@ -6,12 +6,21 @@ define([
 ], function($, _, BackBone, topNavTemplate) {
 
   var TopNavView = BackBone.View.extend({
-    className: 'topbar-inner',
+    events: {
+      'click #nav-list > li > a': 'changeLanguage'
+    },
 
     initialize: function() {
-      _.bindAll(this, 'render');
+      _.bindAll(this, 'render', 'changeLanguage');
       this.template = _.template(topNavTemplate);
-      this.render();
+    },
+
+    changeLanguage: function(evt) {
+      this.$('#nav-list > .active').removeClass('active');
+      this.$('#' + evt.target.id).parent().addClass('active');  // Add 'active' to <li>, not <a>
+
+      var newLanguage = evt.target.text.toLowerCase();
+      this.trigger('changeLanguage', newLanguage);
     },
 
     render: function() {

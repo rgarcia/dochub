@@ -15,6 +15,7 @@ define([
   var cssPropsPattern = new RegExp("^(\\W*)(.+)$");
 
   var MozDevCSSProps = Backbone.Collection.extend({
+    url: '/mozdevcssprop',
     model: MozDevCSSProp,
 
   comparator: function(model) {

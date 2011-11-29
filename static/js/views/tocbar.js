@@ -16,18 +16,13 @@ define([
     },
 
     render: function() {
-      console.log('rendering tocbar');
-      $(this.el).html(this.template({}));
+      // NOP
+      // console.log('rendering tocbar');
+      // $(this.el).html(this.template({}));
       return this;
     },
 
     onClick: function(e) {
-      var targetText = e.target.text;
-      if ("HTML" === targetText || "CSS" === targetText) {
-        // Clicked on one of the tabs.
-        return;
-      }
-
       // If no query, make everything in the search results invisible before
       // showing the one that was clicked.
       var query = $.trim(this.$('#search-box').val()).toLowerCase();

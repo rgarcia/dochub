@@ -9,9 +9,11 @@ define([
   // the results view is just tied to a collection and re-renders itself
   var SearchResultsView = BackBone.View.extend({
     initialize: function() {
-      _.bindAll(this, 'render'); //, 'onLoad');
+      _.bindAll(this, 'render', 'startSpinner');
       this.collection.bind('reset', this.render);
+    },
 
+    startSpinner: function() {
       // Render the loading spinner
       if (this.options.spinner) {
         var opts = {
@@ -33,10 +35,6 @@ define([
 
     render: function() {
       console.log('db loaded, rendering models');
-      if (this.options.spinner) {
-        this.spinner.stop();
-      }
-
       // render a subview for each model in the collection
       var self = this;
       this.collection.each(function(model) {

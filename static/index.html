@@ -24,9 +24,21 @@
   </head>
 
   <body style="padding-top: 60px; overflow-y: hidden;">
-    <div id='topnav' class='topbar'></div>
+    <div id='topnav' class='topbar'>
+      <div id='topbar-inner' class='topbar-inner'></div>
+    </div>
     <div id='container' class='container-fluid' style="padding-right: 0px;">
-      <div id='toc' class='sidebar'></div>
+      <div id='toc' class='sidebar'>
+        <div id="toc-well" class="well" style="overflow-y: hidden;">
+          <div id="search-header" class="search-header">
+            <input id="search-box" style="width: 170px;" name="search" type="text" placeholder="Type a CSS property name" value="<%= query %>"/>
+          </div>
+          <div id="toc-results-div" style="overflow-y: auto; margin-right: -19px;">
+            <ul id="toc-results" style="margin:0px">
+            </ul>
+          </div>
+        </div>
+      </div>
       <div id='search-results' class='content'></div>
     </div>
     <div id='footer'></div>

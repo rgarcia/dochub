@@ -8,24 +8,13 @@ define([
 
   // Views
   'views/topnav',
-  'views/tocbar',
-  'views/searchheader',
-  'views/searchresults',
+  'views/languageview',
   'views/fullwindow',
-
-  // Templates
-  'text!templates/tocresult.html',
-  'text!templates/mozdevcssprop.html',
-
-  // Models
-  'models/mozdevcssprop',
 
   // Collections
   'collections/mozdevcssprops'
 ], function(doc, $, _, Backbone,
-            TopNavView, TOCBarView, SearchHeaderView, SearchResultsView, FullWindowView,
-            TocResultTemplate, FullResultTemplate,
-            MozDevCSSProp,
+            TopNavView, LanguageView, FullWindowView,
             MozDevCSSPropCollection) {
 
   var InstaCSS = Backbone.Router.extend({
@@ -35,56 +24,61 @@ define([
     },
 
     initialize: function() {
+      _.bindAll(this, 'changeLanguage', 'setLanguage');
+
       // for client-side search...
       this.wholeFrigginDB = new MozDevCSSPropCollection();
 
-      this.wholeFrigginDB.fetch({url: '/mozdevcssprop'});
-      this.wholeFrigginDB.bind('reset',function() { console.log('reset!'); });
+      this.languageViews = {
+        'css' : new LanguageView({
+          languageName: 'CSS',
+          collection: this.wholeFrigginDB
+        }),
+        'html' : new LanguageView({
+          languageName: 'HTML',
+          collection: this.wholeFrigginDB
+        })
+      };
+
+      // TODO: Make a different route for each language:
+      //  insta.com/css
+      //  insta.com/html
+      //  insta.com/js
+      //  ...
+      this.currentLanguage = 'css';
+    },
+
+    changeLanguage: function(newLanguage) {
+      if (newLanguage === this.currentLanguage) {
+        return;
+      }
+      this.languageViews[this.currentLanguage].setActive(false);
+      this.setLanguage(newLanguage);
+    },
+
+    setLanguage: function(newLanguage) {
+      this.languageViews[newLanguage].setActive(true);
+      $('#search-box').focus();
+
+      if (!this.fullWindow) {
+        this.fullWindow = new FullWindowView();
+      }
+      // Make sure toc well height is set correctly (TODO: move this into tocbarview)
+      this.languageViews[newLanguage].collection.bind('reset', this.fullWindow.onResize);
+
+      this.currentLanguage = newLanguage;
     },
 
     main: function(query) {
-      this.topNavView = new TopNavView();
-      $('#topnav').empty();
-      $('#topnav').append(this.topNavView.el);
-
-      this.tocBarView = new TOCBarView({
-        el: $('#toc'),
-        collection: this.wholeFrigginDB
+      this.topNavView = new TopNavView({
+        el: $('#topbar-inner')
       });
-      this.tocBarView.render();
+      this.topNavView.render();
+      this.topNavView.bind('changeLanguage', this.changeLanguage);
 
-      this.searchHeaderView = new SearchHeaderView({
-        el: this.tocBarView.$('#search-header'),
-        collection: this.wholeFrigginDB,
-        query: query
-      });
-      this.searchHeaderView.render();
-
-      this.tocResultsView = new SearchResultsView({
-        el: this.tocBarView.$('#toc-results'),
-        collection: this.wholeFrigginDB,
-        itemTemplate: TocResultTemplate,
-        visibleField: 'tocVisible'
-      });
-
-      this.mainResultsView = new SearchResultsView({
-        el: $('#search-results'),
-        collection: this.wholeFrigginDB,
-        itemTemplate: FullResultTemplate,
-        visibleField: 'mainVisible',
-        spinner: true
-      });
-
-      // search needs to be triggered as soon as db is loaded in case search box
-      // has an unhandled query. also need to wait to do this until after
-      // results have rendered (which happens on reset).
-      this.wholeFrigginDB.bind('reset', this.searchHeaderView.onSearch);
-
-      this.fullWindow = new FullWindowView();
-      // make sure toc well height is set correctly (TODO: move this into tocbarview)
-      this.wholeFrigginDB.bind('reset',this.fullWindow.onResize);
-
-      $('#search-box').focus();
+      // Start everything
+      console.log('Router setting language to: ' + this.currentLanguage);
+      this.setLanguage(this.currentLanguage);
     },
   });
 

@@ -81,3 +81,7 @@ div#search-results {
   overflow-y: auto;
 }
 
+html {
+  overflow-y: auto;
+}
+
