@@ -14,7 +14,7 @@ define([
     initialize: function() {
       _.bindAll(this, 'render', 'removeBindings', 'onSearch');
 
-      this.placeHolder  = this.options.placeHolder;
+      this.placeholder  = this.options.placeholder;
       this.languageName = this.options.languageName.toLowerCase();
     },
 
