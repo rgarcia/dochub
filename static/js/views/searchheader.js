@@ -13,6 +13,9 @@ define([
 
     initialize: function() {
       _.bindAll(this, 'render', 'removeBindings', 'onSearch');
+
+      this.placeHolder  = this.options.placeHolder;
+      this.languageName = this.options.languageName.toLowerCase();
     },
 
     removeBindings: function() {
@@ -24,8 +27,8 @@ define([
 
       var initialQuery = this.options.query ? this.options.query : "";
       this.$('#search-box').attr({
-        'value': initialQuery,
-        'placeholder': this.options.placeholder
+        'value'       : initialQuery,
+        'placeholder' : this.placeholder
       });
 
       return this;
@@ -36,7 +39,7 @@ define([
       var query = $.trim(this.$('#search-box').val()).toLowerCase();
 
       // TODO: replacestate...
-      Backbone.history.navigate(query, false);
+      Backbone.history.navigate(this.languageName + '/' + query, false);
 
       var queryExists = (query !== '');
       if (!queryExists) {

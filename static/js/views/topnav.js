@@ -16,10 +16,11 @@ define([
     },
 
     changeLanguage: function(evt) {
+      var elt = this.$('#' + evt.target.id);
       this.$('#nav-list > .active').removeClass('active');
-      this.$('#' + evt.target.id).parent().addClass('active');  // Add 'active' to <li>, not <a>
+      elt.parent().addClass('active');  // Add 'active' to <li>, not <a>
 
-      var newLanguage = evt.target.text;
+      var newLanguage = elt.attr('data-lang');
       this.trigger('changeLanguage', newLanguage);
     },
 

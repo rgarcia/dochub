@@ -21,38 +21,70 @@ define([
   var InstaCSS = Backbone.Router.extend({
     routes: {
       ''         : 'main',
-      ':query'   : 'main',
+      // ':query'   : 'main',
     },
 
     initialize: function() {
       _.bindAll(this, 'changeLanguage', 'setLanguage');
 
       this.languageViews = {
-        'CSS' : new LanguageView({
+        'html' : new LanguageView({
+          languageName: 'HTML',
+          collection: new MDNHtmlElementsCollection(),
+          placeholder: 'Type an HTML element name'
+        }),
+        'css' : new LanguageView({
           languageName: 'CSS',
           collection: new MozDevCSSPropCollection(),
           placeholder: 'Type a CSS property name'
         }),
-        'HTML' : new LanguageView({
-          languageName: 'HTML',
-          collection: new MDNHtmlElementsCollection(),
-          placeholder: 'Type an HTML element name'
-        })
       };
 
+      this.currentLanguage = null;
+
+      var self = this;
+      this.renderTopNav = _.once(function() {
+        self.topNavView = new TopNavView({
+          el: $('#topbar-inner')
+        });
+        self.topNavView.render();
+        self.topNavView.bind('changeLanguage', self.changeLanguage);
+      });
+
       // TODO: Make a different route for each language:
-      //  insta.com/css
-      //  insta.com/html
-      //  insta.com/js
+      //  insta.com/#css
+      //  insta.com/#html
+      //  insta.com/#js
       //  ...
-      this.currentLanguage = 'CSS';
+      for (languageName in this.languageViews) {
+        console.log('Creating route for ' + languageName);
+        var cb = {
+          languageName: languageName,
+          fn: function(query) {
+            console.log('ROUTING ' + this.languageName + ' : ' + query);
+            self.renderTopNav();  // _.once'd
+
+            // Hackish copy from topnav.js =/
+            $('#nav-list > .active').removeClass('active');
+            var newActiveLanguageElt = $('#nav-list [data-lang="' + this.languageName + '"]');
+            newActiveLanguageElt.parent().addClass('active');
+
+            self.changeLanguage(this.languageName);
+            self.languageViews[this.languageName].setQuery(query);
+          }
+        };
+        _.bindAll(cb, 'fn');
+        this.route(languageName + '/:query', languageName, cb.fn);
+      }
     },
 
     changeLanguage: function(newLanguage) {
       if (newLanguage === this.currentLanguage) {
         return;
       }
-      this.languageViews[this.currentLanguage].setActive(false);
+      if (this.currentLanguage !== null) {
+        this.languageViews[this.currentLanguage].setActive(false);
+      }
       this.setLanguage(newLanguage);
     },
 
@@ -70,11 +102,11 @@ define([
     },
 
     main: function(query) {
-      this.topNavView = new TopNavView({
-        el: $('#topbar-inner')
-      });
-      this.topNavView.render();
-      this.topNavView.bind('changeLanguage', this.changeLanguage);
+      if (this.currentLanguage === null) {
+        this.currentLanguage = 'css';
+      }
+
+      this.renderTopNav();  // _.once'd
 
       // Start everything
       console.log('Router setting language to: ' + this.currentLanguage);

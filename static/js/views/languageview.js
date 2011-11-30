@@ -17,7 +17,9 @@ define([
 
   var LanguageView = Backbone.View.extend({
     initialize: function() {
-      _.bindAll(this, 'render', 'setActive');
+      _.bindAll(this, 'render', 'setActive', 'setQuery');
+
+      this.active = false;
 
       this.languageName = this.options.languageName;
       this.createAndRenderViews = _.once(function() {
@@ -32,7 +34,8 @@ define([
         this.searchHeaderView = new SearchHeaderView({
           el: '#search-header',
           collection: this.collection,
-          placeholder: this.options.placeholder
+          placeholder: this.options.placeholder,
+          languageName: this.languageName,
         });
 
         this.tocResultsView = new SearchResultsView({
@@ -61,7 +64,7 @@ define([
     setActive: function(active) {
       console.log('setActive: ' + this.languageName + ' = ' + active);
 
-      if (active) {
+      if (active && !this.active) {
         this.render();
         if (this.collection.length > 0) {
           // (Re)bind events
@@ -69,6 +72,7 @@ define([
           this.tocBarView.delegateEvents();
 
           this.searchHeaderView.onSearch();
+          this.active = true;
         } else {
           console.log('Fetching ' + this.languageName);
 
@@ -79,10 +83,11 @@ define([
               console.log('Success fetching ' + self.languageName);
               self.searchHeaderView.onSearch();
               self.mainResultsView.spinner.stop();
+              self.active = true;
             }
           });
         }
-      } else {
+      } else if (!active && this.active) {
         // Unbind events
         this.searchHeaderView.removeBindings();
         this.tocBarView.removeBindings();
@@ -91,7 +96,13 @@ define([
         this.collection.each(function(model) {
           model.set({ tocVisible: false, mainVisible: false });
         });
+        this.active = false;
       }
+    },
+
+    setQuery: function(query) {
+      this.searchHeaderView.$('#search-box').val(query);
+      this.searchHeaderView.onSearch();
     },
 
   });
