@@ -13,15 +13,15 @@ define([
 
   // Collections
   'collections/mozdevcssprops',
-  'collections/mdnhtmlelements'
+  'collections/mdnhtmlelements',
+  'collections/mdnjsobjs'
 ], function(doc, $, _, Backbone,
             TopNavView, LanguageView, FullWindowView,
-            MozDevCSSPropCollection, MDNHtmlElementsCollection) {
+            MozDevCSSPropCollection, MDNHtmlElementsCollection, MDNJsObjsCollection) {
 
   var InstaCSS = Backbone.Router.extend({
     routes: {
-      ''         : 'main',
-      // ':query'   : 'main',
+      '' : 'main',
     },
 
     initialize: function() {
@@ -37,6 +37,11 @@ define([
           languageName: 'CSS',
           collection: new MozDevCSSPropCollection(),
           placeholder: 'Type a CSS property name'
+        }),
+        'javascript' : new LanguageView({
+          languageName: 'JavaScript',
+          collection: new MDNJsObjsCollection(),
+          placeholder: 'Type a JavaScript class/function name'
         }),
       };
 

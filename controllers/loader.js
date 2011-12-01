@@ -1,7 +1,8 @@
 define([
   './mozdevcssprop',
   './mdnhtmlelement',
-], function(CSSPropActions, HTMLElementActions) {
+  './mdnjsobj',
+], function(CSSPropActions, HTMLElementActions, MDNJsObjActions) {
 
   var mappingString = "";
 
@@ -49,8 +50,11 @@ define([
       console.log("booting cssprop controller");
       bootController(app, CSSPropActions);
 
-      console.log("booting cssprop controller");
+      console.log("booting mdnhtmlelement controller");
       bootController(app, HTMLElementActions);
+
+      console.log("booting mdnjsobj controller");
+      bootController(app, MDNJsObjActions);
 
       app.get("/show_available_interfaces", function(req, res){
         res.send(mappingString);

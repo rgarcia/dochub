@@ -8,6 +8,7 @@
     "request": ">=2.2.5",
     "cheerio": ">=0.2.2",
     "step": ">=0.0.5",
-    "commander": ">=0.4.1"
+    "commander": ">=0.4.1",
+    "spider": ">= 1.9.3"
   }
 }
