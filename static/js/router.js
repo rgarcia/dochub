@@ -77,6 +77,7 @@ define([
             console.log('ROUTING ' + this.languageName + ' : ' + query);
             self.renderTopNav();  // _.once'd
             self.topNavView.setActiveElement('nav-' + this.languageName);
+            self.languageViews[this.languageName].setQuery(query);
           }
         };
         _.bindAll(cb, 'fn');
