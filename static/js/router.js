@@ -21,7 +21,8 @@ define([
 
   var InstaCSS = Backbone.Router.extend({
     routes: {
-      '' : 'main',
+      ''      : 'main',
+      'about' : 'about'
     },
 
     initialize: function() {
@@ -56,10 +57,10 @@ define([
         self.topNavView.bind('changeLanguage', self.changeLanguage);
       });
 
-      // TODO: Make a different route for each language:
+      // Make a different route for each language:
       //  insta.com/#css
       //  insta.com/#html
-      //  insta.com/#js
+      //  insta.com/#javascript
       //  ...
       for (languageName in this.languageViews) {
         console.log('Creating route for ' + languageName);
@@ -68,14 +69,7 @@ define([
           fn: function(query) {
             console.log('ROUTING ' + this.languageName + ' : ' + query);
             self.renderTopNav();  // _.once'd
-
-            // Hackish copy from topnav.js =/
-            $('#nav-list > .active').removeClass('active');
-            var newActiveLanguageElt = $('#nav-list [data-lang="' + this.languageName + '"]');
-            newActiveLanguageElt.parent().addClass('active');
-
-            self.changeLanguage(this.languageName);
-            self.languageViews[this.languageName].setQuery(query);
+            self.topNavView.setActiveElement(this.languageName);
           }
         };
         _.bindAll(cb, 'fn');
@@ -84,6 +78,13 @@ define([
     },
 
     changeLanguage: function(newLanguage) {
+      // Hide about
+      $('#about').css({'display': 'none'});
+
+      // Show search
+      $('#toc').css({'display': 'block'});
+      $('#search-results').css({'display': 'block'});
+
       if (newLanguage === this.currentLanguage) {
         return;
       }
@@ -117,6 +118,17 @@ define([
       console.log('Router setting language to: ' + this.currentLanguage);
       this.setLanguage(this.currentLanguage);
     },
+
+    about: function() {
+      this.renderTopNav();  // _.once'd
+
+      // Hide search
+      $('#toc').css({'display': 'none'});
+      $('#search-results').css({'display': 'none'});
+
+      // Show about
+      $('#about').css({'display': 'block'});
+    }
   });
 
   var initialize = function() {

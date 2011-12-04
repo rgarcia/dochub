@@ -89,3 +89,7 @@ html {
   margin-top: 10px;
 }
 
+div#about {
+  display: none;
+}
+

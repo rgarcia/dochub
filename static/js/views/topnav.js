@@ -7,21 +7,33 @@ define([
 
   var TopNavView = BackBone.View.extend({
     events: {
-      'click #nav-list > li > a': 'changeLanguage'
+      'click #nav-list > li > a'      : 'changeActive',
+      'click #secondary-nav > li > a' : 'changeActive'
     },
 
     initialize: function() {
-      _.bindAll(this, 'render', 'changeLanguage');
+      _.bindAll(this, 'render', 'changeActive', 'setActiveElement');
       this.template = _.template(topNavTemplate);
     },
 
-    changeLanguage: function(evt) {
-      var elt = this.$('#' + evt.target.id);
+    changeActive: function(evt) {
+      if (evt.target.id === 'twitter-link') {
+        return;
+      }
+
+      this.setActiveElement(evt.target.id);
+    },
+
+    setActiveElement: function(elementName) {
+      var elt = this.$('#' + elementName);
       this.$('#nav-list > .active').removeClass('active');
+      this.$('#secondary-nav > .active').removeClass('active');
       elt.parent().addClass('active');  // Add 'active' to <li>, not <a>
 
       var newLanguage = elt.attr('data-lang');
-      this.trigger('changeLanguage', newLanguage);
+      if (newLanguage) {
+        this.trigger('changeLanguage', newLanguage);
+      }
     },
 
     render: function() {
