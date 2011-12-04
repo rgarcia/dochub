@@ -14,10 +14,12 @@ define([
   // Collections
   'collections/mozdevcssprops',
   'collections/mdnhtmlelements',
-  'collections/mdnjsobjs'
+  'collections/mdnjsobjs',
+  'collections/mdndomobjs'
 ], function(doc, $, _, Backbone,
             TopNavView, LanguageView, FullWindowView,
-            MozDevCSSPropCollection, MDNHtmlElementsCollection, MDNJsObjsCollection) {
+            MozDevCSSPropCollection, MDNHtmlElementsCollection, MDNJsObjsCollection,
+            MDNDomObjsCollection) {
 
   var InstaCSS = Backbone.Router.extend({
     routes: {
@@ -44,6 +46,11 @@ define([
           collection: new MDNJsObjsCollection(),
           placeholder: 'Type a JavaScript class/function name'
         }),
+        'dom' : new LanguageView({
+          languageName: 'DOM',
+          collection: new MDNDomObjsCollection(),
+          placeholder: 'Type a DOM object name'
+        }),
       };
 
       this.currentLanguage = null;
@@ -69,7 +76,7 @@ define([
           fn: function(query) {
             console.log('ROUTING ' + this.languageName + ' : ' + query);
             self.renderTopNav();  // _.once'd
-            self.topNavView.setActiveElement(this.languageName);
+            self.topNavView.setActiveElement('nav-' + this.languageName);
           }
         };
         _.bindAll(cb, 'fn');
@@ -95,6 +102,7 @@ define([
     },
 
     setLanguage: function(newLanguage) {
+      console.log('Setting language to ' + newLanguage);
       this.languageViews[newLanguage].setActive(true);
       $('#search-box').focus();
 
@@ -115,12 +123,12 @@ define([
       this.renderTopNav();  // _.once'd
 
       // Start everything
-      console.log('Router setting language to: ' + this.currentLanguage);
       this.setLanguage(this.currentLanguage);
     },
 
     about: function() {
       this.renderTopNav();  // _.once'd
+      this.topNavView.setActiveElement('nav-about');
 
       // Hide search
       $('#toc').css({'display': 'none'});
