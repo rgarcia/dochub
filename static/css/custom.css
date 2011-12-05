@@ -30,17 +30,6 @@ div .smallclear {
   margin-bottom: 9px;
 }
 
-button.up-arrow {
-  width: 180px;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 4px;
-  margin-bottom: 5px;
-  font-weight: 900;
-  font-size: 150%;
-  padding-bottom: 5px;
-}
-
 #search-header {
   margin-bottom: 15px;
 }
@@ -91,5 +80,14 @@ html {
 
 div#about {
   display: none;
+}
+
+/* Overwrite bootstrap */
+.container-fluid > .sidebar {
+  width: 240px;
+}
+
+.container-fluid > .content {
+  margin-left: 260px;
 }
 
