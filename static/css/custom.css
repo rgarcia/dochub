@@ -82,13 +82,3 @@ div#about {
   display: none;
 }
 
-/* Overwrite bootstrap */
-/*
-.container-fluid > .sidebar {
-  width: 240px;
-}
-
-.container-fluid > .content {
-  margin-left: 260px;
-}
-*/
