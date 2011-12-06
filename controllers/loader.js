@@ -3,7 +3,8 @@ define([
   './mdnhtmlelement',
   './mdnjsobj',
   './mdndomobj',
-], function(CSSPropActions, HTMLElementActions, MDNJsObjActions, MDNDomObjActions) {
+  './phpext',
+], function(CSSPropActions, HTMLElementActions, MDNJsObjActions, MDNDomObjActions, PhpExtActions) {
 
   var mappingString = "";
 
@@ -59,6 +60,9 @@ define([
 
       console.log("booting mdndomobj controller");
       bootController(app, MDNDomObjActions);
+
+      console.log("booting phpext controller");
+      bootController(app, PhpExtActions);
 
       app.get("/show_available_interfaces", function(req, res){
         res.send(mappingString);

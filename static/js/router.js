@@ -15,11 +15,12 @@ define([
   'collections/mozdevcssprops',
   'collections/mdnhtmlelements',
   'collections/mdnjsobjs',
-  'collections/mdndomobjs'
+  'collections/mdndomobjs',
+  'collections/phpexts'
 ], function(doc, $, _, Backbone,
             TopNavView, LanguageView, FullWindowView,
             MozDevCSSPropCollection, MDNHtmlElementsCollection, MDNJsObjsCollection,
-            MDNDomObjsCollection) {
+            MDNDomObjsCollection, PHPExtensionsCollection) {
 
   var InstaCSS = Backbone.Router.extend({
     routes: {
@@ -50,6 +51,11 @@ define([
           languageName: 'DOM',
           collection: new MDNDomObjsCollection(),
           placeholder: 'Type a DOM object name'
+        }),
+        'php' : new LanguageView({
+          languageName: 'PHP',
+          collection: new PHPExtensionsCollection(),
+          placeholder: 'Type a PHP function name'
         }),
       };
 
