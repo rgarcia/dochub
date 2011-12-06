@@ -23,7 +23,13 @@ define([
 
     initialize: function() {
       this.set({ title: this.get('fullTitle') }, { silent: true }); // TODO: fix this hack
-      this.set({ htmlEscapedTitle: $('<div/>').html(this.get('title')).text() }, { silent: true });
+      var htmlEscapedTitle = $('<div/>').html(this.get('title')).text();
+      this.set({
+        htmlEscapedTitle: htmlEscapedTitle,
+        lowerCaseTitle: htmlEscapedTitle.toLowerCase()
+      }, {
+        silent: true
+      });
     },
 
     url: function() {

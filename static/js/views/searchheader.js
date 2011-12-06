@@ -52,10 +52,10 @@ define([
       } else {
         console.log('searching for ' + query);
 
-        query = new RegExp(query, 'i'); // Ignore case
+        query = new RegExp(query);
         var searchfn = function(model) {
           // BEGIN GLORIOUS SEARCH ALGORITHM
-          return query.test(model.get('htmlEscapedTitle'));
+          return query.test(model.get('lowerCaseTitle'));
           // END GLORIOUS SEARCH ALGORITHM
         };
         var self = this;

@@ -22,7 +22,13 @@ define([
     },
 
     initialize: function() {
-      this.set({ htmlEscapedTitle: $('<div/>').html(this.get('title')).text() }, { silent: true });
+      var htmlEscapedTitle = $('<div/>').html(this.get('title')).text();
+      this.set({
+        htmlEscapedTitle: htmlEscapedTitle,
+        lowerCaseTitle: htmlEscapedTitle.toLowerCase()
+      }, {
+        silent: true
+      });
     },
 
     url: function() {
