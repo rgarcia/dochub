@@ -34,7 +34,7 @@ define([
       return this;
     },
 
-    onSearch: function(evt) {
+    onSearch: _.debounce(function(evt) {
       console.log('onSearch');
       var query = $.trim(this.$('#search-box').val()).toLowerCase();
 
@@ -64,7 +64,7 @@ define([
           model.set({ tocVisible: visible, mainVisible: visible });
         });
       }
-    },
+    }, 100),
 
   });
 
