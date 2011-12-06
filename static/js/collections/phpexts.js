@@ -10,7 +10,7 @@ define([
     model: PhpExt,
 
     comparator: function(model) {
-      return model.get('fullTitle');
+      return model.get('fullTitle').toLowerCase();
     },
   });
 
