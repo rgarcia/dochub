@@ -42,9 +42,7 @@ define([
       var searchResults = $('#search-results');
       var searchResultsTopVal = searchResults.scrollTop();
       var topVal = $('#search-results [data-model-id="' + modelid + '"]').offset().top;
-      searchResults.animate({
-        scrollTop: searchResultsTopVal + topVal - 60
-      }, 'slow');
+      searchResults.scrollTop(searchResultsTopVal + topVal - 60);
     }
 
   });
