@@ -4,7 +4,8 @@ define([
   './mdnjsobj',
   './mdndomobj',
   './phpext',
-], function(CSSPropActions, HTMLElementActions, MDNJsObjActions, MDNDomObjActions, PhpExtActions) {
+  './jqentry',
+], function(CSSPropActions, HTMLElementActions, MDNJsObjActions, MDNDomObjActions, PhpExtActions, JQEntryActions) {
 
   var mappingString = "";
 
@@ -63,6 +64,9 @@ define([
 
       console.log("booting phpext controller");
       bootController(app, PhpExtActions);
+
+      console.log("booting jqentry controller");
+      bootController(app, JQEntryActions);
 
       app.get("/show_available_interfaces", function(req, res){
         res.send(mappingString);
