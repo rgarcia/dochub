@@ -123,7 +123,7 @@ div#about {
 }
 
 .jq-primaryContent p{
-  font-size: 1.1em;
+  font-size: 1em;
   margin: .5em 0;
   color: #222;
 }
@@ -427,7 +427,7 @@ font-style: italic;
   margin: 0 0 2em 0;
 }
 .jq-primaryContent div.longdesc p{
-  font-size: 1.1em;
+  font-size: 1em;
   line-height: 1.4em;
   margin: 1em 0;
   padding: 0 1px;
