@@ -25,6 +25,9 @@ define([
       this.createAndRenderViews = _.once(function() {
         console.log('Rendering ' + this.languageName);
 
+        // Save for later
+        this.searchResultsDiv = $('#search-results');
+
         this.tocBarView = new TOCBarView({
           el: '#toc',
           collection: this.collection
@@ -66,6 +69,7 @@ define([
 
       if (active && !this.active) {
         this.render();
+        this.searchResultsDiv.addClass(this.options.resultsClassNames);
         if (this.collection.length > 0) {
           // (Re)bind events
           this.searchHeaderView.delegateEvents();
@@ -97,6 +101,9 @@ define([
           model.set({ tocVisible: false, mainVisible: false });
         });
         this.active = false;
+
+        // Remove css styles
+        this.searchResultsDiv.removeClass(this.options.resultsClassNames);
       }
     },
 

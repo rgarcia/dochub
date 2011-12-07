@@ -35,31 +35,37 @@ define([
       this.languageViews = {
         'html' : new LanguageView({
           languageName: 'HTML',
+          resultsClassNames: 'pageText',
           collection: new MDNHtmlElementsCollection(),
           placeholder: 'Type an HTML element name'
         }),
         'css' : new LanguageView({
           languageName: 'CSS',
+          resultsClassNames: 'pageText',
           collection: new MozDevCSSPropCollection(),
           placeholder: 'Type a CSS property name'
         }),
         'javascript' : new LanguageView({
           languageName: 'JavaScript',
+          resultsClassNames: 'pageText',
           collection: new MDNJsObjsCollection(),
           placeholder: 'Type a JavaScript class/function name'
         }),
         'dom' : new LanguageView({
           languageName: 'DOM',
+          resultsClassNames: 'pageText',
           collection: new MDNDomObjsCollection(),
           placeholder: 'Type a DOM object name'
         }),
         'php' : new LanguageView({
           languageName: 'PHP',
+          resultsClassNames: 'pageText',
           collection: new PHPExtensionsCollection(),
           placeholder: 'Type a PHP function name'
         }),
         'jquery' : new LanguageView({
           languageName: 'jQuery',
+          resultsClassNames: 'jq-primaryContent',
           collection: new JQEntriesCollection(),
           placeholder: 'Type a jQuery entry name'
         }),
