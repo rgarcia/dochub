@@ -441,6 +441,7 @@ list-style: disc outside none;
   font-style:italic;
   font-weight:normal;
   margin:1.1em 0 0;
+  line-height: 1em;
 }
 .jq-primaryContent div.longdesc h4 a.stub {
   font-size: .8em;
@@ -449,14 +450,14 @@ list-style: disc outside none;
 }
 .jq-primaryContent div.entry-examples h4{
   color:#555;
-  font-size:1.8em;
+  font-size:1.4em;
   font-style:italic;
   font-weight:normal;
   margin:.2em 0;
   line-height: 18px;
 }
 .jq-primaryContent div.entry-examples h4 span.desc{
-  font-size: .5em;
+  font-size: .75em;
 }
 
 .jq-primaryContent div.entry-examples pre {
