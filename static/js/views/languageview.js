@@ -30,7 +30,8 @@ define([
 
         this.tocBarView = new TOCBarView({
           el: '#toc',
-          collection: this.collection
+          collection: this.collection,
+          languageName: this.languageName
         });
         this.tocBarView.render();
 

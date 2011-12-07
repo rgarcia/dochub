@@ -3,9 +3,9 @@ define([
   'Underscore',
   'Backbone',
   'text!templates/toc.html',
-], function($, _, BackBone, tocTemplate) {
+], function($, _, Backbone, tocTemplate) {
 
-  var TOCBar = BackBone.View.extend({
+  var TOCBar = Backbone.View.extend({
     events: {
       'click a' : 'onClick'
     },
@@ -13,6 +13,7 @@ define([
     initialize: function() {
       _.bindAll(this, 'render', 'removeBindings');
       this.template = _.template(tocTemplate);
+      this.lowercaseLanguageName = this.options.languageName.toLowerCase();
     },
 
     render: function() {
@@ -43,6 +44,10 @@ define([
       var searchResultsTopVal = searchResults.scrollTop();
       var topVal = $('#search-results [data-model-id="' + modelid + '"]').offset().top;
       searchResults.scrollTop(searchResultsTopVal + topVal - 60);
+
+      // Set url 
+      var clickedItemName = this.$(e.currentTarget).text().trim();
+      Backbone.history.navigate(this.lowercaseLanguageName + '/' + clickedItemName, false);
     }
 
   });
