@@ -1,6 +1,6 @@
-# Runnning InstaCSS
+# Runnning locally
 
-Make sure you have a MongoDB server running on your system. For example, on Ubuntu, type
+Make sure you MongoDB running on your system. For example, on Ubuntu, type
 
     apt-get install mongodb
 
@@ -11,6 +11,8 @@ Download the content:
     (cd css-mdn;      ./run.sh)
     (cd css-cssinfos; ./run.sh)
     (cd html-mdn;     ./run.sh)
+    (cd js-mdn;       node scrape.js)
+    (cd dom-mdn       node scrape.js)
 
 Run the server:
 
