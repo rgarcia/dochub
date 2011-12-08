@@ -92,12 +92,13 @@ div#about {
   border-top: 1px solid #aaa;
 }
 .toc{
-  padding: 5px 20px 20px 20px;
+  padding-left: 20px;
   background: #fafafa;
-  border-right: 1px solid #aaa;
-  border-left: 1px solid #aaa;
-  border-bottom: 1px solid #aaa;
+  border: 1px solid #aaa;
 /*  margin: -26px 0 0 0;*/
+}
+.jq-primaryContent .toc ul {
+  list-style: none;
 }
 .jq-primaryContent .toc h4 {
   font-size:1.45em;
@@ -105,13 +106,16 @@ div#about {
   padding: 0 0 6px;
   font-weight: normal;
   border: none;
-  margin-top: -32px;
+  /* margin-top: -32px; */
 }
 .jq-primaryContent .b-wrap .toc h4 {
   margin-top: 0;
 }
 .jq-primaryContent .toc h4 span {
-  background: #fff;
+  /* background: #fff; */
+}
+.toc ul.toc-list {
+  margin-left: 0;
 }
 .toc ul.toc-list li a{
   line-height: 1.1;

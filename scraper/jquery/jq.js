@@ -69,7 +69,11 @@ requirejs([
         jqentry['title']     = title;
         jqentry['fullTitle'] = objName;
         jqentry['sectionNames'] = [ title ];
-        jqentry['sectionHTMLs'].push($($($('div.entry-content').children()[1]).children()[1]).html());
+        jqentry['sectionHTMLs'] = 
+          _.map(_.toArray($('div.entry-content').children()).slice(1),
+            function(obj) {
+              return $(obj).html();
+            });
 
         jqentry.save(this);
       },
