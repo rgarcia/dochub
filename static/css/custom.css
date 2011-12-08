@@ -34,6 +34,14 @@ div .smallclear {
   margin-bottom: 15px;
 }
 
+div#about table tr td.logo {
+  width: 180px;
+}
+
+div#about table tr td.desc {
+  vertical-align: middle;
+}
+
 /* From MDN site (needed to make HTML element attributes section look the same) */
 
 .pageText code, .pageText tt {
@@ -207,6 +215,7 @@ table.listing td {
   padding: 6px 20px;
   margin: 1em 0 0 0;
   font-size: 1.1em;
+  border-radius: 5px;
 }
 #jq-interiorNavigation .section-title{
   border: none;
