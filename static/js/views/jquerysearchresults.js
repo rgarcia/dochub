@@ -25,7 +25,7 @@ define([
       var self = this;
       $('div.code-demo').each(function(index) {
         var demoBtn = $('<button class="button primary">Click for demo</button>');
-        demoBtn.bind('click', { demoCodeDiv: $('code.demo-code').eq(index) }, self.codeDemoClick);
+        demoBtn.bind('click', { demoCodeDivIdx: index }, self.codeDemoClick);
         $(this).append(demoBtn);
       });
 
@@ -52,7 +52,7 @@ define([
         return true;
       }
 
-      var demoCodeDiv = evt.data.demoCodeDiv;
+      var demoCodeDiv = $('code.demo-code').eq(evt.data.demoCodeDivIdx);
       var source = demoCodeDiv.html()
             // .replace(/<\/?a.*?>/ig, "")
             // .replace(/<\/?strong.*?>/ig, "")
