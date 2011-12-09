@@ -52,7 +52,6 @@ define([
           visibleField: 'tocVisible'
         });
 
-        console.log(this.options.mainSearchResultsView);
         var mainSearchResultsView = this.options.mainSearchResultsView
           ? this.options.mainSearchResultsView
           : SearchResultsView;

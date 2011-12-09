@@ -24,8 +24,6 @@ define([
     },
 
     render: function() {
-      console.log('rendering search header');
-
       var initialQuery = this.options.query ? this.options.query : "";
       this.$('#search-box').attr({
         'value'       : initialQuery,
@@ -36,9 +34,9 @@ define([
     },
 
     onSearch: _.debounce(function(evt) {
-      console.log('onSearch');
       var query = $.trim(this.$('#search-box').val()).toLowerCase();
-      if (query === this.lastQuery) {
+      var queryExists = (query !== '');
+      if (queryExists && query === this.lastQuery) {
         return;
       }
       this.lastQuery = query;
@@ -46,7 +44,6 @@ define([
       // TODO: replacestate...
       Backbone.history.navigate(this.languageName + '/' + query, false);
 
-      var queryExists = (query !== '');
       if (!queryExists) {
         // No query, so can do some optimizations.
         //  1. Don't use the search function
