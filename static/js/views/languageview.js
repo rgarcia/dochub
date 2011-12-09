@@ -92,6 +92,7 @@ define([
           this.collection.fetch({
             success: function(coll, resp) {
               console.log('Success fetching ' + self.languageName);
+              self.searchHeaderView.lastQuery = null; // TODO: use abstractions
               self.searchHeaderView.onSearch();
               self.mainResultsView.spinner.stop();
               self.active = true;
