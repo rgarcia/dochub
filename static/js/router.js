@@ -24,7 +24,7 @@ define([
             MozDevCSSPropCollection, MDNHtmlElementsCollection, MDNJsObjsCollection,
             MDNDomObjsCollection, PHPExtensionsCollection, JQEntriesCollection) {
 
-  var InstaCSS = Backbone.Router.extend({
+  var DocHub = Backbone.Router.extend({
     routes: {
       ''      : 'main',
       'about' : 'about'
@@ -114,6 +114,9 @@ define([
       $('#search-results').css({'display': 'block'});
 
       if (newLanguage === this.currentLanguage) {
+        // TODO: To refresh the url in came from #about. Breaking abstractions everywhere.
+        //       Super nasty :(
+        this.languageViews[this.currentLanguage].searchHeaderView.onSearch();
         return;
       }
       if (this.currentLanguage !== null) {
@@ -161,7 +164,7 @@ define([
   });
 
   var initialize = function() {
-    var mainApp = new InstaCSS();
+    var mainApp = new DocHub();
     Backbone.history.start(); // can't do pushstate until we handle all routes on backend ({pushState: true});
   };
 

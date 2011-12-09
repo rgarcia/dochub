@@ -35,14 +35,16 @@ define([
 
     onSearch: _.debounce(function(evt) {
       var query = $.trim(this.$('#search-box').val()).toLowerCase();
+
+      // TODO: replacestate...
+      Backbone.history.navigate(this.languageName + '/' + query, false);
+
+      // Do this after we set url
       var queryExists = (query !== '');
       if (queryExists && query === this.lastQuery) {
         return;
       }
       this.lastQuery = query;
-
-      // TODO: replacestate...
-      Backbone.history.navigate(this.languageName + '/' + query, false);
 
       if (!queryExists) {
         // No query, so can do some optimizations.
