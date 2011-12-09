@@ -16,6 +16,7 @@ define([
 
       this.placeholder  = this.options.placeholder;
       this.languageName = this.options.languageName.toLowerCase();
+      this.lastQuery = null;
     },
 
     removeBindings: function() {
@@ -37,6 +38,10 @@ define([
     onSearch: _.debounce(function(evt) {
       console.log('onSearch');
       var query = $.trim(this.$('#search-box').val()).toLowerCase();
+      if (query === this.lastQuery) {
+        return;
+      }
+      this.lastQuery = query;
 
       // TODO: replacestate...
       Backbone.history.navigate(this.languageName + '/' + query, false);

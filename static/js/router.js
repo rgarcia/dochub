@@ -8,6 +8,7 @@ define([
 
   // Views
   'views/topnav',
+  'views/jquerysearchresults',
   'views/languageview',
   'views/fullwindow',
 
@@ -19,7 +20,7 @@ define([
   'collections/phpexts',
   'collections/jqentries',
 ], function(doc, $, _, Backbone,
-            TopNavView, LanguageView, FullWindowView,
+            TopNavView, JQuerySearchResultsView, LanguageView, FullWindowView,
             MozDevCSSPropCollection, MDNHtmlElementsCollection, MDNJsObjsCollection,
             MDNDomObjsCollection, PHPExtensionsCollection, JQEntriesCollection) {
 
@@ -67,7 +68,8 @@ define([
           languageName: 'jQuery',
           resultsClassNames: 'jq-primaryContent',
           collection: new JQEntriesCollection(),
-          placeholder: 'Type a jQuery entry name'
+          placeholder: 'Type a jQuery entry name',
+          mainSearchResultsView: JQuerySearchResultsView,
         }),
       };
 

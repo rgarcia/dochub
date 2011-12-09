@@ -42,14 +42,21 @@ define([
           languageName: this.languageName,
         });
 
-        this.tocResultsView = new SearchResultsView({
+        var tocSearchResultsView = this.options.tocSearchResultsView
+          ? this.tocSearchResultsView
+          : SearchResultsView;
+        this.tocResultsView = new tocSearchResultsView({
           el: '#toc-results',
           collection: this.collection,
           itemTemplate: tocResultTemplate,
           visibleField: 'tocVisible'
         });
 
-        this.mainResultsView = new SearchResultsView({
+        console.log(this.options.mainSearchResultsView);
+        var mainSearchResultsView = this.options.mainSearchResultsView
+          ? this.options.mainSearchResultsView
+          : SearchResultsView;
+        this.mainResultsView = new mainSearchResultsView({
           el: '#search-results',
           collection: this.collection,
           itemTemplate: fullResultTemplate,
@@ -102,6 +109,9 @@ define([
           model.set({ tocVisible: false, mainVisible: false });
         });
         this.active = false;
+
+        // Necessary so toc is displayed when clicking back to a language
+        this.searchHeaderView.lastQuery = null;
 
         // Remove css styles
         this.searchResultsDiv.removeClass(this.options.resultsClassNames);

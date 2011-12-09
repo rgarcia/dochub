@@ -45,6 +45,7 @@ define([
         });
         $(self.el).append(view.el);
       });
+
       return this;
     },
   });
