@@ -40,7 +40,7 @@ requirejs([
   // so in addition to not visiting the same url twice, keep this list to prevent visiting the same title twice
   var titles = [];
 
-  spidey.route('developer.mozilla.org', '\/en\/DOM/*', function ($, url) {
+  spidey.route('developer.mozilla.org', /\/en\/DOM\/*/, function ($, url) {
     if ( _.indexOf(blacklist,url) !== -1 ) return;
     visitLinks($);
 

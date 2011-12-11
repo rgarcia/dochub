@@ -40,7 +40,7 @@ requirejs([
   // so in addition to not visiting the same url twice, keep this list to prevent visiting the same title twice
   var titles = [];
 
-  spidey.route('developer.mozilla.org', '(\/en\/JavaScript_typed_arrays|\/en\/JavaScript\/Reference\/(Global_Objects|Statement|Operators))\/*', function ($, url) {
+  spidey.route('developer.mozilla.org', /(\/en\/JavaScript_typed_arrays|\/en\/JavaScript\/Reference\/(Global_Objects|Statement|Operators))\/*/, function ($, url) {
     if ( _.indexOf(blacklist,url) !== -1 ) return;
     visitLinks($);
 
@@ -48,6 +48,8 @@ requirejs([
     console.log('scraping:',url);
 
     var title = $('article .page-title h1').text().trim();
+    if ( /Global_Objects/.test(url) && url.split('Global_Objects/').length > 1)
+      title = url.split('Global_Objects/')[1].replace(/\//g, '.');
     if ( title === '' || title === null ) {
       console.log('ERROR: could not get title, skipping');
       return;
