@@ -2,16 +2,16 @@ define([
   'jQuery',
   'Underscore',
   'Backbone',
-  'models/mdnhtmlelement'
-], function($, _, Backbone, MDNHtmlElement) {
+  'models/sectionscrape'
+], function($, _, Backbone, SectionScrape) {
 
   // Handle the following cases:
   //  <xyz>
   var htmlElementPattern = new RegExp("^(\\W*)(.+)$");
 
   var MDNHtmlElemnts = Backbone.Collection.extend({
-    url: '/mdnhtmlelement',
-    model: MDNHtmlElement,
+    url: '/data/html-mdn.json',
+    model: SectionScrape,
 
   comparator: function(model) {
     var title = model.get('title');

@@ -9,8 +9,7 @@ define([], function() {
     environment:  global.process.env.NODE_ENV || 'development',
 
     // MONGOLAB_URI is provided by heroku mongolab add-on
-    mongo_uri: global.process.env.MONGOLAB_URI || 'mongodb://127.0.0.1/instacss',
+    //mongo_uri: global.process.env.MONGOLAB_URI || 'mongodb://127.0.0.1/instacss',
 
   };
 });
-

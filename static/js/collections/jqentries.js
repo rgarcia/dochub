@@ -2,18 +2,18 @@ define([
   'jQuery',
   'Underscore',
   'Backbone',
-  'models/jqentry'
-], function($, _, Backbone, JQEntry) {
+  'models/sectionscrape'
+], function($, _, Backbone, SectionScrape) {
 
   var jqEntryPattern = new RegExp("^(\\W*)(.+)$");
 
   var JQEntry = Backbone.Collection.extend({
-    url: '/jqentry',
-    model: JQEntry,
+    url: '/data/jquery.json',
+    model: SectionScrape,
 
 
     comparator: function(model) {
-      var title = model.get('fullTitle');
+      var title = model.get('title');
       var results = jqEntryPattern.exec(title);
       var prefix = results[1];
       var name   = results[2];
@@ -30,4 +30,3 @@ define([
 
   return JQEntry;
 });
-

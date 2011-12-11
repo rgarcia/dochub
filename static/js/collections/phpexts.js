@@ -2,18 +2,17 @@ define([
   'jQuery',
   'Underscore',
   'Backbone',
-  'models/phpext'
-], function($, _, Backbone, PhpExt) {
+  'models/SectionScrape'
+], function($, _, Backbone, SectionScrape) {
 
   var PhpExt = Backbone.Collection.extend({
-    url: '/phpext',
-    model: PhpExt,
+    url: '/data/php.json',
+    model: SectionScrape,
 
     comparator: function(model) {
-      return model.get('fullTitle').toLowerCase();
+      return model.get('title').toLowerCase();
     },
   });
 
   return PhpExt;
 });
-

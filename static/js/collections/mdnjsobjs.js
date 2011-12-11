@@ -2,18 +2,18 @@ define([
   'jQuery',
   'Underscore',
   'Backbone',
-  'models/mdnjsobj'
-], function($, _, Backbone, MDNJsObj) {
+  'models/sectionscrape'
+], function($, _, Backbone, SectionScrape) {
 
   var MDNJsObj = Backbone.Collection.extend({
-    url: '/mdnjsobj',
-    model: MDNJsObj,
+    url: '/data/js-mdn.json',
+    model: SectionScrape,
 
     comparator: function(model) {
-      return model.get('fullTitle');
+      return model.get('title');
     },
+
   });
 
   return MDNJsObj;
 });
-
