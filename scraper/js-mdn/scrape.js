@@ -10,6 +10,8 @@ requirejs([
   'fs'
 ], function(step, spider, _, cheerio, SectionScrape, path, fs) {
 
+  var results = [];
+
   var spidey = spider();
 
   // use this to visit all links on a page
@@ -45,9 +47,7 @@ requirejs([
     console.log('---------');
     console.log('scraping:',url);
 
-    var scrapeData = new SectionScrape();
-
-    var title = $('article .page-title h1').text();
+    var title = $('article .page-title h1').text().trim();
     if ( title === '' || title === null ) {
       console.log('ERROR: could not get title, skipping');
       return;
@@ -58,6 +58,7 @@ requirejs([
 
     console.log('title:',title);
 
+    var scrapeData = new SectionScrape();
     scrapeData['title'] = title;
     scrapeData['url'] = url;
     scrapeData['sectionNames'] = [];
@@ -92,11 +93,15 @@ requirejs([
       scrapeData['sectionHTMLs'].push($section.html());
     }
 
-    fs.writeSync(file,JSON.stringify(scrapeData) + '\n',scrapeData);
+    results.push(scrapeData.toJSON());
   });
 
   // start 'er up
   spidey.get('https://developer.mozilla.org/en/JavaScript/Reference').log('info');
 
+  process.on('exit', function () {
+    fs.writeSync(file,JSON.stringify(results,null,'\t'));
+    console.log('DONE');
+  });
   return;
 });

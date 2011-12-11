@@ -10,6 +10,8 @@ requirejs([
   'fs'
 ], function(step, spider, _, cheerio, SectionScrape, path, fs) {
 
+  var results = [];
+
   var spidey = spider();
 
   // file where we'll dump the json
@@ -68,11 +70,16 @@ requirejs([
               return $(obj).html();
             });
 
-    fs.writeSync(file,JSON.stringify(scrapeData) + '\n',scrapeData);
+    results.push(scrapeData.toJSON());
   });
 
   // start 'er up
   spidey.get('http://api.jquery.com/').log('info');
+
+  process.on('exit', function () {
+    fs.writeSync(file,JSON.stringify(results,null,'\t'));
+    console.log('DONE');
+  });
 
   return;
 });
