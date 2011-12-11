@@ -94,6 +94,7 @@ requirejs([
     }
 
     results.push(scrapeData.toJSON());
+    titles.push(title);
   });
 
   // start 'er up
