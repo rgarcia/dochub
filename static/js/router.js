@@ -31,7 +31,7 @@ define([
     },
 
     initialize: function() {
-      _.bindAll(this, 'changeLanguage', 'setLanguage');
+      _.bindAll(this, 'changeLanguage');
 
       this.languageViews = {
         'html' : new LanguageView({
@@ -122,10 +122,7 @@ define([
       if (this.currentLanguage !== null) {
         this.languageViews[this.currentLanguage].setActive(false);
       }
-      this.setLanguage(newLanguage);
-    },
 
-    setLanguage: function(newLanguage) {
       console.log('Setting language to ' + newLanguage);
       this.languageViews[newLanguage].setActive(true);
       $('#search-box').focus();
@@ -140,14 +137,10 @@ define([
     },
 
     main: function(query) {
-      if (this.currentLanguage === null) {
-        this.currentLanguage = 'css';
-      }
-
       this.renderTopNav();  // _.once'd
 
       // Start everything
-      this.setLanguage(this.currentLanguage);
+      this.changeLanguage('css');
     },
 
     about: function() {
