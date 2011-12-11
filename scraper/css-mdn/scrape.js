@@ -23,24 +23,25 @@ requirejs([
   };
 
   // file where we'll dump the json
-  var filename = path.dirname(__filename) + '/../../static/data/js-mdn.json';
+  var filename = path.dirname(__filename) + '/../../static/data/css-mdn.json';
   console.log('dumping to ' + filename);
   var file = fs.openSync(filename,'w');
 
-  // main index of mdn's js docs
-  spidey.route('developer.mozilla.org', '/en/JavaScript/Reference', function ($) {
+  // main index of mdn's css docs
+  spidey.route('developer.mozilla.org', '/en/CSS_Reference', function ($) {
     visitLinks($);
   });
 
   var blacklist = [
-    'https://developer.mozilla.org/en/JavaScript/Reference'
+    'https://developer.mozilla.org/en/CSS/CSS_Reference'
+    , 'https://developer.mozilla.org/en/CSS/CSS_Reference/Property_Template'
   ];
 
   // some urls redirect to other pages w/o changing the url (for example: https://developer.mozilla.org/en/CSS/-moz-scrollbars-none)
   // so in addition to not visiting the same url twice, keep this list to prevent visiting the same title twice
   var titles = [];
 
-  spidey.route('developer.mozilla.org', '(\/en\/JavaScript_typed_arrays|\/en\/JavaScript\/Reference\/(Global_Objects|Statement|Operators))\/*', function ($, url) {
+  spidey.route('developer.mozilla.org', '/en/CSS/*', function ($, url) {
     if ( _.indexOf(blacklist,url) !== -1 ) return;
     visitLinks($);
 
@@ -98,7 +99,7 @@ requirejs([
   });
 
   // start 'er up
-  spidey.get('https://developer.mozilla.org/en/JavaScript/Reference').log('info');
+  spidey.get('https://developer.mozilla.org/en/CSS_Reference').log('info');
 
   process.on('exit', function () {
     fs.writeSync(file,JSON.stringify(results,null,'\t'));
