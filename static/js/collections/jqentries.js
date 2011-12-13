@@ -11,7 +11,6 @@ define([
     url: '/data/jquery.json',
     model: SectionScrape,
 
-
     comparator: function(model) {
       var title = model.get('title');
       var results = jqEntryPattern.exec(title);

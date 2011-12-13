@@ -22,9 +22,15 @@ define([
       var title = model.get('title');
       var results = cssPropsPattern.exec(title);
       var prefix = results[1];
-      var name   = results[2].toLowerCase();
+      var name   = results[2];
 
-      return prefix ? ('1' + title) : ('0' + name);
+      if (prefix) {
+        return '2' + title;
+      } else if (name[0] === name[0].toLowerCase()) {
+        return '0' + name;
+      } else {
+        return '1' + name;
+      }
     },
 
   });

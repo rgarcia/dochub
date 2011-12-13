@@ -1085,6 +1085,7 @@
     }
 
     // Make the request.
+    console.log(params);
     return $.ajax(params);
   };
 

@@ -10,7 +10,12 @@ define([
     model: SectionScrape,
 
     comparator: function(model) {
-      return model.get('title');
+      var title = model.get('title');
+      if (title[0] === title[0].toLowerCase()) {
+        return '0' + title;
+      } else {
+        return '1' + title;
+      }
     },
   });
 
