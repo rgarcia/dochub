@@ -19,10 +19,12 @@ define([
   'collections/mdndomobjs',
   'collections/phpexts',
   'collections/jqentries',
+  'collections/languagesocketcollection',
 ], function(doc, $, _, Backbone,
             TopNavView, JQuerySearchResultsView, LanguageView, FullWindowView,
             MozDevCSSPropCollection, MDNHtmlElementsCollection, MDNJsObjsCollection,
-            MDNDomObjsCollection, PHPExtensionsCollection, JQEntriesCollection) {
+            MDNDomObjsCollection, PHPExtensionsCollection, JQEntriesCollection,
+            LanguageSocketCollection) {
 
   var DocHub = Backbone.Router.extend({
     routes: {
@@ -34,17 +36,18 @@ define([
       _.bindAll(this, 'changeLanguage');
 
       this.languageViews = {
+        'css' : new LanguageView({
+          languageName: 'CSS',
+          resultsClassNames: 'pageText',
+          collection: new MozDevCSSPropCollection(),
+          // collection: new LanguageSocketCollection(null, 'css'),
+          placeholder: 'Type a CSS property name'
+        }),
         'html' : new LanguageView({
           languageName: 'HTML',
           resultsClassNames: 'pageText',
           collection: new MDNHtmlElementsCollection(),
           placeholder: 'Type an HTML element name'
-        }),
-        'css' : new LanguageView({
-          languageName: 'CSS',
-          resultsClassNames: 'pageText',
-          collection: new MozDevCSSPropCollection(),
-          placeholder: 'Type a CSS property name'
         }),
         'javascript' : new LanguageView({
           languageName: 'JavaScript',

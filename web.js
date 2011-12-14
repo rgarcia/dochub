@@ -8,7 +8,9 @@ requirejs.config({
 });
 
 requirejs([
-  'app'
-], function(app) {
+  'app',
+  'io'
+], function(app, io) {
   app.initialize();
+  io.initialize(app.getApp());
 });

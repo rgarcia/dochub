@@ -8,6 +8,7 @@
     "underscore": ">=1.2.1",
     "step": ">=0.0.5",
     "request": ">=2.2.5",
-    "commander": ">=0.4.1"
+    "commander": ">=0.4.1",
+    "socket.io": ">=0.8.7"
   }
 }

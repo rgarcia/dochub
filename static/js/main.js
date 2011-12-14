@@ -4,6 +4,7 @@ require.config({
     jQuery:     'libs/jquery/jquery',
     Underscore: 'libs/underscore/underscore',
     Backbone:   'libs/backbone/backbone',
+    SocketIO:   'libs/socket.io/socket.io',
     templates:  '../templates'
   }
 });

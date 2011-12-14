@@ -49,7 +49,9 @@ define([
           el: '#toc-results',
           collection: this.collection,
           itemTemplate: tocResultTemplate,
-          visibleField: 'tocVisible'
+          visibleField: 'tocVisible',
+          visibleOnCreate: true,
+          spinner: false
         });
 
         var mainSearchResultsView = this.options.mainSearchResultsView
@@ -60,7 +62,8 @@ define([
           collection: this.collection,
           itemTemplate: fullResultTemplate,
           visibleField: 'mainVisible',
-          spinner: true
+          visibleOnCreate: false,
+          spinner: false
         });
       });
     },

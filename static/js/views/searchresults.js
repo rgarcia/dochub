@@ -9,8 +9,9 @@ define([
   // the results view is just tied to a collection and re-renders itself
   var SearchResultsView = BackBone.View.extend({
     initialize: function() {
-      _.bindAll(this, 'render', 'startSpinner');
+      _.bindAll(this, 'render', 'renderAdditional', 'startSpinner');
       this.collection.bind('reset', this.render);
+      this.collection.bind('add', this.renderAdditional);
     },
 
     startSpinner: function() {
@@ -45,6 +46,22 @@ define([
         });
         $(self.el).append(view.el);
       });
+
+      return this;
+    },
+
+    renderAdditional: function(newModel) {
+      // render a subview for each new model
+      var view = new MozDevCSSPropView({
+        model: newModel,
+        template: this.options.itemTemplate,
+        visibleField: this.options.visibleField
+      });
+      $(this.el).append(view.el);
+      if (this.options.visibleOnCreate) {
+        // newModel.set({ this.options.visibleField: true });
+        newModel.set({ tocVisible: true });  // XXX: Testing hack
+      }
 
       return this;
     },
