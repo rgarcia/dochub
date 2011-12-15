@@ -33,7 +33,7 @@ requirejs([
   });
 
   var blacklist = [
-    'https://developer.mozilla.org/en/HTML/Element'
+    // 'https://developer.mozilla.org/en/HTML/Element'
   ];
 
   // some urls redirect to other pages w/o changing the url (for example: https://developer.mozilla.org/en/CSS/-moz-scrollbars-none)
@@ -92,6 +92,9 @@ requirejs([
       scrapeData['sectionNames'].push(sectionName);
       scrapeData['sectionHTMLs'].push($section.html());
     }
+
+    // Add link to original page in scraped data.
+    scrapeData['sectionHTMLs'].push('<p class="source-link">Edit the original source at <a target="_blank" href="' + url +'">' + url + '</a></p>');
 
     results.push(scrapeData.toJSON());
     titles.push(title);

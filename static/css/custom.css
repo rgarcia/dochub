@@ -42,6 +42,15 @@ div#about table tr td.desc {
   vertical-align: middle;
 }
 
+p.source-link {
+  border-width: 1px;
+  border-color: #888;
+  border-style: solid;
+  background-color: #FFC;
+  padding: 6px;
+  border-radius: 3px;
+}
+
 /* From MDN site (needed to make HTML element attributes section look the same) */
 
 .pageText code, .pageText tt {
