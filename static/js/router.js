@@ -39,8 +39,8 @@ define([
         'css' : new LanguageView({
           languageName: 'CSS',
           resultsClassNames: 'pageText',
-          collection: new MozDevCSSPropCollection(),
-          // collection: new LanguageSocketCollection(null, 'css'),
+          // collection: new MozDevCSSPropCollection(),
+          collection: new LanguageSocketCollection(null, 'css'),
           placeholder: 'Type a CSS property name'
         }),
         'html' : new LanguageView({

@@ -581,7 +581,6 @@
     _add : function(model, options) {
       options || (options = {});
       model = this._prepareModel(model, options);
-      console.log(model);
       if (!model) return false;
       var already = this.getByCid(model);
       if (already) throw new Error(["Can't add the same model to a set twice", already.id]);
