@@ -2,7 +2,7 @@ define([
   'jQuery',
   'Underscore',
   'Backbone',
-  'models/SectionScrape'
+  'models/sectionscrape'
 ], function($, _, Backbone, SectionScrape) {
 
   var PhpExt = Backbone.Collection.extend({
