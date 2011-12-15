@@ -3,4 +3,5 @@
   <% for ( var i = 0; i < model.get('sectionHTMLs').length; i++ ) { %>
     <%= model.get('sectionHTMLs')[i] %>
   <% } %>
+  <p class="source-link">View the original document at <a target="_blank" href="<%= model.get('url') %>"><%= model.get('url') %></a>.<p>
 </div>

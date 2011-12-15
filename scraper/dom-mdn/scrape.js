@@ -40,8 +40,11 @@ requirejs([
   // so in addition to not visiting the same url twice, keep this list to prevent visiting the same title twice
   var titles = [];
 
+  // Need to lowercase titles that match anything in here, b/c MDN doc is inconsistent.
+  var titleRegexes = [ /^Document\./, /^Element\./ ];
+
   spidey.route('developer.mozilla.org', /\/en\/DOM\/*/, function ($, url) {
-    if ( _.indexOf(blacklist,url) !== -1 ) return;
+    if ( _.include(blacklist,url) ) return;
     visitLinks($);
 
     console.log('---------');
@@ -51,9 +54,17 @@ requirejs([
     if ( title === '' || title === null ) {
       console.log('ERROR: could not get title, skipping');
       return;
-    } else if ( _.indexOf(titles,title) !== -1 ) {
+    } else if ( _.include(titles,title) ) {
       console.log('WARNING: already scraped something with this title, skipping');
       return;
+    }
+
+    var titleMatches = _.filter(titleRegexes, function(regex) {
+      return regex.test(title);
+    });
+    
+    if (titleMatches.length > 0) {
+      title = title[0].toLowerCase() + title.substr(1);
     }
 
     console.log('title:',title);
@@ -92,9 +103,6 @@ requirejs([
       scrapeData['sectionNames'].push(sectionName);
       scrapeData['sectionHTMLs'].push($section.html());
     }
-
-    // Add link to original page in scraped data.
-    scrapeData['sectionHTMLs'].push('<p class="source-link">Edit the original source at <a target="_blank" href="' + url +'">' + url + '</a></p>');
 
     results.push(scrapeData.toJSON());
     titles.push(title);

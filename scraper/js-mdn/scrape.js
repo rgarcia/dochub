@@ -95,9 +95,6 @@ requirejs([
       scrapeData['sectionHTMLs'].push($section.html());
     }
 
-    // Add link to original page in scraped data.
-    scrapeData['sectionHTMLs'].push('<p class="source-link">Edit the original source at <a target="_blank" href="' + url +'">' + url + '</a></p>');
-
     results.push(scrapeData.toJSON());
     titles.push(title);
   });

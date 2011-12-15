@@ -70,9 +70,6 @@ requirejs([
               return $(obj).html();
             });
 
-    // Add link to original page in scraped data.
-    scrapeData['sectionHTMLs'].push('<p class="source-link">View the original documentation at <a target="_blank" href="' + url +'">' + url + '</a></p>');
-
     results.push(scrapeData.toJSON());
     titles.push(title);
   });
