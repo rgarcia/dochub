@@ -8,6 +8,7 @@
 
     <!-- Work with Google ChromeFrame -->
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <script defer>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
 
     <title>dochub | Instant Documentation Search</title>
 
@@ -179,6 +180,13 @@
                 s.parentNode.insertBefore(_usr, s);
         })(document);
 </script>
+
+    <!-- Prompt IE users to install Chrome Frame. Remove this if you want to support IE 6.
+    chromium.org/developers/how-tos/chrome-frame-getting-started -->
+    <!--[if gte IE 0 ]>
+      <script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+      <script defer>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+    <![endif]-->
   </body>
 
 </html>
