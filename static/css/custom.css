@@ -678,3 +678,19 @@ margin-bottom:32px !important;
   position:relative;
   top: -2px;
 }
+
+
+/* PHP */
+div.phpcode {
+  background-color: #CCC;
+  border-width: 1px;
+  border-style: solid;
+  padding: 6px;
+  font-family: Consolas, "Andale Mono WT", "Andale Mono", "Lucida Console", Monaco, "Courier New", Courier, monospace;
+  font-size: 14px;
+}
+
+div.phpcode code {
+  background-color: #CCC;
+}
+

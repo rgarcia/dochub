@@ -67,7 +67,7 @@ define([
         }),
         'php' : new LanguageView({
           languageName: 'PHP',
-          resultsClassNames: 'pageText',
+          resultsClassNames: '',
           collection: new PHPExtensionsCollection(),
           placeholder: 'Type a PHP function name',
           debounceTime: 150,  // PHP is slower b/c of larger data set
