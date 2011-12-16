@@ -1,19 +1,15 @@
 var requirejs = require('requirejs');
 
 requirejs([
-  '../../config',
-  'step',
   'spider',
-  'mongoose',
-  'underscore',   // used by mongoose.save
-  'cheerio',      // used by mongoose.save
-  '../../models/phpext',
-], function(config, step, spider, mongoose, _, cheerio, PhpExt) {
+  'underscore',
+  '../../models/sectionscrape',
+  'path',
+  'fs'
+], function(spider, _, SectionScrape, path, fs) {
 
   // c.f. http://docs.jquery.com/Frequently_Asked_Questions#How_do_I_select_an_element_by_an_ID_that_has_characters_used_in_CSS_notation.3F
   function jq(myid) { 
-    // return '#' + myid.replace(/(:|\.)/g,'\\$1');
-    // XXX: This is cheerio, NOT jQuery
     return '#' + myid;
   }
   var extractJqueryId = function(url) {
@@ -91,38 +87,39 @@ requirejs([
     return str.toLowerCase();
   });
 
-  // Config that shiz
-  var jsSpider = spider();
-  jsSpider.route('www.php.net', '/manual/en/extensions.alphabetical.php', function ($, url) {
-    console.log(url);
-    var crawlfn = function() {
+  // File where we'll dump the json
+  var filename = path.dirname(__filename) + '/../../static/data/php-ext.json';
+  console.log('[Dumping to ' + filename + '.]');
+  var file = fs.openSync(filename, 'w');
+
+  // The list of results we're going to put into the file
+  var results = [];
+
+  var crawlfn = function($) {
+    return function() {
       var href = 'http://www.php.net/manual/en/' + $(this).attr('href');
       jsSpider.get(href);
     };
+  };
+
+  // Config the crawler
+  var jsSpider = spider();
+  jsSpider.route('www.php.net', '/manual/en/extensions.alphabetical.php', function ($, url) {
+    console.log(url);
 
     var links = _.filter($(jq('extensions.alphabetical') + ' a'), function(link) {
       var txt = $(link).text().trim().toLowerCase();
       return desiredExts.indexOf(txt) > -1;
     });
-    $(links).each(crawlfn);
+    $(links).each(crawlfn($));
   }).route('www.php.net', '/manual/en/book*', function ($, url) {
     console.log(url);
-    var crawlfn = function() {
-      var href = 'http://www.php.net/manual/en/' + $(this).attr('href');
-      jsSpider.get(href);
-    };
-
     var jqId = extractJqueryId(url);
-    $(jqId + ' a').each(crawlfn);
+    $(jqId + ' a').each(crawlfn($));
   }).route('www.php.net', '/manual/en/ref*', function ($, url) {
     console.log(url);
-    var crawlfn = function() {
-      var href = 'http://www.php.net/manual/en/' + $(this).attr('href');
-      jsSpider.get(href);
-    };
-
     var jqId = extractJqueryId(url);
-    $(jqId + ' a').each(crawlfn);
+    $(jqId + ' a').each(crawlfn($));
   });
 
   var subroutes = [
@@ -138,79 +135,31 @@ requirejs([
 
         // Extract everything after the subroute and lowercase first letter
         var remaining = url.split('manual/en/')[1];
-        var objName = title;
-        console.log('[Scraping ' + url + ' :: ' + objName + ']');
+        console.log('[Scraping ' + url + ' :: ' + title + ']');
 
         // Create new obj to save
-        var phpobj = new PhpExt();
-        step(
-          function searchForExistingDoc() {
-            PhpExt.findOne({ fullTitle: objName }, this);
-          },
+        var scrapeData = new SectionScrape();
 
-          function processFind(err, doc) {
-            if (err) {
-              console.log('[processFind error: ' + err + ']');
-              throw err;
-            }
+        scrapeData['title'] = title;
+        scrapeData['url']   = url;
+        scrapeData['sectionNames'] = [ title ];
+        scrapeData['sectionHTMLs'] = [ $(extractJqueryId(url)).html() ];
 
-            if ( !doc ) {
-              console.log('[No existing doc, creating one.]');
-              return null;
-            } else {
-              console.log('[Removing doc and creating a new one.]');
-              doc.remove(this);
-            }
-          },
+        results.push(scrapeData.toJSON());
 
-          function processRemoveAndAddNewDoc(err) {
-            if (err) {
-              console.log('[processRemoveAndAddNewDoc error: ' + err + ']');
-              throw err;
-            }
-
-            phpobj['title']     = title;
-            phpobj['fullTitle'] = objName;
-            phpobj['sectionNames'] = [ title ];
-            phpobj['sectionHTMLs'] = [ $(extractJqueryId(url)).html() ];
-
-            phpobj.save(this);
-          },
-
-          function postDBSave(err) {
-            if (err) {
-              console.log('[ERROR could not save to db: ' + err + ']');
-              throw err;
-            }
-
-            console.log('[Successfully saved to db.]');
-            return null;
-          },
-
-          function continueCrawling() {
-            var crawlfn = function() {
-              var href = 'http://www.php.net/manual/en/' + $(this).attr('href');
-              jsSpider.get(href);
-            };
-
-            $('#pageText a').each(crawlfn);
-          }
-        );
+        // Continue crawling
+        $('#pageText a').each(crawlfn($));
       });
     })();
   }
 
-  // Do it son
-  console.log('[Connecting to db: ' + config.mongo_uri + ']');
-  mongoose.connect(config.mongo_uri, function(err) {
-    if (err) {
-      console.log('[Error connecting to db: ' + err + ']');
-      throw err;
-    } else {
-      console.log('[Connected to ' + config.mongo_uri + ']');
-    }
+  // Start the crawler
+  jsSpider.get('http://www.php.net/manual/en/extensions.alphabetical.php').log('info');
 
-    jsSpider.get('http://www.php.net/manual/en/extensions.alphabetical.php').log('info');
+  // Write on exit
+  process.on('exit', function() {
+    fs.writeSync(file, JSON.stringify(results, null, '\t'));
+    console.log('[Done.]');
   });
 
   return;

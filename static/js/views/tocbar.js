@@ -11,7 +11,7 @@ define([
     },
 
     initialize: function() {
-      _.bindAll(this, 'render', 'removeBindings');
+      _.bindAll(this, 'render', 'addBindings', 'removeBindings');
       this.template = _.template(tocTemplate);
       this.lowercaseLanguageName = this.options.languageName.toLowerCase();
     },
@@ -19,6 +19,10 @@ define([
     render: function() {
       // NOP
       return this;
+    },
+
+    addBindings: function() {
+      this.delegateEvents();
     },
 
     removeBindings: function() {

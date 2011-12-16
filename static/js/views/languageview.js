@@ -30,16 +30,17 @@ define([
 
         this.tocBarView = new TOCBarView({
           el: '#toc',
-          collection: this.collection,
+          collection:   this.collection,
           languageName: this.languageName
         });
         this.tocBarView.render();
 
         this.searchHeaderView = new SearchHeaderView({
           el: '#search-header',
-          collection: this.collection,
-          placeholder: this.options.placeholder,
+          collection:   this.collection,
+          placeholder:  this.options.placeholder,
           languageName: this.languageName,
+          debounceTime: this.options.debounceTime
         });
 
         var tocSearchResultsView = this.options.tocSearchResultsView
@@ -47,7 +48,7 @@ define([
           : SearchResultsView;
         this.tocResultsView = new tocSearchResultsView({
           el: '#toc-results',
-          collection: this.collection,
+          collection:   this.collection,
           itemTemplate: tocResultTemplate,
           visibleField: 'tocVisible'
         });
@@ -57,7 +58,7 @@ define([
           : SearchResultsView;
         this.mainResultsView = new mainSearchResultsView({
           el: '#search-results',
-          collection: this.collection,
+          collection:   this.collection,
           itemTemplate: fullResultTemplate,
           visibleField: 'mainVisible',
           spinner: true
@@ -79,8 +80,8 @@ define([
         this.searchResultsDiv.addClass(this.options.resultsClassNames);
         if (this.collection.length > 0) {
           // (Re)bind events
-          this.searchHeaderView.delegateEvents();
-          this.tocBarView.delegateEvents();
+          this.searchHeaderView.addBindings();
+          this.tocBarView.addBindings();
 
           this.searchHeaderView.onSearch();
           this.active = true;

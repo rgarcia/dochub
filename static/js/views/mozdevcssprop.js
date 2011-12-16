@@ -6,7 +6,7 @@ define([
 
   var MozDevCSSPropView = Backbone.View.extend({
     initialize: function() {
-      _.bindAll(this,'render');
+      _.bindAll(this, 'render');
       this.template = _.template(this.options.template);
       var self = this;
 
@@ -22,12 +22,14 @@ define([
     },
 
     render: function() {
-      var obj = {
+      var $thisEl = $(this.el);
+
+      // A LOT faster to set css display: none BEFORE setting the HTML.
+      $thisEl.css({'display': 'none'}); // Default hidden, only search makes things visible
+      $thisEl.html(this.template({
         _ : _,
         model : this.model,
-      }
-      this.$(this.el).html(this.template(obj));
-      this.$(this.el).hide(); // by default need to have everything hidden, only search unhides
+      }));
       return this;
     },
   });

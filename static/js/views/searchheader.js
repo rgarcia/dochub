@@ -4,23 +4,39 @@ define([
   'Backbone',
 ], function($, _, Backbone) {
 
+  var DEFAULT_SEARCH_DEBOUNCE_MS = 100;
+
   // the header does not re-render on collection events
   // it just handles applying the query to the collection of models
   var SearchHeaderView = Backbone.View.extend({
     events: {
-      'keyup #search-box': 'onSearch',
+      // Do this inside initialize, since we debounce by an argument
+      // 'keyup #search-box': 'onSearch',
     },
 
     initialize: function() {
-      _.bindAll(this, 'render', 'removeBindings', 'onSearch');
+      _.bindAll(this, 'render', 'addBindings', 'removeBindings', 'searchFunc');
 
       this.placeholder  = this.options.placeholder;
       this.languageName = this.options.languageName.toLowerCase();
       this.lastQuery = null;
+
+      this.debounceTime = this.options.debounceTime
+        ? this.options.debounceTime
+        : DEFAULT_SEARCH_DEBOUNCE_MS;
+      this.onSearch = _.debounce(this.searchFunc, this.debounceTime);
+      _.bindAll(this, 'onSearch');
+
+      this.$searchBox = $('#search-box');
+      this.addBindings();
+    },
+
+    addBindings: function() {
+      this.$searchBox.bind('keyup', this.onSearch);
     },
 
     removeBindings: function() {
-      $(this.el).undelegate();
+      this.$searchBox.unbind();
     },
 
     render: function() {
@@ -33,7 +49,7 @@ define([
       return this;
     },
 
-    onSearch: _.debounce(function(evt) {
+    searchFunc: function() {
       var query = $.trim(this.$('#search-box').val()).toLowerCase();
 
       // TODO: replacestate...
@@ -68,8 +84,10 @@ define([
           model.set({ tocVisible: visible, mainVisible: visible });
         });
       }
-    }, 100),
+    },
 
+    // set in initialize
+    onSearch: function() {},
   });
 
   return SearchHeaderView;

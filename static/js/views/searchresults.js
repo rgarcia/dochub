@@ -37,13 +37,14 @@ define([
       console.log('db loaded, rendering models');
       // render a subview for each model in the collection
       var self = this;
+      var $thisEl = $(this.el);
       this.collection.each(function(model) {
         var view = new MozDevCSSPropView({
           model: model,
           template: self.options.itemTemplate,
           visibleField: self.options.visibleField
         });
-        $(self.el).append(view.el);
+        $thisEl.append(view.el);
       });
 
       return this;

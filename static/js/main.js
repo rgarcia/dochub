@@ -14,7 +14,9 @@ require([
 
   // Some plugins have to be loaded in order due to their non AMD compliance
   // Because these scripts are not "modules" they do not pass any values to the definition function below
+  // 'order!libs/prettify/prettify.min',
   'order!libs/jquery/jquery-min',
+  // 'order!libs/jquery/jquery.syntaxhighlighter.min',
   'order!libs/bootstrap/bootstrap-dropdown',
   'order!libs/bootstrap/bootstrap-twipsy',
   'order!libs/bootstrap/bootstrap-scrollspy',

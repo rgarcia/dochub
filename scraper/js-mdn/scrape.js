@@ -1,14 +1,13 @@
 var requirejs = require('requirejs');
 
 requirejs([
-  'step',
   'spider',
   'underscore',
   'cheerio',
   '../../models/sectionscrape',
   'path',
   'fs'
-], function(step, spider, _, cheerio, SectionScrape, path, fs) {
+], function(spider, _, cheerio, SectionScrape, path, fs) {
 
   var results = [];
 
@@ -41,7 +40,7 @@ requirejs([
   var titles = [];
 
   spidey.route('developer.mozilla.org', /(\/en\/JavaScript_typed_arrays|\/en\/JavaScript\/Reference\/(Global_Objects|Statement|Operators))\/*/, function ($, url) {
-    if ( _.indexOf(blacklist,url) !== -1 ) return;
+    if ( _.include(blacklist, url) ) return;
     visitLinks($);
 
     console.log('---------');
@@ -53,7 +52,7 @@ requirejs([
     if ( title === '' || title === null ) {
       console.log('ERROR: could not get title, skipping');
       return;
-    } else if ( _.indexOf(titles,title) !== -1 ) {
+    } else if ( _.include(titles, title) ) {
       console.log('WARNING: already scraped something with this title, skipping');
       return;
     }

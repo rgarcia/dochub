@@ -58,18 +58,19 @@ define([
           collection: new MDNDomObjsCollection(),
           placeholder: 'Type a DOM object name'
         }),
-        'php' : new LanguageView({
-          languageName: 'PHP',
-          resultsClassNames: 'pageText',
-          collection: new PHPExtensionsCollection(),
-          placeholder: 'Type a PHP function name'
-        }),
         'jquery' : new LanguageView({
           languageName: 'jQuery',
           resultsClassNames: 'jq-primaryContent',
           collection: new JQEntriesCollection(),
           placeholder: 'Type a jQuery entry name',
           mainSearchResultsView: JQuerySearchResultsView,
+        }),
+        'php' : new LanguageView({
+          languageName: 'PHP',
+          resultsClassNames: 'pageText',
+          collection: new PHPExtensionsCollection(),
+          placeholder: 'Type a PHP function name',
+          debounceTime: 150,  // PHP is slower b/c of larger data set
         }),
       };
 
