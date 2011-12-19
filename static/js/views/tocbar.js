@@ -44,12 +44,11 @@ define([
         });
       }
 
-      var modelid = this.$(e.currentTarget).attr('id');
+      var modelid = this.$(e.currentTarget).attr('data-model-id');
       this.collection.get(modelid).set({ mainVisible: true });
 
       var searchResultsTopVal = this.$searchResults.scrollTop();
-      var topVal = $('#div_' + modelid).offset().top; // ID selection is the fastest
-      console.log('topVal: ' + topVal);
+      var topVal = $('#' + modelid).offset().top; // ID selection is the fastest
       this.$searchResults.scrollTop(searchResultsTopVal + topVal - 60);
 
       // Set url 
