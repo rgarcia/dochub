@@ -9,12 +9,13 @@ define([
       _.bindAll(this, 'render');
       this.template = _.template(this.options.template);
       var self = this;
+      var $selfEl = $(self.el);
 
       this.model.bind("change:" + this.options.visibleField, function(model) {
         if (model.get(self.options.visibleField)) {
-          $(self.el).css({'display': 'block'});
+          $selfEl.css({'display': 'block'});
         } else {
-          $(self.el).css({'display': 'none'});
+          $selfEl.css({'display': 'none'});
         }
       });
 

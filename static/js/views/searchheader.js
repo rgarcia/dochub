@@ -9,10 +9,6 @@ define([
   // the header does not re-render on collection events
   // it just handles applying the query to the collection of models
   var SearchHeaderView = Backbone.View.extend({
-    events: {
-      // Do this inside initialize, since we debounce by an argument
-      // 'keyup #search-box': 'onSearch',
-    },
 
     initialize: function() {
       _.bindAll(this, 'render', 'addBindings', 'removeBindings', 'searchFunc');
@@ -50,7 +46,7 @@ define([
     },
 
     searchFunc: function() {
-      var query = $.trim(this.$('#search-box').val()).toLowerCase();
+      var query = $.trim(this.$searchBox.val()).toLowerCase();
 
       // TODO: replacestate...
       Backbone.history.navigate(this.languageName + '/' + query, false);
@@ -73,21 +69,12 @@ define([
         console.log('searching for ' + query);
 
         query = new RegExp(query);
-        var searchfn = function(model) {
-          // BEGIN GLORIOUS SEARCH ALGORITHM
-          return query.test(model.get('lowerCaseTitle'));
-          // END GLORIOUS SEARCH ALGORITHM
-        };
-        var self = this;
         this.collection.each(function(model) {
-          var visible = searchfn(model);
+          var visible = query.test(model.get('lowerCaseTitle'));
           model.set({ tocVisible: visible, mainVisible: visible });
         });
       }
     },
-
-    // set in initialize
-    onSearch: function() {},
   });
 
   return SearchHeaderView;
