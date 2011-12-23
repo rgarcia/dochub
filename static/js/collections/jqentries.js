@@ -2,12 +2,13 @@ define([
   'jQuery',
   'Underscore',
   'Backbone',
-  'models/sectionscrape'
-], function($, _, Backbone, SectionScrape) {
+  'models/sectionscrape',
+  'collections/cachedcollection'
+], function($, _, Backbone, SectionScrape, CachedCollection) {
 
   var jqEntryPattern = new RegExp("^(\\W*)(.+)$");
 
-  var JQEntry = Backbone.Collection.extend({
+  var JQEntry = CachedCollection.extend({
     url: '/data/jquery.json',
     model: SectionScrape,
 

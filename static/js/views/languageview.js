@@ -85,6 +85,8 @@ define([
 
           this.searchHeaderView.onSearch();
           this.active = true;
+        } else if (this.collection.fetchFromCache(this.languageName)) {
+          console.log('Successfully fetched from cache');
         } else {
           console.log('Fetching ' + this.languageName);
 
@@ -97,6 +99,8 @@ define([
               self.searchHeaderView.onSearch();
               self.mainResultsView.spinner.stop();
               self.active = true;
+              if (self.collection.saveToCache(this.languageName))
+                console.log('Successfully saved to cache');
             }
           });
         }

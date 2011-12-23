@@ -2,10 +2,11 @@ define([
   'jQuery',
   'Underscore',
   'Backbone',
-  'models/sectionscrape'
-], function($, _, Backbone, SectionScrape) {
+  'models/sectionscrape',
+  'collections/cachedcollection'
+], function($, _, Backbone, SectionScrape, CachedCollection) {
 
-  var MDNDomObj = Backbone.Collection.extend({
+  var MDNDomObj = CachedCollection.extend({
     url: '/data/dom-mdn.json',
     model: SectionScrape,
 

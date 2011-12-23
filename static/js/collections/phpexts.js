@@ -2,10 +2,11 @@ define([
   'jQuery',
   'Underscore',
   'Backbone',
-  'models/sectionscrape'
-], function($, _, Backbone, SectionScrape) {
+  'models/sectionscrape',
+  'collections/cachedcollection'
+], function($, _, Backbone, SectionScrape, CachedCollection) {
 
-  var PhpExt = Backbone.Collection.extend({
+  var PhpExt = CachedCollection.extend({
     url: '/data/php-ext.json',
     model: SectionScrape,
 

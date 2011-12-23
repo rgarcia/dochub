@@ -2,14 +2,15 @@ define([
   'jQuery',
   'Underscore',
   'Backbone',
-  'models/sectionscrape'
-], function($, _, Backbone, SectionScrape) {
+  'models/sectionscrape',
+  'collections/cachedcollection'
+], function($, _, Backbone, SectionScrape, CachedCollection) {
 
   // Handle the following cases:
   //  <xyz>
   var htmlElementPattern = new RegExp("^(\\W*)(.+)$");
 
-  var MDNHtmlElemnts = Backbone.Collection.extend({
+  var MDNHtmlElemnts = CachedCollection.extend({
     url: '/data/html-mdn.json',
     model: SectionScrape,
 

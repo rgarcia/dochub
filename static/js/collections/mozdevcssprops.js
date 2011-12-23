@@ -2,8 +2,9 @@ define([
   'jQuery',
   'Underscore',
   'Backbone',
-  'models/sectionscrape'
-], function($, _, Backbone, SectionScrape) {
+  'models/sectionscrape',
+  'collections/cachedcollection'
+], function($, _, Backbone, SectionScrape, CachedCollection) {
 
   // Handle the following cases:
   //  -xyz
@@ -14,7 +15,7 @@ define([
   //  <xyz>
   var cssPropsPattern = new RegExp("^(\\W*)(.+)$");
 
-  var MozDevCSSProps = Backbone.Collection.extend({
+  var MozDevCSSProps = CachedCollection.extend({
     url: '/data/css-mdn.json',
     model: SectionScrape,
 
