@@ -44,7 +44,8 @@ define([
         });
       }
 
-      var modelid = this.$(e.currentTarget).attr('data-model-id');
+      var $elt = this.$(e.currentTarget);
+      var modelid = $elt.attr('data-model-id');
       this.collection.get(modelid).set({ mainVisible: true });
 
       var searchResultsTopVal = this.$searchResults.scrollTop();
@@ -52,7 +53,7 @@ define([
       this.$searchResults.scrollTop(searchResultsTopVal + topVal - 60);
 
       // Set url 
-      var clickedItemName = this.$(e.currentTarget).text().trim();
+      var clickedItemName = $elt.text().trim();
       Backbone.history.navigate(this.lowercaseLanguageName + '/' + clickedItemName, false);
     }
 

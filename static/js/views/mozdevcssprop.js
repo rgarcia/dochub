@@ -11,11 +11,12 @@ define([
       var self = this;
       var $selfEl = $(self.el);
 
+      console.log(this.options.visibleField);
       this.model.bind("change:" + this.options.visibleField, function(model) {
         if (model.get(self.options.visibleField)) {
-          $selfEl.css({'display': 'block'});
+          $selfEl.css('display', 'block');
         } else {
-          $selfEl.css({'display': 'none'});
+          $selfEl.css('display', 'none');
         }
       });
 
@@ -26,7 +27,7 @@ define([
       var $thisEl = $(this.el);
 
       // A LOT faster to set css display: none BEFORE setting the HTML.
-      $thisEl.css({'display': 'none'}); // Default hidden, only search makes things visible
+      $thisEl.css('display', 'none'); // Default hidden, only search makes things visible
       $thisEl.html(this.template({
         _ : _,
         model : this.model,

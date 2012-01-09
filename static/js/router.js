@@ -10,6 +10,7 @@ define([
   'views/topnav',
   'views/jquerysearchresults',
   'views/languageview',
+  'views/pagescrapedlanguageview',
   'views/fullwindow',
 
   // Collections
@@ -19,10 +20,13 @@ define([
   'collections/mdndomobjs',
   'collections/phpexts',
   'collections/jqentries',
+  'collections/xsltpages',
 ], function(doc, $, _, Backbone,
-            TopNavView, JQuerySearchResultsView, LanguageView, FullWindowView,
+            TopNavView, JQuerySearchResultsView, LanguageView, PageScrapedLanguageView,
+            FullWindowView,
             MozDevCSSPropCollection, MDNHtmlElementsCollection, MDNJsObjsCollection,
-            MDNDomObjsCollection, PHPExtensionsCollection, JQEntriesCollection) {
+            MDNDomObjsCollection, PHPExtensionsCollection, JQEntriesCollection,
+            XSLTPagesCollection) {
 
   var DocHub = Backbone.Router.extend({
     routes: {
@@ -34,17 +38,17 @@ define([
       _.bindAll(this, 'changeLanguage');
 
       this.languageViews = {
-        'html' : new LanguageView({
-          languageName: 'HTML',
-          resultsClassNames: 'pageText',
-          collection: new MDNHtmlElementsCollection(),
-          placeholder: 'Type an HTML element name'
-        }),
         'css' : new LanguageView({
           languageName: 'CSS',
           resultsClassNames: 'pageText',
           collection: new MozDevCSSPropCollection(),
           placeholder: 'Type a CSS property name'
+        }),
+        'html' : new LanguageView({
+          languageName: 'HTML',
+          resultsClassNames: 'pageText',
+          collection: new MDNHtmlElementsCollection(),
+          placeholder: 'Type an HTML element name'
         }),
         'javascript' : new LanguageView({
           languageName: 'JavaScript',
@@ -71,6 +75,13 @@ define([
           collection: new PHPExtensionsCollection(),
           placeholder: 'Type a PHP function name',
           debounceTime: 150,  // PHP is slower b/c of larger data set
+        }),
+        'xslt' : new PageScrapedLanguageView({
+          languageName: 'XSLT',
+          resultsClassNames: '',
+          collection: new XSLTPagesCollection(),
+          placeholder: 'Type an XSLT element name',
+          debounceTime: 100,  
         }),
       };
 
