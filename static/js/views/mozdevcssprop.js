@@ -11,7 +11,6 @@ define([
       var self = this;
       var $selfEl = $(self.el);
 
-      console.log(this.options.visibleField);
       this.model.bind("change:" + this.options.visibleField, function(model) {
         if (model.get(self.options.visibleField)) {
           $selfEl.css('display', 'block');

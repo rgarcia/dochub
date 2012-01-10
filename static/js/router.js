@@ -78,7 +78,7 @@ define([
         }),
         'xslt' : new PageScrapedLanguageView({
           languageName: 'XSLT',
-          resultsClassNames: '',
+          resultsClassNames: 'w3',
           collection: new XSLTPagesCollection(),
           placeholder: 'Type an XSLT element name',
           debounceTime: 100,  
@@ -119,14 +119,14 @@ define([
 
     changeLanguage: function(newLanguage) {
       // Hide about
-      $('#about').css({'display': 'none'});
+      $('#about').css('display', 'none');
 
       // Show search
-      $('#toc').css({'display': 'block'});
-      $('#search-results').css({'display': 'block'});
+      $('#toc').css('display', 'block');
+      $('#search-results').css('display', 'block');
 
       if (newLanguage === this.currentLanguage) {
-        // TODO: To refresh the url in came from #about. Breaking abstractions everywhere.
+        // TODO: To refresh the url if came from #about. Breaking abstractions everywhere.
         //       Super nasty :(
         this.languageViews[this.currentLanguage].searchHeaderView.onSearch();
         return;

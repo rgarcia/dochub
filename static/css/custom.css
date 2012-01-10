@@ -694,3 +694,51 @@ div.phpcode code {
   background-color: #CCC;
 }
 
+/* Taken from w3.org/TR/xslt W3C-REC.css */
+
+div.w3 {
+  font-family: sans-serif;
+}
+
+div.w3 p {
+  font-size: 14px;
+}
+
+div.w3 code {
+  font-family: monospace;
+  font-size: 14px;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  color: black;
+}
+
+div.w3 code pre {
+  font-size: 14px;
+}
+
+div.w3 p.element-syntax {
+  border: solid thin;
+}
+
+div.w3 pre {
+  margin-top: 13px;
+  margin-bottom: 13px;
+  margin-left: 2em;
+  background-color: transparent;
+}
+
+div.w3 strong, b {
+  font-size: 14px;
+}
+
+div.w3 blockquote {
+  font-size: 14px;
+  line-height: 18px;
+  border: 0;
+}
+
+div.w3 li {
+  color: black;
+}
+
