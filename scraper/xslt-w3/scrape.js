@@ -36,18 +36,34 @@ requirejs([
       return item.name;
     });
 
+    // Each <a> without an href attribute is used as an anchor on this page.
+    // It has <a name="anchorname">. Modify it so it becomes
+    // <a name="anchorname" id="anchorname">. This is because the client
+    // will select anchors by id, not by name.
+    $('a').each(function(i, elt) {
+      var $elt = $(elt);
+      if ($elt.attr('name') && !$elt.attr('id')) {
+        $elt.attr('id', $elt.attr('name'));
+      }
+    });
+
     // Change the html by taking all links that referred to by searchableItems
-    // and prepnding the title (which is 'XSLT')
+    // and prepending the title (which is this particular case is 'XSLT')
     // This is to avoid collisions if more than one page is visible (although
     // this doesn't apply to XSLT b/c there's only one page, but it could to Python).
     var title = 'XSLT';
     for (var i = 0; i < searchableItems.length; ++i) {
-      var item = searchableItems[i];
-      var newId = title + '_' + item.domId;
+      var domId = searchableItems[i].domId;
+      var newId = title + '_' + domId;
 
-      var $elt = $('a[name=' + item.domId + ']');
+      var $elt = $('a[name=' + domId + ']');
       $elt.attr('name', newId);
       $elt.attr('id', newId);
+
+      // Now go through and change all internal links that href to this.
+      $('a[href=#' + domId + ']').each(function(i, elt) {
+        $(elt).attr('href', '#' + newId);
+      });
 
       // Do this after we modify the element.
       searchableItems[i].domId = newId;

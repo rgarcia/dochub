@@ -13,13 +13,14 @@ define([
   'views/pagetocbar',
   'views/pagesearchheader',
   'views/searchresults',
+  'views/pagesearchresults',
 
   // Templates
   'text!templates/tocpagescraperesult.html',
   'text!templates/page.html',
 ], function($, _, Backbone,
             PageElement, PageElements,
-            PageTOCBarView, PageSearchHeaderView, SearchResultsView,
+            PageTOCBarView, PageSearchHeaderView, SearchResultsView, PageSearchResultsView,
             tocResultTemplate, pageTemplate) {
 
   var PageScrapedLanguageView = Backbone.View.extend({
@@ -35,7 +36,7 @@ define([
 
       var mainSearchResultsView = this.options.mainSearchResultsView
         ? this.options.mainSearchResultsView
-        : SearchResultsView;
+        : PageSearchResultsView;
       this.mainResultsView = new mainSearchResultsView({
         el: '#search-results',
         collection:   this.collection,
