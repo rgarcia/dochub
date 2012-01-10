@@ -17,24 +17,30 @@ requirejs([
   var file = fs.openSync(filename, 'w');
 
   // W3's single-page xslt docs
-  spidey.route('www.w3.org', '/TR/xslt', function ($, url) {
+  spidey.route('www.w3.org', '/TR/xslt20', function ($, url) {
 
     console.log('---------');
     console.log('scraping:', url);
 
 
-    // Get the list of all elements (searchable items) from Appendix B
-    var searchableItems = _.map($('p.element-syntax-summary code a'), function(elt) {
+    // Get the list of all elements (searchable items) from Appendix D
+    var searchableItems = _.map(
+      _.filter($('a[href|="#element"]'), function(elt) {
+        return $(elt).text().indexOf('xsl:') === 0;
+      }), function(elt) {
+      var $elt = $(elt);
       return {
-        'name'  : elt.children[0].data.split(':')[1],
-        'domId' : elt.attribs.href.split('#')[1]
+        'name'  : $elt.text().split(':')[1],
+        'domId' : $elt.attr('href').substr(1)
       };
     });
+    console.log(searchableItems.length);
     searchableItems = _.uniq(searchableItems.sort(function(a, b) {
       return a.name.localeCompare(b.name);
     }), true, function(item) {
       return item.name;
     });
+    console.log(searchableItems.length);
 
     // Each <a> without an href attribute is used as an anchor on this page.
     // It has <a name="anchorname">. Modify it so it becomes
@@ -80,7 +86,7 @@ requirejs([
   });
 
   // Start 'er up
-  spidey.get('http://www.w3.org/TR/xslt').log('info');
+  spidey.get('http://www.w3.org/TR/xslt20').log('info');
 
   process.on('exit', function () {
     fs.writeSync(file, JSON.stringify(scrapeData, null, '\t'));
