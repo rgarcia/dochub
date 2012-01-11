@@ -9,7 +9,7 @@ define([
     model: PageElement,
 
     comparator: function(model) {
-      return model.get('name');
+      return model.get('lowerCaseName');
     }
   });
 
