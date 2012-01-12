@@ -42,7 +42,9 @@ define([
       var elementName = clicked.text();
       this.nameToPageMap[elementName].set({ mainVisible: true });
 
-      var topVal = $('#' + elementId).offset().top; // ID selection is the fastest
+      var topVal = $(document.getElementById(elementId)).offset().top;
+      // For some reason, with python, using the jQuery ID selector does not work
+      // var topVal = $('#' + elementId).offset().top; // ID selection is the fastest
       this.$searchResults.scrollTop(this.$searchResults.scrollTop() + topVal - 60);
 
       // Set url 

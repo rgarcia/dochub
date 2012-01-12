@@ -57,7 +57,7 @@ define([
         var visiblePages = {};
         for (var i = 0; i < this.options.pages.length; ++i) {
           var page = this.options.pages.at(i);
-          visiblePages[page] = false;
+          visiblePages[page.get('title')] = false;
         }
 
         // Find all matching elements and the pages they're on
@@ -72,19 +72,21 @@ define([
             if (firstVisibleElement === null) {
               firstVisibleElement = pageElement;
             }
-            visiblePages[this.options.nameToPageMap[pageElement.get('name')]] = visible;
+            visiblePages[this.options.nameToPageMap[pageElement.get('name')].get('title')] = visible;
           }
         }
 
         // Hide/show each page accordingly
         for (var i = 0; i < this.options.pages.length; ++i) {
           var page = this.options.pages.at(i);
-          page.set({ mainVisible : visiblePages[page] });
+          page.set({ mainVisible : visiblePages[page.get('title')] });
         }
 
         // Scroll to the first search result
         if (firstVisibleElement !== null) {
-          var topVal = $('#' + firstVisibleElement.get('domId')).offset().top;
+          topVal = $(document.getElementById(firstVisibleElement.get('domId'))).offset().top;
+          // For some reason, the bottom fails:
+          // var topVal = $('dt[id="' + firstVisibleElement.get('domId') + '"]').offset().top;
           this.$searchResults.scrollTop(this.$searchResults.scrollTop() + topVal - 60);
         }
       }

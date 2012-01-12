@@ -21,12 +21,13 @@ define([
   'collections/phpexts',
   'collections/jqentries',
   'collections/xsltpages',
+  'collections/pythonpages',
 ], function(doc, $, _, Backbone,
             TopNavView, JQuerySearchResultsView, LanguageView, PageScrapedLanguageView,
             FullWindowView,
             MozDevCSSPropCollection, MDNHtmlElementsCollection, MDNJsObjsCollection,
             MDNDomObjsCollection, PHPExtensionsCollection, JQEntriesCollection,
-            XSLTPagesCollection) {
+            XSLTPagesCollection, PythonPagesCollection) {
 
   var DocHub = Backbone.Router.extend({
     routes: {
@@ -75,6 +76,13 @@ define([
           collection: new PHPExtensionsCollection(),
           placeholder: 'Type a PHP function name',
           debounceTime: 150,  // PHP is slower b/c of larger data set
+        }),
+        'python' : new PageScrapedLanguageView({
+          languageName: 'Python',
+          resultsClassNames: 'python',
+          collection: new PythonPagesCollection(),
+          placeholder: 'Type an Python element name',
+          debounceTime: 200,  
         }),
         'xslt' : new PageScrapedLanguageView({
           languageName: 'XSLT',
