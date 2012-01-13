@@ -37,7 +37,7 @@ requirejs([
       if (result !== null) {
         // Only take certain sections
         var sectionNum = parseInt(result[2], 10);
-        return (7 <= sectionNum) && (sectionNum <= 31);
+        return (5 <= sectionNum) && (sectionNum <= 31);
       }
       return false;
     });
