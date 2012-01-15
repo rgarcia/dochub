@@ -121,21 +121,18 @@ requirejs([
       searchableItems[i].domId = newId;
     }
 
-    /*
-    // Each <a> without an href attribute is used as an anchor on this page.
-    // It has <a name="anchorname">. Modify it so it becomes
-    // <a name="anchorname" id="anchorname">. This is because the clienside js
-    // will select anchors by id, not by name.
+    // If a link href starts with a hashtag, leave it. If it is a relative url,
+    // then make it absolute.
+    var baseUrl = url.substr(0, url.lastIndexOf('/') + 1);
     $('a').each(function(i, elt) {
       var $elt = $(elt);
-      if ($elt.attr('name') && !$elt.attr('id')) {
-        $elt.attr('id', $elt.attr('name'));
+      var href = $elt.attr('href');
+      if (href.charAt(0) != '#' && href.indexOf('://') === -1) {
+        $elt.attr('href', baseUrl + href);
       }
     });
-    */
 
     // Change img srcs from relative to absolute
-    var baseUrl = url.substr(0, url.lastIndexOf('/') + 1);
     $('img').each(function(i, img) {
       var src = img.attribs.src;
       if (src.indexOf('http') === -1) {

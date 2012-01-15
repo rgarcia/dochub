@@ -28,6 +28,7 @@ define([
         this.$searchResults.scrollTop(searchResultsTopVal + topVal - 60);
       } else {
         // External link
+        // When we scraped, should turn all external relative links to absolute links.
         window.location.href = href;
       }
     },
