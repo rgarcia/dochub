@@ -66,7 +66,7 @@ define([
           model.set({ tocVisible: true, mainVisible: false });
         });
       } else {
-        console.log('searching for ' + query);
+        console.log('[Searching for ' + query + '.]');
 
         query = new RegExp(query);
         this.collection.each(function(model) {

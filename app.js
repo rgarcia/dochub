@@ -15,8 +15,9 @@ define([
   // can't serve cache manifest w/ express static since it doesn't set the header
   // correctly. so we'll load the file once, keep it in memory, serve it up manually
   var filename = module.uri;
+  var manifestFilename = 'dochub.appcache';
   var manifest = null;
-  fs.readFile(path.dirname(filename) + '/static/offline.manifest', function(err,buf) {
+  fs.readFile(path.dirname(filename) + '/static/' + manifestFilename, function(err,buf) {
     if(err)
       throw(err);
     manifest = {
@@ -46,7 +47,7 @@ define([
         // });
         app.use(express.logger({ format: ':method :url :status' }));
         // preempt static to serve up cache manifest
-        app.get("/offline.manifest", function(req, res){
+        app.get("/" + manifestFilename, function(req, res){
           res.writeHead(200,manifest.headers);
           res.end(manifest.body);
         });

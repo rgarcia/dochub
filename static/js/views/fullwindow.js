@@ -11,24 +11,26 @@ define([
     initialize: function() {
       _.bindAll(this, 'onResize');
       $(window).resize(this.onResize);
+      this.$tocWell = $('#toc-well');
+      this.$tocResultsDiv = $('#toc-results-div');
+      this.$searchResults = $('#search-results');
+      this.$container = $('#container');
       this.onResize();
     },
 
     onResize: function() {
       // make sure the TOC div reaches the bottom of the screen
-      console.log('window height',$(window).height());
+      console.log('[Window height: ' + $(window).height() + '.]');
       var windowHeight = $(window).height();
-      $('#toc-well').height(windowHeight - 120);
+      this.$tocWell.height(windowHeight - 120);
 
       // Adjust the -196 magic # to account for the heights of new objects
       // put in the tocbar. For example, if a new thing occupies +24px height
       // in the toc bar, make the magic number -(196 + 24) = -220.
-      $('#toc-results-div').height(windowHeight - 160);
+      this.$tocResultsDiv.height(windowHeight - 160);
 
-      var searchResults = $('#search-results');
-      searchResults.height(windowHeight - 80);
-
-      $('#container').height(Math.max($('#toc').height(), searchResults.height()));
+      this.$searchResults.height(windowHeight - 80);
+      this.$container.height(Math.max($('#toc').height(), this.$searchResults.height()));
     },
   });
 

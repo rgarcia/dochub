@@ -10,7 +10,7 @@ define([
   var JQuerySearchResultsView = SearchResultsView.extend({
 
     render: function() {
-      console.log('db loaded, rendering models');
+      console.log('[Data loaded, rendering models.]');
       // render a subview for each model in the collection
       var self = this;
       this.collection.each(function(model) {

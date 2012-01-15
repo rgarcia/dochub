@@ -23,7 +23,7 @@ define([
 
       this.languageName = this.options.languageName;
       this.createAndRenderViews = _.once(function() {
-        console.log('Rendering ' + this.languageName);
+        console.log('[Rendering ' + this.languageName + '.]');
 
         // Save for later
         this.searchResultsDiv = $('#search-results');
@@ -73,7 +73,7 @@ define([
     },
 
     setActive: function(active) {
-      console.log('setActive: ' + this.languageName + ' = ' + active);
+      console.log('[setActive: ' + this.languageName + ' = ' + active + '.]');
 
       if (active && !this.active) {
         this.render();
@@ -86,13 +86,13 @@ define([
           this.searchHeaderView.onSearch();
           this.active = true;
         } else {
-          console.log('Fetching ' + this.languageName);
+          console.log('[Fetching ' + this.languageName + '.]');
 
           this.mainResultsView.startSpinner();
           var self = this;
           this.collection.fetch({
             success: function(coll, resp) {
-              console.log('Success fetching ' + self.languageName);
+              console.log('[Success fetching ' + self.languageName + '.]');
               self.searchHeaderView.lastQuery = null; // TODO: use abstractions
               self.searchHeaderView.onSearch();
               self.mainResultsView.spinner.stop();

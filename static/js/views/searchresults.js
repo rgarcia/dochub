@@ -34,7 +34,7 @@ define([
     },
 
     render: function() {
-      console.log('db loaded, rendering models');
+      console.log('[Data loaded, rendering models.]');
       // render a subview for each model in the collection
       var self = this;
       var $thisEl = $(this.el);

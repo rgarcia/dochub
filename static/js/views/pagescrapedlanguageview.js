@@ -62,7 +62,7 @@ define([
           }
         }
 
-        console.log('Rendering ' + this.languageName);
+        console.log('[Rendering ' + this.languageName + '.]');
 
         this.tocBarView = new PageTOCBarView({
           el            : '#toc',
@@ -103,7 +103,7 @@ define([
     },
 
     setActive: function(active) {
-      console.log('setActive: ' + this.languageName + ' = ' + active);
+      console.log('[setActive: ' + this.languageName + ' = ' + active + '.]');
 
       if (active && !this.active) {
         this.render();
@@ -118,13 +118,13 @@ define([
           this.searchHeaderView.onSearch();
           this.active = true;
         } else {
-          console.log('Fetching ' + this.languageName);
+          console.log('[Fetching ' + this.languageName + '.]');
 
           this.mainResultsView.startSpinner();
           var self = this;
           this.collection.fetch({
             success: function(coll, resp) {
-              console.log('Success fetching ' + self.languageName);
+              console.log('[Success fetching ' + self.languageName + '.]');
               self.createAndRenderViews();    // _.once'd
 
               self.searchHeaderView.lastQuery = null; // TODO: use abstractions

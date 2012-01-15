@@ -51,7 +51,7 @@ define([
           pageElement.set({ tocVisible: true });
         });
       } else {
-        console.log('searching for ' + query);
+        console.log('[Searching for ' + query + '.]');
 
         // Which pages should we show?
         var visiblePages = {};
