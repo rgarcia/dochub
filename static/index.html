@@ -23,16 +23,6 @@
 
     <!-- javascript -->
     <script data-main="js/main" src="js/libs/require/require.js"></script>
-    <script type="text/javascript">
-      <-- c.f. http://appcachefacts.info/ -->
-      if (window.applicationCache) {
-        applicationCache.addEventListener('updateready', function() {
-          if (confirm('An update is available. Reload now?')) {
-            window.location.reload();
-          }
-        });
-      }
-    </script>
 
   </head>
 
