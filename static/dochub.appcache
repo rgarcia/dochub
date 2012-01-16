@@ -1,9 +1,10 @@
 CACHE MANIFEST
 
-# Version 0.01
+# Version 0.02
 
 # just copy/pasted a dump of server logs...might be a better way to do this programmatically 
 CACHE:
+index.html
 js/libs/require/require.js
 css/custom.css
 css/docs.css
@@ -12,6 +13,7 @@ js/main.js
 images/php_logo.png
 images/jquery_logo.png
 images/mdn_logo.png
+images/python_logo.gif
 js/order.js
 js/app.js
 js/libs/jquery/jquery-min.js
