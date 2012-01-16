@@ -55,6 +55,8 @@ templates/toc.html
 templates/mozdevcssprop.html
 templates/tocresult.html
 templates/topnav.html
+templates/page.html
+templates/tocpagescraperesult.html
 js/libs/spin/spin.js
 js/libs/spin/spin.min.js
 data/css-mdn.json

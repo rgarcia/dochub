@@ -125,6 +125,7 @@ define([
           this.collection.fetch({
             success: function(coll, resp) {
               console.log('[Success fetching ' + self.languageName + '.]');
+
               self.createAndRenderViews();    // _.once'd
 
               self.searchHeaderView.lastQuery = null; // TODO: use abstractions
