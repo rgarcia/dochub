@@ -23,6 +23,9 @@ define([
       this.$searchBox     = $('#search-box');
       this.$searchResults = $('#search-results');
 
+      // Only accept queries that have some alphanumeric character
+      this.alphaNumRegex = /\w+/;
+
       this.addBindings();
     },
 
@@ -34,7 +37,8 @@ define([
 
       // Do this after we set url
       var queryExists = (query !== '');
-      if (queryExists && query === this.lastQuery) {
+      if ((queryExists && query === this.lastQuery) ||
+          (query !== '' && (query.length <= 2 || this.alphaNumRegex.test(query) === null))) {
         return;
       }
       this.lastQuery = query;
