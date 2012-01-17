@@ -10,7 +10,7 @@ define([
 
   // Templates
   'text!templates/tocresult.html',
-  'text!templates/mozdevcssprop.html',
+  'text!templates/sectionscrape.html',
 ], function($, _, Backbone,
             TOCBarView, SearchHeaderView, SearchResultsView,
             tocResultTemplate, fullResultTemplate) {
@@ -59,7 +59,9 @@ define([
         this.mainResultsView = new mainSearchResultsView({
           el: '#search-results',
           collection:   this.collection,
-          itemTemplate: fullResultTemplate,
+          itemTemplate: this.options.mainResultTemplate ?
+                        this.options.mainResultTemplate :
+                        fullResultTemplate,
           visibleField: 'mainVisible',
           spinner: true
         });

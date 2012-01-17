@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-# Version 0.02
+# Version 0.05
 
 # just copy/pasted a dump of server logs...might be a better way to do this programmatically 
 CACHE:
@@ -54,7 +54,8 @@ js/views/pagesearchresults.js
 js/views/pagesearchheader.js
 js/views/pagetocbar.js
 templates/toc.html
-templates/mozdevcssprop.html
+templates/mdnpage.html
+templates/sectionscrape.html
 templates/tocresult.html
 templates/topnav.html
 templates/page.html

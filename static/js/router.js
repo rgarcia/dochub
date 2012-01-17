@@ -22,12 +22,16 @@ define([
   'collections/jqentries',
   'collections/xsltpages',
   'collections/pythonpages',
+
+  // Templates
+  'text!templates/mdnpage.html',
 ], function(doc, $, _, Backbone,
             TopNavView, JQuerySearchResultsView, LanguageView, PageScrapedLanguageView,
             FullWindowView,
             MozDevCSSPropCollection, MDNHtmlElementsCollection, MDNJsObjsCollection,
             MDNDomObjsCollection, PHPExtensionsCollection, JQEntriesCollection,
-            XSLTPagesCollection, PythonPagesCollection) {
+            XSLTPagesCollection, PythonPagesCollection,
+            MDNPage) {
 
   var DocHub = Backbone.Router.extend({
     routes: {
@@ -43,25 +47,29 @@ define([
           languageName: 'CSS',
           resultsClassNames: 'pageText',
           collection: new MozDevCSSPropCollection(),
-          placeholder: 'Type a CSS property name'
+          placeholder: 'Type a CSS property name',
+          mainResultTemplate: MDNPage,
         }),
         'html' : new LanguageView({
           languageName: 'HTML',
           resultsClassNames: 'pageText',
           collection: new MDNHtmlElementsCollection(),
-          placeholder: 'Type an HTML element name'
+          placeholder: 'Type an HTML element name',
+          mainResultTemplate: MDNPage
         }),
         'javascript' : new LanguageView({
           languageName: 'JavaScript',
           resultsClassNames: 'pageText',
           collection: new MDNJsObjsCollection(),
-          placeholder: 'Type a JavaScript class/function name'
+          placeholder: 'Type a JavaScript class/function name',
+          mainResultTemplate: MDNPage
         }),
         'dom' : new LanguageView({
           languageName: 'DOM',
           resultsClassNames: 'pageText',
           collection: new MDNDomObjsCollection(),
-          placeholder: 'Type a DOM object name'
+          placeholder: 'Type a DOM object name',
+          mainResultTemplate: MDNPage
         }),
         'jquery' : new LanguageView({
           languageName: 'jQuery',

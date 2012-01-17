@@ -1,0 +1,7 @@
+<div id="<%= model.id %>" class="page-header span10 offset6">
+  <h2><%= model.get('title') %></h2>
+  <% for ( var i = 0; i < model.get('sectionHTMLs').length; ++i ) { %>
+    <%= model.get('sectionHTMLs')[i] %>
+  <% } %>
+  <p class="source-link">Content sourced from MDN at <a target="_blank" href="<%= model.get('url') %>"><%= model.get('url') %></a>. Want to contribute? Click the 'Edit' button when you get there.<p>
+</div>
