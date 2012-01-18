@@ -37,8 +37,11 @@ define([
 
       // Do this after we set url
       var queryExists = (query !== '');
-      if ((queryExists && query === this.lastQuery) ||
-          (query !== '' && (query.length <= 2 || this.alphaNumRegex.test(query) === null))) {
+      if (queryExists && (
+          query === this.lastQuery ||
+          query.length <= 2 ||
+          !this.alphaNumRegex.test(query)
+         )) {
         return;
       }
       this.lastQuery = query;
