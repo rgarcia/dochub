@@ -89,7 +89,7 @@ define([
           languageName: 'Python',
           resultsClassNames: 'python',
           collection: new PythonPagesCollection(),
-          placeholder: 'Type an Python element name',
+          placeholder: 'Type a Python class/function name',
           debounceTime: 200,  
         }),
         'xslt' : new PageScrapedLanguageView({
