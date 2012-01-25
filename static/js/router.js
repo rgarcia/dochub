@@ -91,6 +91,7 @@ define([
           collection: new PythonPagesCollection(),
           placeholder: 'Type a Python class/function name',
           debounceTime: 200,  
+          minQueryLength: 3,
         }),
         'xslt' : new PageScrapedLanguageView({
           languageName: 'XSLT',
@@ -98,6 +99,7 @@ define([
           collection: new XSLTPagesCollection(),
           placeholder: 'Type an XSLT element name',
           debounceTime: 100,  
+          minQueryLength: 2,
         }),
       };
 

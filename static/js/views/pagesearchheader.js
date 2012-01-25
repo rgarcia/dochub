@@ -5,6 +5,8 @@ define([
   'views/searchheader',
 ], function($, _, Backbone, SearchHeaderView) {
 
+  var DEFAULT_MIN_QUERY_LENGTH = 2;
+
   var PageSearchHeaderView = SearchHeaderView.extend({
 
     initialize: function() {
@@ -17,6 +19,9 @@ define([
       this.debounceTime = this.options.debounceTime
         ? this.options.debounceTime
         : DEFAULT_SEARCH_DEBOUNCE_MS;
+      this.minQueryLength = this.options.minQueryLength
+        ? this.options.minQueryLength
+        : DEFAULT_MIN_QUERY_LENGTH;
       this.onSearch = _.debounce(this.searchFunc, this.debounceTime);
       _.bindAll(this, 'onSearch');
 
@@ -37,11 +42,13 @@ define([
 
       // Do this after we set url
       var queryExists = (query !== '');
-      if (queryExists && (
-          query === this.lastQuery ||
-          query.length <= 2 ||
-          !this.alphaNumRegex.test(query)
-         )) {
+      if (queryExists &&
+            (
+              query === this.lastQuery ||
+              query.length < this.minQueryLength ||
+              !this.alphaNumRegex.test(query)
+            )
+          ) {
         return;
       }
       this.lastQuery = query;

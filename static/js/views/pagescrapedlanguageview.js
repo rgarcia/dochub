@@ -73,12 +73,13 @@ define([
 
         this.searchHeaderView = new PageSearchHeaderView({
           el: '#search-header',
-          pages         : this.collection,
-          pageElements  : this.pageElements,
-          nameToPageMap : nameToPageMap,
-          placeholder   : this.options.placeholder,
-          languageName  : this.languageName,
-          debounceTime  : this.options.debounceTime
+          pages          : this.collection,
+          pageElements   : this.pageElements,
+          nameToPageMap  : nameToPageMap,
+          placeholder    : this.options.placeholder,
+          languageName   : this.languageName,
+          debounceTime   : this.options.debounceTime,
+          minQueryLength : this.options.minQueryLength
         });
 
         var tocSearchResultsView = this.options.tocSearchResultsView
