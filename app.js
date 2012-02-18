@@ -1,12 +1,10 @@
 define([
   'express',
-  // 'mongoose',
-  // 'controllers/loader',
   'module',
   'path',
   './config',
   'fs'
-], function (express,/* mongoose, controllerLoader,*/ module, path, config, fs) {
+], function (express, module, path, config, fs) {
 
   var app = null;
 
@@ -39,12 +37,6 @@ define([
       app.listen(config.app_port);
 
       app.configure(function() {
-        // var db = mongoose.connect(config.mongo_uri, function(err) {
-        //   if (err)
-        //     throw err;
-        //   else
-        //     console.log('connected to ' + config.mongo_uri);
-        // });
         app.use(express.logger({ format: ':method :url :status' }));
         // preempt static to serve up cache manifest
         app.get("/" + manifestFilename, function(req, res){
@@ -56,13 +48,9 @@ define([
         app.use(express.static(staticDir));
         app.use(express.bodyParser());
         app.use(express.methodOverride());
-        //controllerLoader.bootControllers(app);
-        console.log('instacss version now running on port ' + config.app_port);
+        console.log('dochub now running on port ' + config.app_port);
       });
     },
 
-    getApp: function() {
-      return app;
-    },
   };
 });
