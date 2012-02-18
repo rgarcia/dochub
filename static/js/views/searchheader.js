@@ -48,8 +48,8 @@ define([
     searchFunc: function() {
       var query = $.trim(this.$searchBox.val()).toLowerCase();
 
-      // TODO: replacestate...
-      Backbone.history.navigate(this.languageName + '/' + query, false);
+      Backbone.history.navigate(this.languageName + '/' + query,
+                                {trigger: false, replace: true});
 
       // Do this after we set url
       var queryExists = (query !== '');

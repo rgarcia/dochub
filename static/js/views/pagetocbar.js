@@ -47,12 +47,12 @@ define([
       // var topVal = $('#' + elementId).offset().top; // ID selection is the fastest
       this.$searchResults.scrollTop(this.$searchResults.scrollTop() + topVal - 60);
 
-      // Set url 
-      Backbone.history.navigate(this.lowercaseLanguageName + '/' + elementName, false);
+      // Set url
+      Backbone.history.navigate(this.lowercaseLanguageName + '/' + elementName,
+                                {trigger: false});
     }
 
   });
 
   return PageTOCBarView;
 });
-
