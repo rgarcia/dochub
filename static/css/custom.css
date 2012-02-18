@@ -742,3 +742,8 @@ div.w3 li {
   color: black;
 }
 
+/* mdn compatibility tables */
+.htab { display: none; }
+table.compat-table { border: 1px solid #bbb; border-collapse: collapse;}
+table.compat-table td { padding: 5px; border: 1px solid #ccc; text-align: left; background: #fff; vertical-align: top; word-wrap: break-word; }
+table.compat-table td.header, table.compat-table th { border: 1px solid #bbb; padding: 0 5px; background: #eee; text-align: left; font-weight: bold; }
