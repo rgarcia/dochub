@@ -90,17 +90,17 @@ define([
           resultsClassNames: 'python',
           collection: new PythonPagesCollection(),
           placeholder: 'Type a Python class/function name',
-          debounceTime: 200,  
+          debounceTime: 200,
           minQueryLength: 3,
         }),
-        'xslt' : new PageScrapedLanguageView({
-          languageName: 'XSLT',
-          resultsClassNames: 'w3',
-          collection: new XSLTPagesCollection(),
-          placeholder: 'Type an XSLT element name',
-          debounceTime: 100,  
-          minQueryLength: 2,
-        }),
+        // 'xslt' : new PageScrapedLanguageView({
+        //   languageName: 'XSLT',
+        //   resultsClassNames: 'w3',
+        //   collection: new XSLTPagesCollection(),
+        //   placeholder: 'Type an XSLT element name',
+        //   debounceTime: 100,
+        //   minQueryLength: 2,
+        // }),
       };
 
       this.currentLanguage = null;
