@@ -10,7 +10,7 @@ define([
   var SearchResultsView = BackBone.View.extend({
     initialize: function() {
       _.bindAll(this, 'render', 'startSpinner');
-      this.collection.bind('reset', this.render);
+      this.collection.on('reset', this.render);
     },
 
     startSpinner: function() {
@@ -39,11 +39,14 @@ define([
       var self = this;
       var $thisEl = $(this.el);
       this.collection.each(function(model) {
-        var view = new MozDevCSSPropView({
+        var options = {
           model: model,
           template: self.options.itemTemplate,
           visibleField: self.options.visibleField
-        });
+        };
+        if ('itemViewOptions' in self.options)
+          _.extend(options, self.options.itemViewOptions)
+        var view = new MozDevCSSPropView(options);
         $thisEl.append(view.el);
       });
 
@@ -53,4 +56,3 @@ define([
 
   return SearchResultsView;
 });
-

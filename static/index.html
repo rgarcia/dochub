@@ -17,142 +17,58 @@
         <![endif]-->
 
     <!-- styles -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+      }
+      .sidebar-nav {
+      padding: 9px 0;
+      }
+    </style>
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
     <link href="css/custom.css" rel="stylesheet">
 
     <!-- javascript -->
     <script data-main="js/main" src="js/libs/require/require.js"></script>
 
+    <script type="text/javascript">
+      var _usrp = {
+      type: "inline",
+      company: "instacss",
+      host: "instacss.userrules.com",
+      mode: "advanced",
+      sso: {},
+      getVisitorId: function() {return "";},
+      getAdditionalParams: function() {return "";}
+      };
+
+      (function(D) {
+      var _usr = D.createElement("script"), s = D.getElementsByTagName("script")[0];
+      _usr.type = "text/javascript"; _usr.async = true;
+      _usr.src = ("https:" == D.location.protocol ? "https" : "http" ) + "://dtkm4pd19nw6z.cloudfront.net/js/userrules/9a41a826e957127b4e5bfc7d140e45c4/feedback.canary.js";
+      s.parentNode.insertBefore(_usr, s);
+      })(document);
+    </script>
   </head>
 
-  <!-- figure out where to put data source (https://developer.mozilla.org/) so it looks nice. -->
-
-  <body style="padding-top: 60px;">
-    <div id='topnav' class='topbar'>
-      <div id='topbar-inner' class='topbar-inner'></div>
+  <body>
+    <div class="navbar navbar-fixed-top">
     </div>
-    <div id='container' class='container-fluid' style="padding-right: 0px;">
-      <div id='about' class='about'>
-        <table>
-          <tbody>
-            <tr>
-              <td class="logo">
-                <a target="_blank" href="https://developer.mozilla.org/"><img src="images/mdn_logo.png"/></a>
-              </td>
-              <td class="desc">
-                CSS/HTML/JavaScript/DOM data is from the <a target="_blank" href="https://developer.mozilla.org">Mozilla Developer Network</a>.
-              </td>
-            </tr>
-            <tr>
-              <td class="logo">
-                <a target="_blank" href="http://www.jquery.com/"><img src="images/jquery_logo.png" height="36" width="150" /></a>
-              </td>
-              <td class="desc">
-                jQuery data is from <a target="_blank" href="http://api.jquery.com">http://api.jquery.com</a>. Version is 1.7.
-              </td>
-            </tr>
-            <tr>
-              <td class="logo">
-                <a target="_blank" href="http://www.php.net/"><img src="images/php_logo.png" height="79" width="150" /></a>
-              </td>
-              <td stle="vertical-align: top;">
-                PHP data is from <a target="_blank" href="http://www.php.net/manual/en/extensions.alphabetical.php">http://www.php.net/manual/en/extensions.alphabetical.php</a>.
-                <p>Currently supported PHP extensions:</p>
-                <p>
-                  <ul>
-                    <li>Apache</li>
-                    <li>Arrays</li>
-                    <li>Bzip2</li>
-                    <li>Calendar</li>
-                    <li>Classkit</li>
-                    <li>Class/Objects</li>
-                    <li>COM</li>
-                    <li>cURL</li>
-                    <li>Date/Time</li>
-                    <li>DBA</li>
-                    <li>DB++</li>
-                    <li>Direct IO</li>
-                    <li>Directories</li>
-                    <li>DOM</li>
-                    <li>.NET</li>
-                    <li>Eio</li>
-                    <li>Error Handling</li>
-                    <li>Program execution</li>
-                    <li>Filesystem</li>
-                    <li>FTP</li>
-                    <li>Function Handling</li>
-                    <li>Gearman</li>
-                    <li>GeoIP</li>
-                    <li>Hash</li>
-                    <li>HTTP</li>
-                    <li>ID3</li>
-                    <li>IIS</li>
-                    <li>IMAP</li>
-                    <li>Ingres</li>
-                    <li>Java</li>
-                    <li>JSON</li>
-                    <li>LDAP</li>
-                    <li>Libevent</li>
-                    <li>libxml</li>
-                    <li>Mail</li>
-                    <li>Math</li>
-                    <li>Mailparse</li>
-                    <li>Memcache</li>
-                    <li>Memcached</li>
-                    <li>Mongo</li>
-                    <li>MySQL</li>
-                    <li>MySQLi</li>
-                    <li>OAuth</li>
-                    <li>OpenSSL</li>
-                    <li>Output Control</li>
-                    <li>PostgreSQL</li>
-                    <li>POSIX</li>
-                    <li>Readline</li>
-                    <li>SimpleXML</li>
-                    <li>SQLite</li>
-                    <li>SQLite3</li>
-                    <li>SQLSRV</li>
-                    <li>SSH2</li>
-                    <li>Streams</li>
-                    <li>Strings</li>
-                    <li>SWF</li>
-                    <li>Sybase</li>
-                    <li>ODBC</li>
-                    <li>URLs</li>
-                    <li>Variable handling</li>
-                    <li>WinCache</li>
-                    <li>XML-RPC</li>
-                    <li>XSL</li>
-                    <li>Yaml</li>
-                    <li>Zip</li>
-                    <li>Zlib</li>
-                  </ul>
-                </p>
-              </td>
-            </tr>
-            <tr>
-              <td class="logo">
-                <a target="_blank" href="http://www.python.org/"><img src="images/python_logo.gif" height="71" width="211" /></a>
-              </td>
-              <td class="desc">
-                Python data is from <a target="_blank" href="http://docs.python.org/library/">http://docs.python.org/library/</a>. Version is 2.7.
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div id='toc' class='sidebar'>
-        <div id="toc-well" class="well" style="overflow-y: hidden;">
-          <div id="search-header" class="search-header">
-            <input id="search-box" style="width: 170px;" name="search" type="text" autocomplete="off"/>
-          </div>
-          <div id="toc-results-div" style="overflow-y: auto; margin-right: -19px;">
-            <ul id="toc-results" style="margin:0px">
+    <div id="container" class="container-fluid">
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav" id="toc">
+            <div id="search-header">
+              <input class="input focused" id="search-box" name="search" type="text" autocomplete="off">
+            </div>
+            <ul class="nav nav-list" id="toc-results" style="overflow-y: scroll">
             </ul>
           </div>
         </div>
+        <div id="search-results" class="span9"></div>
       </div>
-      <div id='search-results' class='content'></div>
     </div>
     <div id='footer'></div>
 
@@ -169,28 +85,6 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
-</script>
-
-
-<script type="text/javascript">
-        var _usrp = {
-                type: "button",
-                company: "instacss",
-                host: "instacss.userrules.com",
-                mode: "advanced",
-                sso: {},
-                getVisitorId: function() {return "";},
-                getAdditionalParams: function() {return "";},
-                placement: "right",
-                color: ["#32312E", "#62615E"]
-        };
-
-        (function(D) {
-                var _usr = D.createElement("script"), s = D.getElementsByTagName("script")[0];
-                _usr.type = "text/javascript"; _usr.async = true;
-                _usr.src = ("https:" == D.location.protocol ? "https" : "http" ) + "://dtkm4pd19nw6z.cloudfront.net/js/userrules/9a41a826e957127b4e5bfc7d140e45c4/feedback.canary.js";
-                s.parentNode.insertBefore(_usr, s);
-        })(document);
 </script>
 
     <!-- Prompt IE users to install Chrome Frame. Remove this if you want to support IE 6.

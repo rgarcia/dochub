@@ -50,6 +50,7 @@ define([
           el: '#toc-results',
           collection:   this.collection,
           itemTemplate: tocResultTemplate,
+          itemViewOptions: { tagName: 'li' },
           visibleField: 'tocVisible'
         });
 

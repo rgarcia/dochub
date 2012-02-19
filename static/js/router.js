@@ -108,7 +108,7 @@ define([
       var self = this;
       this.renderTopNav = _.once(function() {
         self.topNavView = new TopNavView({
-          el: $('#topbar-inner')
+          el: $('.navbar')
         });
         self.topNavView.render();
         self.topNavView.bind('changeLanguage', self.changeLanguage);
@@ -193,4 +193,3 @@ define([
 
   return { initialize: initialize };
 });
-
