@@ -29,6 +29,11 @@ p.source-link {
   border-radius: 3px;
 }
 
+td.logo {
+  padding: 10px 5px;
+  vertical-align: top;
+}
+
 /* From MDN site (needed to make HTML element attributes section look the same) */
 
 .pageText code, .pageText tt {
