@@ -85,14 +85,14 @@ define([
           placeholder: 'Type a PHP function name',
           debounceTime: 150,  // PHP is slower b/c of larger data set
         }),
-        // 'python' : new PageScrapedLanguageView({
-        //   languageName: 'Python',
-        //   resultsClassNames: 'python',
-        //   collection: new PythonPagesCollection(),
-        //   placeholder: 'Type a Python class/function name',
-        //   debounceTime: 200,
-        //   minQueryLength: 3,
-        // }),
+        'python' : new PageScrapedLanguageView({
+          languageName: 'Python',
+          resultsClassNames: 'python',
+          collection: new PythonPagesCollection(),
+          placeholder: 'Type a Python class/function name',
+          debounceTime: 200,
+          minQueryLength: 3,
+        }),
         // 'xslt' : new PageScrapedLanguageView({
         //   languageName: 'XSLT',
         //   resultsClassNames: 'w3',
