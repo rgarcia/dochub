@@ -38,6 +38,12 @@ td.logo {
   vertical-align: top;
 }
 
+/* ky's eyes have trouble scanning left to right */
+#search-results > div {
+  max-width: 700px;
+}
+
+
 /* From MDN site (needed to make HTML element attributes section look the same) */
 
 .pageText code, .pageText tt {
@@ -100,6 +106,7 @@ div#about {
   background: #fafafa;
   border: 1px solid #aaa;
 /*  margin: -26px 0 0 0;*/
+  padding-top: 10px;
 }
 .jq-primaryContent .toc ul {
   list-style: none;
