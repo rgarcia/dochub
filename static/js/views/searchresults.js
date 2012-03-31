@@ -35,6 +35,31 @@ define([
       }
     },
 
+    setDownloadProgress: function(receivedB, totalB) {
+      if (!this.options.spinner)
+        return;
+      if (!this.progressEl) {
+        this.progressEl = $(
+            '<div style="text-align:center; width:100%; max-width: 100%;">' +
+            '  <progress></progress>' +
+            '  <br>' +
+            '  <span class="progress-text"></span>' +
+            '</div>').get(0);
+        $(this.el).append(this.progressEl);
+      }
+      var receivedMB = Math.round(receivedB/1024/1024*10)/10
+        , totalMB = Math.round(totalB/1024/1024*10)/10;
+      $(this.progressEl)
+        .find("progress").prop("max", totalB).prop("value", receivedB).end()
+        .find(".progress-text").text(receivedMB + "MB/" + totalMB + "MB");
+    },
+    removeDownlaodProgress: function() {
+      if (this.progressEl) {
+        $(this.progressEl).remove();
+        this.progressEl = undefined;
+      }
+    },
+
     render: function() {
       console.log('[Data loaded, rendering models.]');
       // render a subview for each model in the collection

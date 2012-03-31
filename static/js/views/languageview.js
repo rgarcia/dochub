@@ -94,13 +94,26 @@ define([
           this.mainResultsView.startSpinner();
           var self = this;
           this.collection.fetch({
+            xhr: function() {
+              var xhr = jQuery.ajaxSettings.xhr();
+              if (xhr instanceof window.XMLHttpRequest) {
+                // XMLHttpRequest 2
+                xhr.addEventListener("progress", function(evt) {
+                  if (evt.lengthComputable) {
+                    self.mainResultsView.setDownloadProgress(evt.loaded, evt.total);
+                  }
+                }, false);
+              }
+              return xhr;
+            },
             success: function(coll, resp) {
               console.log('[Success fetching ' + self.languageName + '.]');
               self.searchHeaderView.lastQuery = null; // TODO: use abstractions
               self.searchHeaderView.onSearch();
               self.mainResultsView.spinner.stop();
+              self.mainResultsView.removeDownlaodProgress();
               self.active = true;
-            }
+            },
           });
         }
       } else if (!active && this.active) {
