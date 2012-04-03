@@ -131,7 +131,9 @@ define([
           }
         };
         _.bindAll(cb, 'fn');
-        this.route(languageName + '/:query', languageName, cb.fn);
+        // match #languageName/:query or #languageName/ or just #languageName
+        this.route(new RegExp("^" + languageName + '(?:/([^/])?)?$'),
+            languageName, cb.fn);
       }
     },
 
