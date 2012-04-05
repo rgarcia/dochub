@@ -27,9 +27,36 @@ define([
           shadow : false    // Whether to render a shadow
         };
         this.spinner = new Spinner(opts).spin();
-        $(this.spinner.el).css('margin-top',  $(window).height()/4);
-        $(this.spinner.el).css('margin-left', $(window).width()/4);
+        var halfHeight = opts.radius + opts.length + opts.width;
+        $(this.spinner.el).css('margin-top',  $(window).height()/4 + halfHeight);
+        $(this.spinner.el).css('margin-left', "50%");
+        $(this.spinner.el).css("height", halfHeight + "px");
         $(this.el).append(this.spinner.el);
+      }
+    },
+
+    setDownloadProgress: function(receivedB, totalB) {
+      if (!this.options.spinner)
+        return;
+      if (!this.progressEl) {
+        this.progressEl = $(
+            '<div style="text-align:center; width:100%; max-width: 100%;">' +
+            '  <progress></progress>' +
+            '  <br>' +
+            '  <span class="progress-text"></span>' +
+            '</div>').get(0);
+        $(this.el).append(this.progressEl);
+      }
+      var receivedMB = Math.round(receivedB/1024/1024*10)/10
+        , totalMB = Math.round(totalB/1024/1024*10)/10;
+      $(this.progressEl)
+        .find("progress").prop("max", totalB).prop("value", receivedB).end()
+        .find(".progress-text").text(receivedMB + "MB/" + totalMB + "MB");
+    },
+    removeDownlaodProgress: function() {
+      if (this.progressEl) {
+        $(this.progressEl).remove();
+        this.progressEl = undefined;
       }
     },
 
