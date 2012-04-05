@@ -256,6 +256,8 @@ table.listing td {
 }
 code{
   background-color: #eee;
+  padding: 2px 0px;
+  margin: 5px;
 }
 .jq-primaryContent pre code{
   background: none;
