@@ -132,7 +132,7 @@ define([
         };
         _.bindAll(cb, 'fn');
         // match #languageName/:query or #languageName/ or just #languageName
-        this.route(new RegExp("^" + languageName + '(?:/([^/])?)?$'),
+        this.route(new RegExp("^" + languageName + '(?:/([^/]*))?$'),
             languageName, cb.fn);
       }
     },
