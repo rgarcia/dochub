@@ -51,6 +51,7 @@ define([
           collection:   this.collection,
           itemTemplate: tocResultTemplate,
           itemViewOptions: { tagName: 'li' },
+          languageName: this.languageName,
           visibleField: 'tocVisible'
         });
 
@@ -64,6 +65,7 @@ define([
                         this.options.mainResultTemplate :
                         fullResultTemplate,
           visibleField: 'mainVisible',
+          languageName  : this.languageName,
           spinner: true
         });
       });

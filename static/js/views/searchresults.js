@@ -69,6 +69,7 @@ define([
         var options = {
           model: model,
           template: self.options.itemTemplate,
+          languageName: self.options.languageName,
           visibleField: self.options.visibleField
         };
         if ('itemViewOptions' in self.options)
@@ -78,7 +79,7 @@ define([
       });
 
       return this;
-    },
+    }
   });
 
   return SearchResultsView;

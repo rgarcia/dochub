@@ -10,6 +10,8 @@ define([
       'domId' : '',
       'page'  : null,
 
+      'lowerCaseTitle' : '', // queries and fragments; set in initialize
+
       // Display properties
       'tocVisible'  : false,
     },
