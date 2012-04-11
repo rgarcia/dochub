@@ -53,7 +53,7 @@ define([
       this.$searchResults.scrollTop(this.$searchResults.scrollTop() + topVal - 60);
 
       // Set url
-      var href = $elt.attr('href');  // not HTMLLinkElement.href, which is absolute
+      var href = clicked.attr('href');  // not HTMLLinkElement.href, which is absolute
       Backbone.history.navigate(href, {trigger: false});
 
       e.preventDefault();
