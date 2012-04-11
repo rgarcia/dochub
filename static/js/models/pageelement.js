@@ -15,7 +15,7 @@ define([
     },
 
     initialize: function() {
-      this.set({'lowerCaseName': this.get('name').toLowerCase()});
+      this.set({'lowerCaseTitle': this.get('name').toLowerCase()});
     },
 
   });
