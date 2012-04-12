@@ -26,6 +26,11 @@ define([
     },
 
     onClick: function(e) {
+      if (e.button > 0)
+        return;
+      if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey)
+        return;
+
       // If no query, make everything in the search results invisible before
       // showing the page of the one that was clicked.
       var query = $.trim(this.$searchBox.val()).toLowerCase();
@@ -48,8 +53,10 @@ define([
       this.$searchResults.scrollTop(this.$searchResults.scrollTop() + topVal - 60);
 
       // Set url
-      Backbone.history.navigate(this.lowercaseLanguageName + '/' + elementName,
-                                {trigger: false});
+      var href = clicked.attr('href');  // not HTMLLinkElement.href, which is absolute
+      Backbone.history.navigate(href, {trigger: false});
+
+      e.preventDefault();
     }
 
   });

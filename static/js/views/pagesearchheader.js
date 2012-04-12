@@ -81,7 +81,7 @@ define([
         for (var i = 0; i < this.options.pageElements.length; ++i) {
           var pageElement = this.options.pageElements.at(i);
 
-          var visible = query.test(pageElement.get('lowerCaseName'));
+          var visible = query.test(pageElement.get('lowerCaseTitle'));
           pageElement.set({ tocVisible: visible });
           if (visible) {
             if (firstVisibleElement === null) {

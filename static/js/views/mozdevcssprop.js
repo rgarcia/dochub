@@ -27,9 +27,11 @@ define([
 
       // A LOT faster to set css display: none BEFORE setting the HTML.
       $thisEl.css('display', 'none'); // Default hidden, only search makes things visible
+      var href = '#' + this.options.languageName.toLowerCase() + '/' + this.model.get('lowerCaseTitle');
       $thisEl.html(this.template({
         _ : _,
         model : this.model,
+        href: href
       }));
       return this;
     },

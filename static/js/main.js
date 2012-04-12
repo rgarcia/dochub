@@ -19,6 +19,7 @@ require([
   // 'order!libs/jquery/jquery.syntaxhighlighter.min',
   'order!libs/bootstrap/bootstrap-dropdown',
   'order!libs/bootstrap/bootstrap-twipsy',
+  'order!libs/bootstrap/bootstrap-collapse',
   'order!libs/bootstrap/bootstrap-scrollspy',
   'order!libs/underscore/underscore-min',
 ], function(App) {

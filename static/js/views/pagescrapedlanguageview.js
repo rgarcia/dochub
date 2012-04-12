@@ -42,6 +42,7 @@ define([
         collection:   this.collection,
         itemTemplate: pageTemplate,
         visibleField: 'mainVisible',
+        languageName  : this.languageName,
         spinner: true
       });
 
@@ -89,6 +90,7 @@ define([
           el            : '#toc-results',
           collection    : this.pageElements,
           itemTemplate  : tocResultTemplate,
+          languageName  : this.languageName,
           visibleField  : 'tocVisible'
         });
         this.tocResultsView.render();

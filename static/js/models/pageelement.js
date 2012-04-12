@@ -10,12 +10,14 @@ define([
       'domId' : '',
       'page'  : null,
 
+      'lowerCaseTitle' : '', // queries and fragments; set in initialize
+
       // Display properties
       'tocVisible'  : false,
     },
 
     initialize: function() {
-      this.set({'lowerCaseName': this.get('name').toLowerCase()});
+      this.set({'lowerCaseTitle': this.get('name').toLowerCase()});
     },
 
   });
