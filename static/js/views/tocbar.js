@@ -13,7 +13,6 @@ define([
     initialize: function() {
       _.bindAll(this, 'render', 'addBindings', 'removeBindings');
       this.template = _.template(tocTemplate);
-      this.lowercaseLanguageName = this.options.languageName.toLowerCase();
       
       this.$searchBox     = this.$('#search-box');
       this.$searchResults = $('#search-results');
@@ -33,6 +32,11 @@ define([
     },
 
     onClick: function(e) {
+      if (e.button > 0)
+        return;
+      if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey)
+        return;
+
       // If no query, make everything in the search results invisible before
       // showing the one that was clicked.
       var query = $.trim(this.$searchBox.val()).toLowerCase();
@@ -43,7 +47,6 @@ define([
           }
         });
       }
-
       var $elt = this.$(e.currentTarget);
       var modelid = $elt.attr('data-model-id');
       this.collection.get(modelid).set({ mainVisible: true });
@@ -53,8 +56,10 @@ define([
       this.$searchResults.scrollTop(searchResultsTopVal + topVal - 60);
 
       // Set url 
-      var clickedItemName = $elt.text().trim();
-      Backbone.history.navigate(this.lowercaseLanguageName + '/' + clickedItemName, false);
+      var href = $elt.attr('href');  // not HTMLLinkElement.href, which is absolute
+      Backbone.history.navigate(href, false);
+
+      e.preventDefault();
     }
 
   });

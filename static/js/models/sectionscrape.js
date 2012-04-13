@@ -14,6 +14,7 @@ define([
       'url'                  : '',
       'sectionNames'         : [],
       'sectionHTMLs'         : [],
+      'lowerCaseTitle'       : '', // queries and fragments; set in initialize
 
       // display properties
       'tocVisible'           : false,

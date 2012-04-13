@@ -16,6 +16,7 @@ define([
       this.collection.each(function(model) {
         var view = new MozDevCSSPropView({
           model: model,
+          languageName: self.options.languageName,
           template: self.options.itemTemplate,
           visibleField: self.options.visibleField
         });
