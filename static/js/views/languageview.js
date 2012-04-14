@@ -96,6 +96,7 @@ define([
           this.mainResultsView.startSpinner();
           var self = this;
           this.collection.fetch({
+/*
             xhr: function() {
               var xhr = jQuery.ajaxSettings.xhr();
               if (xhr instanceof window.XMLHttpRequest) {
@@ -108,12 +109,13 @@ define([
               }
               return xhr;
             },
+*/
             success: function(coll, resp) {
               console.log('[Success fetching ' + self.languageName + '.]');
               self.searchHeaderView.lastQuery = null; // TODO: use abstractions
               self.searchHeaderView.onSearch();
               self.mainResultsView.spinner.stop();
-              self.mainResultsView.removeDownlaodProgress();
+              //self.mainResultsView.removeDownlaodProgress();
               self.active = true;
             },
           });

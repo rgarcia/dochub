@@ -27,14 +27,19 @@ define([
           shadow : false    // Whether to render a shadow
         };
         this.spinner = new Spinner(opts).spin();
+        $(this.spinner.el).css('margin-top',  $(window).height()/4);
+        $(this.spinner.el).css('margin-left', $(window).width()/4);
+/*
         var halfHeight = opts.radius + opts.length + opts.width;
         $(this.spinner.el).css('margin-top',  $(window).height()/4 + halfHeight);
         $(this.spinner.el).css('margin-left', "50%");
         $(this.spinner.el).css("height", halfHeight + "px");
+*/
         $(this.el).append(this.spinner.el);
       }
     },
 
+/*
     setDownloadProgress: function(receivedB, totalB) {
       if (!this.options.spinner)
         return;
@@ -59,7 +64,7 @@ define([
         this.progressEl = undefined;
       }
     },
-
+*/
     render: function() {
       console.log('[Data loaded, rendering models.]');
       // render a subview for each model in the collection

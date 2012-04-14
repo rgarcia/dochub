@@ -20,7 +20,6 @@ define([
 
     onResize: function() {
       // make sure the TOC div reaches the bottom of the screen
-      console.log('[Window height: ' + $(window).height() + '.]');
       var windowHeight = $(window).height();
       this.$tocWell.height(windowHeight - 100);
 
