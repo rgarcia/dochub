@@ -38,6 +38,22 @@ define([
 
       app.configure(function() {
         app.use(express.logger({ format: ':method :url :status' }));
+        app.use(function(req, res, next) {
+          // overrides for coda
+          var coda_overrides = {
+            '/': '/coda/',
+            '/css/bootstrap-responsive.css': '/coda/css/bootstrap-responsive.css',
+            '/css/bootstrap-responsive.min.css': '/coda/css/bootstrap-responsive.min.css',
+            '/css/bootstrap.css': '/coda/css/bootstrap.css',
+            '/css/bootstrap.min.css': '/coda/css/bootstrap.min.css',
+            '/js/views/fullwindow.js': '/coda/js/views/fullwindow.js',
+            '/templates/toc.html': '/coda/templates/toc.html'
+          };
+          if (coda_overrides[req.url] && /Coda/.test(req.headers['user-agent'])) {
+            req.url = coda_overrides[req.url];
+          }
+          next();
+        });
         // preempt static to serve up cache manifest
         app.get("/" + manifestFilename, function(req, res){
           res.writeHead(200,manifest.headers);
