@@ -24,6 +24,11 @@ div#about table tr td.desc {
   vertical-align: middle;
 }
 
+/* twitter bootstrap default is 1px too short */
+.nav-list {
+    padding-right: 15px;
+}
+
 p.source-link {
   border-width: 1px;
   border-color: #888;
