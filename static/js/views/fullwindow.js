@@ -21,16 +21,16 @@ define([
     onResize: function() {
       // make sure the TOC div reaches the bottom of the screen
       var windowHeight = $(window).height();
-      this.$tocWell.height(windowHeight - 100);
+      this.$tocWell.css('max-height', windowHeight - 100 + 'px');
 
       // Adjust the -196 magic # to account for the heights of new objects
       // put in the tocbar. For example, if a new thing occupies +24px height
       // in the toc bar, make the magic number -(196 + 24) = -220.
-      this.$tocResultsDiv.height(windowHeight - 125);
+      this.$tocResultsDiv.css('max-height', windowHeight - 125 + 'px');
 
       this.$searchResults.height(windowHeight - 80);
       this.$container.height(Math.max($('#toc').height(), this.$searchResults.height()));
-    },
+    }
   });
 
   return FullWindowView;
