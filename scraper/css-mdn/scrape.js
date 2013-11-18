@@ -28,9 +28,10 @@ requirejs([
         return;
       }
 
-      // Skip links to special wiki pages: /login/*, $history, $edit, ... 
+      // Skip links to special wiki pages: /login/*, $history, $edit, ...
       if (hrefUrl.pathname.indexOf('$') !== -1 ||
-          hrefUrl.pathname.search('/login/') !== -1) {
+          hrefUrl.pathname.indexOf('/login/') !== -1 ||
+          hrefUrl.pathname.indexOf('?redirect=no') !== -1) {
         return;
       }
 
@@ -67,16 +68,16 @@ requirejs([
   var titles = [];
 
   spidey.route('developer.mozilla.org',
-               /\/en-US\/docs\/Web\/CSS\/*/,
-               function ($, url) {
-    if (_.include(blacklist,url)) {
-      console.log('skipping blacklisted URL: ' + url);
+               /^\/en-US\/docs\/Web\/CSS\/(.*)$/,
+               function ($, pageUrl) {
+    if (_.include(blacklist, pageUrl)) {
+      console.log('skipping blacklisted URL: ' + pageUrl);
       return;
     }
     visitLinks($);
 
     console.log('---------');
-    console.log('scraping:',url);
+    console.log('scraping:', pageUrl);
 
     var title = $('#article-head h1.page-title').text().trim();
     if ( title === '' || title === null ) {
@@ -91,7 +92,7 @@ requirejs([
 
     var scrapeData = new SectionScrape();
     scrapeData['title'] = title;
-    scrapeData['url'] = url;
+    scrapeData['url'] = pageUrl;
     scrapeData['sectionNames'] = [];
     scrapeData['sectionHTMLs'] = [];
 
@@ -111,7 +112,7 @@ requirejs([
 
     var $section, sectionName, sectionBody;
     var state = 'SEEKING_FIRST_SECTION';
-                   
+
     var startNextSection = function(headerElem) {
       sectionName = headerElem.attribs.id;
       $section = cheerio.load('<div>');
@@ -141,7 +142,44 @@ requirejs([
         });
       }
 
-      // TODO find relative hrefs and turn them into absolute hrefs
+      // find relative hrefs and turn them into absolute hrefs
+      $section('a[href]').each(function(i, elem) {
+        var hrefUrl = url.parse(elem.attribs.href);
+        var hrefPath = hrefUrl.pathname || '';
+        var match;
+        if (!hrefUrl.hostname) {
+          // Check if the path links to a page that we might be scraping in this
+          // run. This differs from the regex we used above in spidey.route()
+          // because there are some legacy links to paths without the /Web/
+          // subcomponent, for example
+          //   https://developer.mozilla.org/en-US/docs/CSS/angle
+          // We don't want to scrape these (they all redirect to their /Web/*
+          // versions), but we do want to rewrite links to them.
+          match = hrefPath.match(/^\/en-US\/docs\/(?:Web\/)?CSS\/(.*)$/);
+          if (match) {
+            // Create internal dochub link.  Note that MDN's wiki uses '_' in
+            // URLs for space, but dochub just stores the title (including
+            // spaces) and uses it directly.
+            hrefUrl.pathname = null;
+            hrefUrl.hash = '#css/' + match[1].replace(/_/g, '%20');
+          } else {
+            hrefUrl.protocol = 'https:';
+            hrefUrl.hostname = 'developer.mozilla.org';
+          }
+          elem.attribs.href = url.format(hrefUrl);
+        }
+      });
+
+      // find relative img srcs and turn them into absolute urls
+      $section('img[src]').each(function(i, elem) {
+        var srcUrl = url.parse(elem.attribs.src);
+        if (!srcUrl.hostname) {
+          srcUrl.protocol = 'https:';
+          srcUrl.hostname = 'developer.mozilla.org';
+        }
+        elem.attribs.src = url.format(srcUrl);
+      });
+
       scrapeData['sectionHTMLs'].push($section.html());
     };
 
@@ -162,7 +200,6 @@ requirejs([
         }
       }
     });
-
 
     // Handle final section after we run off the end of the article.
     if ($section) {
