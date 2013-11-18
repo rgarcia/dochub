@@ -121,9 +121,27 @@ requirejs([
     };
 
     var finishCurrentSection = function() {
-      // TODO find relative hrefs and turn them into absolute hrefs
-      $section('script').remove();  // strip scripts.
       scrapeData['sectionNames'].push(sectionName);
+
+      // strip scripts.
+      $section('script').remove();
+
+      // replace each header from h2-h5 with the next-less-important header
+      // down. MDN now fairly consistently uses h2 as the most-important header
+      // level, which clashes with dochub style.
+      // TODO(keunwoo): Probably should handle this instead by styling headers
+      // beneath the entry div differently, but I don't feel like tangling with
+      // dochub's global CSS right now since it's shared across the output of
+      // all scrapers.
+      var i, replacementTag;
+      for (i = 5; i >= 2; --i) {
+        replacementTag = 'h' + (i + 1);
+        $section('h' + i).each(function(i, elem) {
+          elem.name = replacementTag;
+        });
+      }
+
+      // TODO find relative hrefs and turn them into absolute hrefs
       scrapeData['sectionHTMLs'].push($section.html());
     };
 
